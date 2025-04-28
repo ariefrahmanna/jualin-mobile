@@ -13,7 +13,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
   Widget build(BuildContext context) {
     // TODO: Implement authentication
     Future.delayed(const Duration(seconds: 5)).then((value) {
-      Get.offAllNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.REGISTER);
     });
 
     return Scaffold(
