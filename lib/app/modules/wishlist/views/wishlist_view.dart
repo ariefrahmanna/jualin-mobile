@@ -10,8 +10,21 @@ class WishlistView extends GetView<WishlistController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('WishlistView'),
+        title: const Text('Wishlist'),
         centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications_none, color: Colors.black),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black),
+            onPressed: () {},
+          ),
+        ],
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: const Center(
         child: Text(
