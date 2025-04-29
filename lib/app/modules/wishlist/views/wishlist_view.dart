@@ -20,7 +20,7 @@ class WishlistView extends GetView<WishlistController> {
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black),
+            icon: const Icon(Icons.person_outline, color: Colors.black),
             onPressed: () {},
           ),
         ],
