@@ -6,6 +6,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
+import '../modules/wishlist/bindings/wishlist_binding.dart';
+import '../modules/wishlist/views/wishlist_view.dart';
 
 part 'app_routes.dart';
 
@@ -29,6 +31,11 @@ class AppPages {
       name: _Paths.SPLASH_SCREEN,
       page: () => const SplashScreenView(),
       binding: SplashScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.WISHLIST,
+      page: () => const WishlistView(),
+      binding: WishlistBinding(),
     ),
   ];
 }
