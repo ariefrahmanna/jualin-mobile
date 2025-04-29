@@ -26,11 +26,21 @@ class WishlistView extends GetView<WishlistController> {
         ],
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: const Center(
-        child: Text(
-          'WishlistView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          WishlistItem(
+            title: 'Kursi Kuning',
+            price: 'Rp499.000',
+            imageName: 'yellow-chair.png',
+          ),
+          SizedBox(height: 16),
+          WishlistItem(
+            title: 'Kursi Abu-abu',
+            price: 'Rp999.000',
+            imageName: 'kursi_abu.jpg',
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
