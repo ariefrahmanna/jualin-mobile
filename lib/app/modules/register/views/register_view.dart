@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 
 import '../controllers/register_controller.dart';
@@ -138,18 +139,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Create Account',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: neutral10)),
+                    onPressed: () {
+                      Get.toNamed(Routes.LOGIN);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
+                    child: const Text('Create Account',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: neutral10)),
                   ),
                 ),
                 const SizedBox(height: 20),

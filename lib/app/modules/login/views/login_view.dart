@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 
 import '../controllers/login_controller.dart';
@@ -105,18 +106,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Log In',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: neutral10)),
+                    onPressed: () {
+                      Get.offAllNamed(Routes.HOME);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
+                    child: const Text('Log In',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: neutral10)),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -176,7 +179,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     const Text('Don’t have an account? '),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.offAllNamed(Routes.REGISTER);
+                      },
                       child: const Text(
                         'Register',
                         style: TextStyle(
