@@ -10,6 +10,8 @@ import '../modules/my-account/bindings/my_account_binding.dart';
 import '../modules/my-account/views/my_account_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
+import '../modules/wishlist/bindings/wishlist_binding.dart';
+import '../modules/wishlist/views/wishlist_view.dart';
 
 part 'app_routes.dart';
 
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.MY_ACCOUNT,
       page: () => const MyAccountView(),
       binding: MyAccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.WISHLIST,
+      page: () => const WishlistView(),
+      binding: WishlistBinding(),
     ),
   ];
 }
