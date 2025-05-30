@@ -9,6 +9,9 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const MY_ACCOUNT = _Paths.MY_ACCOUNT;
   static const WISHLIST = _Paths.WISHLIST;
+  static const DASHBOARD = _Paths.DASHBOARD;
+  static const TRANSACTIONS = _Paths.TRANSACTIONS;
+  static const SELL_ITEMS = _Paths.SELL_ITEMS;
 }
 
 abstract class _Paths {
@@ -19,4 +22,7 @@ abstract class _Paths {
   static const REGISTER = '/register';
   static const MY_ACCOUNT = '/my-account';
   static const WISHLIST = '/wishlist';
+  static const DASHBOARD = '/dashboard';
+  static const TRANSACTIONS = '/transactions';
+  static const SELL_ITEMS = '/sell-items';
 }

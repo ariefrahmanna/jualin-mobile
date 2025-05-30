@@ -1,15 +1,21 @@
 import 'package:get/get.dart';
 
+import '../modules/dashboard/bindings/dashboard_binding.dart';
+import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
-import '../modules/register/bindings/register_binding.dart';
-import '../modules/register/views/register_view.dart';
 import '../modules/my-account/bindings/my_account_binding.dart';
 import '../modules/my-account/views/my_account_view.dart';
+import '../modules/register/bindings/register_binding.dart';
+import '../modules/register/views/register_view.dart';
+import '../modules/sell_items/bindings/sell_items_binding.dart';
+import '../modules/sell_items/views/sell_items_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
+import '../modules/transactions/bindings/transactions_binding.dart';
+import '../modules/transactions/views/transactions_view.dart';
 import '../modules/wishlist/bindings/wishlist_binding.dart';
 import '../modules/wishlist/views/wishlist_view.dart';
 
@@ -50,6 +56,21 @@ class AppPages {
       name: _Paths.WISHLIST,
       page: () => const WishlistView(),
       binding: WishlistBinding(),
+    ),
+    GetPage(
+      name: _Paths.DASHBOARD,
+      page: () => DashboardView(),
+      binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSACTIONS,
+      page: () => const TransactionsView(),
+      binding: TransactionsBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELL_ITEMS,
+      page: () => const SellItemsView(),
+      binding: SellItemsBinding(),
     ),
   ];
 }

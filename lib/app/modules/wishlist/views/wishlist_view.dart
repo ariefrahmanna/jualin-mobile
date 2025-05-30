@@ -42,30 +42,6 @@ class WishlistView extends GetView<WishlistController> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: 'Wishlist',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_long_outlined),
-            label: 'Transactions',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.sell_outlined),
-            label: 'Sell Item',
-          ),
-        ],
-        selectedItemColor: const Color(0xFF4CAF50),
-        unselectedItemColor: const Color(0xFF9E9E9E),
-        showUnselectedLabels: true,
-       ),
     );
   }
 }
@@ -93,7 +69,7 @@ class WishlistItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.asset(
-                'assets/$imageName',
+                'assets/images/$imageName',
                 width: 80,
                 height: 80,
                 fit: BoxFit.cover,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart'; // Import warna yang sudah kamu buat
 
 import '../controllers/home_controller.dart';
@@ -53,7 +54,9 @@ class HomeView extends GetView<HomeController> {
             icon: const Icon(Icons.notifications_none, color: text),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(Routes.MY_ACCOUNT);
+            },
             icon: const Icon(Icons.person_outline, color: text),
           ),
         ],
@@ -159,31 +162,6 @@ class HomeView extends GetView<HomeController> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: neutral10,
-        selectedItemColor: primaryColor,
-        unselectedItemColor: neutral50,
-        showUnselectedLabels: true,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: 'Wishlist',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_long_outlined),
-            label: 'Transactions',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.sell_outlined),
-            label: 'Sell Items',
-          ),
-        ],
       ),
     );
   }
