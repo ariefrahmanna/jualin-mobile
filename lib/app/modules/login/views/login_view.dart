@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.offAllNamed(Routes.HOME);
+                      Get.offAllNamed(Routes.DASHBOARD);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,

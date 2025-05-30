@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jualin/app/themes/colors.dart';
 
 import '../controllers/my_account_controller.dart';
 
@@ -10,7 +11,7 @@ class MyAccountView extends GetView<MyAccountController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: primaryColor,
           elevation: 0,
           title: const Text(
             "My Account",
