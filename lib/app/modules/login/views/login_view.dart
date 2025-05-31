@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
@@ -8,27 +7,6 @@ import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Login Page',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: const LoginScreen(),
-    );
-  }
-}
-
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 30),
                 TextField(
+                  controller: controller.emailController,
                   decoration: InputDecoration(
                     labelText: 'Email',
                     prefixIcon: const Icon(Icons.email_outlined),
@@ -68,28 +47,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                TextField(
-                  obscureText: !_isPasswordVisible,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    prefixIcon: const Icon(Icons.lock_outline),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _isPasswordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
+                Obx(() => TextField(
+                      controller: controller.passwordController,
+                      obscureText: !controller.isPasswordVisible.value,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        prefixIcon: const Icon(Icons.lock_outline),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            controller.isPasswordVisible.value
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: controller.togglePasswordVisibility,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
+                    )),
                 const SizedBox(height: 10),
                 Align(
                   alignment: Alignment.centerRight,
@@ -124,13 +100,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 20),
                 Row(
-                  children: [
-                    const Expanded(child: Divider()),
-                    const Padding(
+                  children: const [
+                    Expanded(child: Divider()),
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Text('OR'),
                     ),
-                    const Expanded(child: Divider()),
+                    Expanded(child: Divider()),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -158,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {},
                   icon:
                       const Icon(Icons.facebook, color: Colors.blue, size: 30),
-                   label: const Text(
+                  label: const Text(
                     'Log In with Facebook',
                     style: TextStyle(
                       fontSize: 16,

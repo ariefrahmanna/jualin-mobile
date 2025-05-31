@@ -1,7 +1,16 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   //TODO: Implement LoginController
+  var isPasswordVisible = false.obs;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  void togglePasswordVisibility() {
+    isPasswordVisible.value = !isPasswordVisible.value;
+  }
 
   final count = 0.obs;
   @override
@@ -16,6 +25,8 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
+    emailController.dispose();
+    passwordController.dispose();
     super.onClose();
   }
 
