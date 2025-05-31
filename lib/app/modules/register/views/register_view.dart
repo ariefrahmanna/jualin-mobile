@@ -1,34 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
-
 import '../controllers/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
   const RegisterView({super.key});
-   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Register Page',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: const RegisterScreen(),
-    );
-  }
-}
-
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
-
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
-  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 30),
                 TextField(
+                  controller: controller.firstNameController,
                   decoration: InputDecoration(
                     labelText: 'First Name',
                     prefixIcon: const Icon(Icons.person_outline),
@@ -69,6 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 20),
                 TextField(
+                  controller: controller.lastNameController,
                   decoration: InputDecoration(
                     labelText: 'Last Name',
                     prefixIcon: const Icon(Icons.person_outline),
@@ -79,6 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 20),
                 TextField(
+                  controller: controller.emailController,
                   decoration: InputDecoration(
                     labelText: 'Email',
                     prefixIcon: const Icon(Icons.email_outlined),
@@ -88,33 +68,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                TextField(
-                  obscureText: !_isPasswordVisible,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    prefixIcon: const Icon(Icons.lock_outline),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _isPasswordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
+                Obx(() => TextField(
+                      controller: controller.passwordController,
+                      obscureText: !controller.isPasswordVisible.value,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        prefixIcon: const Icon(Icons.lock_outline),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            controller.isPasswordVisible.value
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: controller.togglePasswordVisibility,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
+                    )),
                 const SizedBox(height: 10),
                 const Text.rich(
                   TextSpan(
-                    text: 'By clicking Create Account, you acknowledge you have read and agreed to our ',
-                    style: TextStyle(fontSize: 12, color:neutral50),
+                    text:
+                        'By clicking Create Account, you acknowledge you have read and agreed to our ',
+                    style: TextStyle(fontSize: 12, color: neutral50),
                     children: [
                       TextSpan(
                         text: 'Terms of Use',
@@ -140,7 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.toNamed(Routes.LOGIN);
+                      Get.offAllNamed(Routes.LOGIN);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
@@ -148,34 +126,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text('Create Account',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: neutral10)),
+                    child: const Text(
+                      'Create Account',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: neutral10,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
                 Row(
-                  children: [
-                    const Expanded(child: Divider()),
-                    const Padding(
+                  children: const [
+                    Expanded(child: Divider()),
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Text('OR'),
                     ),
-                    const Expanded(child: Divider()),
+                    Expanded(child: Divider()),
                   ],
                 ),
                 const SizedBox(height: 20),
                 OutlinedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.g_mobiledata, color: Colors.red, size: 30),
-                   label: const Text(
+                  onPressed: () {
+                    // TODO: Google auth logic
+                  },
+                  icon: const Icon(Icons.g_mobiledata,
+                      color: Colors.red, size: 30),
+                  label: const Text(
                     'Continue with Google',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: primaryColor,
-                    ),
+                    style: TextStyle(fontSize: 16, color: primaryColor),
                   ),
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -187,14 +168,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 10),
                 OutlinedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.facebook, color: Colors.blue, size: 30),
-                   label: const Text(
+                  onPressed: () {
+                    // TODO: Facebook auth logic
+                  },
+                  icon:
+                      const Icon(Icons.facebook, color: Colors.blue, size: 30),
+                  label: const Text(
                     'Continue with Facebook',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: primaryColor,
-                    ),
+                    style: TextStyle(fontSize: 16, color: primaryColor),
                   ),
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -204,6 +185,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     minimumSize: const Size(double.infinity, 50),
                   ),
                 ),
+                const SizedBox(height: 20),
+
                 const SizedBox(height: 20),
               ],
             ),
