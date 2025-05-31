@@ -138,6 +138,23 @@ class RegisterView extends GetView<RegisterController> {
                 ),
                 const SizedBox(height: 20),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Already have an account? '),
+                    GestureDetector(
+                      onTap: () => Get.offAllNamed(Routes.LOGIN),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
                   children: const [
                     Expanded(child: Divider()),
                     Padding(
@@ -185,8 +202,6 @@ class RegisterView extends GetView<RegisterController> {
                     minimumSize: const Size(double.infinity, 50),
                   ),
                 ),
-                const SizedBox(height: 20),
-
                 const SizedBox(height: 20),
               ],
             ),
