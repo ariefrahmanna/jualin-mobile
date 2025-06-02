@@ -15,7 +15,6 @@ class RegisterController extends GetxController {
   final passwordController = TextEditingController();
   final usernameController = TextEditingController();
 
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   final isPasswordVisible = false.obs;
   var isLoading = false.obs;
 
