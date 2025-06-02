@@ -63,26 +63,7 @@ class RegisterController extends GetxController {
       );
       final json = jsonDecode(response.body);
 
-      if (response.statusCode == 200) {
-        if (json['status']) {
-          Get.snackbar(
-            'Success',
-            json['message'],
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: success,
-            colorText: neutral10,
-          );
-          Get.offAllNamed(Routes.LOGIN);
-        } else {
-          Get.snackbar(
-            'error',
-            json['message'],
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: errors,
-            colorText: neutral10,
-          );
-        }
-      } else {
+      if (response.statusCode != 200 || !json['status']) {
         Get.snackbar(
           'error',
           json['message'],
@@ -90,7 +71,18 @@ class RegisterController extends GetxController {
           backgroundColor: errors,
           colorText: neutral10,
         );
+        return;
       }
+
+      Get.snackbar(
+        'Success',
+        json['message'],
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: success,
+        colorText: neutral10,
+      );
+
+      Get.offAllNamed(Routes.LOGIN);
     } catch (error) {
       Get.snackbar(
         'error',
