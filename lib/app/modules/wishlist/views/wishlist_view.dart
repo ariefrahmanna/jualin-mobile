@@ -31,13 +31,13 @@ class WishlistView extends GetView<WishlistController> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          WishlistItem(
+          wishlistItem(
             title: 'Kursi Kuning',
             price: 'Rp499.000',
             imageName: 'yellow-chair.png',
           ),
           SizedBox(height: 16),
-          WishlistItem(
+          wishlistItem(
             title: 'Kursi Abu-abu',
             price: 'Rp999.000',
             imageName: 'kursi_abu.jpg',
@@ -46,21 +46,12 @@ class WishlistView extends GetView<WishlistController> {
       ),
     );
   }
-}
 
-class WishlistItem extends StatelessWidget {
-  final String title;
-  final String price;
-  final String imageName;
-
-  const WishlistItem({
-    Key? key,
-    required this.title,
-    required this.price,
-    required this.imageName,
-  }) : super(key: key);
- @override
-  Widget build(BuildContext context) {
+  Widget wishlistItem({
+    required title,
+    required price,
+    required imageName,
+  }) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 4,
