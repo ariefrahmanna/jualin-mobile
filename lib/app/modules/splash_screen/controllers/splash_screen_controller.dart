@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, unnecessary_overrides
+
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';

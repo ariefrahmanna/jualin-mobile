@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_overrides
+
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
@@ -53,8 +55,8 @@ class LoginController extends GetxController {
         if (json['status'] == true) {
           var token = json['token'];
 
-          final SharedPreferences? prefs = await _prefs;
-          await prefs?.setString('token', token.toString());
+          final SharedPreferences prefs = await _prefs;
+          await prefs.setString('token', token.toString());
           Get.snackbar(
             'Success',
             json['message'],

@@ -1,3 +1,5 @@
+// ignore_for_file: use_super_parameters
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -106,7 +108,6 @@ class WishlistItem extends StatelessWidget {
                   onPressed: () {
                     // Tombol buy ditekan
                   },
-                  child: const Text('Buy'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     minimumSize: const Size(80, 36),
@@ -115,6 +116,7 @@ class WishlistItem extends StatelessWidget {
                     ),
                     textStyle: const TextStyle(fontSize: 14),
                   ),
+                  child: const Text('Buy'),
                 ),
               ],
             ),
