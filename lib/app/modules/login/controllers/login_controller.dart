@@ -13,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginController extends GetxController {
   var isPasswordVisible = false.obs;
 
-  final emailController = TextEditingController();
+  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   var isLoading = false.obs;
@@ -23,15 +23,15 @@ class LoginController extends GetxController {
   }
 
   Future<void> login() async {
-    final email = emailController.text.trim();
+    final username = usernameController.text.trim();
     final password = passwordController.text;
 
     var headers = {'Content-Type': 'application/json'};
 
-    if (email.isEmpty || password.isEmpty) {
+    if (username.isEmpty || password.isEmpty) {
       Get.snackbar(
         'Error',
-        'Email dan Passsword tidak boleh kosong',
+        'Username dan Passsword tidak boleh kosong',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: errors,
         colorText: neutral10,
@@ -45,36 +45,19 @@ class LoginController extends GetxController {
       var url =
           Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.login);
 
-      Map body = {'username': email, 'password': password};
+      Map body = {
+        'username': username,
+        'password': password,
+      };
 
-      http.Response response =
-          await http.post(url, body: jsonEncode(body), headers: headers);
+      http.Response response = await http.post(
+        url,
+        body: jsonEncode(body),
+        headers: headers,
+      );
       final json = jsonDecode(response.body);
 
-      if (response.statusCode == 200) {
-        if (json['status'] == true) {
-          var token = json['token'];
-
-          final SharedPreferences prefs = await _prefs;
-          await prefs.setString('token', token.toString());
-          Get.snackbar(
-            'Success',
-            json['message'],
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: success,
-            colorText: neutral10,
-          );
-          Get.offAllNamed(Routes.DASHBOARD);
-        } else {
-          Get.snackbar(
-            'error',
-            json['message'],
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: errors,
-            colorText: neutral10,
-          );
-        }
-      } else {
+      if (response.statusCode != 200 || !json['status']) {
         Get.snackbar(
           'error',
           json['message'],
@@ -82,15 +65,23 @@ class LoginController extends GetxController {
           backgroundColor: errors,
           colorText: neutral10,
         );
+        return;
       }
-    } catch (error) {
+
+      var token = json['token'];
+
+      final SharedPreferences prefs = await _prefs;
+      await prefs.setString('token', token.toString());
+
       Get.snackbar(
-        'error',
-        error.toString(),
+        'Success',
+        json['message'],
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: errors,
+        backgroundColor: success,
         colorText: neutral10,
       );
+
+      Get.offAllNamed(Routes.DASHBOARD);
     } finally {
       isLoading.value = false;
     }
@@ -109,7 +100,7 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
-    emailController.dispose();
+    usernameController.dispose();
     passwordController.dispose();
     super.onClose();
   }

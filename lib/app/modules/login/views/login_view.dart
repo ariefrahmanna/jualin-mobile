@@ -37,7 +37,7 @@ class LoginView extends GetView<LoginController> {
                 ),
                 const SizedBox(height: 30),
                 TextField(
-                  controller: controller.emailController,
+                  controller: controller.usernameController,
                   decoration: InputDecoration(
                     labelText: 'Username',
                     prefixIcon: const Icon(Icons.email_outlined),
