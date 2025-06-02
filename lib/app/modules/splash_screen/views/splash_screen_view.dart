@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 
 import '../controllers/splash_screen_controller.dart';
@@ -11,10 +10,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Implement authentication
-    Future.delayed(const Duration(seconds: 5)).then((value) {
-      Get.offAllNamed(Routes.LOGIN);
-    });
+    controller.runtimeType;
 
     return Scaffold(
       backgroundColor: neutral10,

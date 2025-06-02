@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
   var isPasswordVisible = false.obs;
 
   final emailController = TextEditingController();
@@ -47,8 +46,9 @@ class LoginController extends GetxController {
 
         if (json['status'] == true) {
           var token = json['token'];
+          
           final SharedPreferences? prefs = await _prefs;
-          await prefs?.setString('token', token);
+          await prefs?.setString('token', token.toString());
           Get.snackbar('Sukses', json['message']);
           Get.offAllNamed(Routes.DASHBOARD);
         } else {
