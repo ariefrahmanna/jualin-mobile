@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterController extends GetxController {
   final nameController = TextEditingController();
