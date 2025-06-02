@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterController extends GetxController {
   final fullnameController = TextEditingController();
@@ -46,7 +47,7 @@ class RegisterController extends GetxController {
     isLoading.value = true;
 
     try {
-      var url =
+      Uri url =
           Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.register);
 
       Map body = {
@@ -74,6 +75,11 @@ class RegisterController extends GetxController {
         return;
       }
 
+      String token = json['token'].toString();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      await prefs.setString('token', token);
+
       Get.snackbar(
         'Success',
         json['message'],
@@ -82,7 +88,7 @@ class RegisterController extends GetxController {
         colorText: neutral10,
       );
 
-      Get.offAllNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.DASHBOARD);
     } catch (error) {
       Get.snackbar(
         'error',
