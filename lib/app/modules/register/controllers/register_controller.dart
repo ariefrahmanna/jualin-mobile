@@ -1,19 +1,104 @@
 // ignore_for_file: unnecessary_overrides
 
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
+import 'package:jualin/app/themes/colors.dart';
+import 'package:jualin/utils/api_endpoints.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterController extends GetxController {
-  //TODO: Implement RegisterController
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final usernameController = TextEditingController();
 
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   final isPasswordVisible = false.obs;
+  var isLoading = false.obs;
 
   void togglePasswordVisibility() {
     isPasswordVisible.value = !isPasswordVisible.value;
+  }
+
+  Future<void> login() async {
+    final username = usernameController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+    final name = nameController.text;
+
+    var headers = {'Content-Type': 'application/json'};
+
+    if (email.isEmpty || password.isEmpty || name.isEmpty || username.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'field tidak boleh kosong',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: errors,
+        colorText: neutral10,
+      );
+      return;
+    }
+
+    isLoading.value = true;
+
+    try {
+      var url =
+          Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.register);
+
+      Map body = {
+        'username': username,
+        'fullname': name,
+        'email': email,
+        'password': password
+      };
+
+      http.Response response =
+          await http.post(url, body: jsonEncode(body), headers: headers);
+      final json = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        if (json['status']) {
+
+          Get.snackbar(
+            'Success',
+            json['message'],
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: success,
+            colorText: neutral10,
+          );
+          Get.offAllNamed(Routes.LOGIN);
+        } else {
+          Get.snackbar(
+            'error',
+            json['message'],
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: errors,
+            colorText: neutral10,
+          );
+        }
+      } else {
+        Get.snackbar(
+          'error',
+          json['message'],
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: errors,
+          colorText: neutral10,
+        );
+      }
+    } catch (error) {
+      Get.snackbar(
+        'error',
+        error.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: errors,
+        colorText: neutral10,
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   final count = 0.obs;
@@ -29,10 +114,10 @@ class RegisterController extends GetxController {
 
   @override
   void onClose() {
-    firstNameController.dispose();
-    lastNameController.dispose();
+    usernameController.dispose();
     emailController.dispose();
     passwordController.dispose();
+    nameController.dispose();
     super.onClose();
   }
 

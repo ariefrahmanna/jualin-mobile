@@ -29,17 +29,17 @@ class LoginView extends GetView<LoginController> {
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  'Enter your email to start shopping and get awesome deals today!',
+                  'Login to start shopping and get awesome deals today!',
                   style: TextStyle(
                     fontSize: 16,
-                    color: neutral50,
+                    color: text,
                   ),
                 ),
                 const SizedBox(height: 30),
                 TextField(
                   controller: controller.emailController,
                   decoration: InputDecoration(
-                    labelText: 'Email',
+                    labelText: 'Username',
                     prefixIcon: const Icon(Icons.email_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
