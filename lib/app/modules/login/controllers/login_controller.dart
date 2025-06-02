@@ -15,7 +15,6 @@ class LoginController extends GetxController {
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   var isLoading = false.obs;
 
   void togglePasswordVisibility() {
@@ -68,10 +67,10 @@ class LoginController extends GetxController {
         return;
       }
 
-      var token = json['token'];
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String token = json['token'].toString();
 
-      final SharedPreferences prefs = await _prefs;
-      await prefs.setString('token', token.toString());
+      await prefs.setString('token', token);
 
       Get.snackbar(
         'Success',
