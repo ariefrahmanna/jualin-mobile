@@ -391,8 +391,7 @@ class MyAccountView extends GetView<MyAccountController> {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(15),
                     onTap: () {
-                      // TODO: Ganti dengan fungsi logout yang sebenarnya
-                      Get.back();
+                      controller.logout();
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
