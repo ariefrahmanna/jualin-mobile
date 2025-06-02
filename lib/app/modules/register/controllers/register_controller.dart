@@ -9,7 +9,7 @@ import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
 
 class RegisterController extends GetxController {
-  final nameController = TextEditingController();
+  final fullnameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final usernameController = TextEditingController();
@@ -25,11 +25,14 @@ class RegisterController extends GetxController {
     final username = usernameController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text;
-    final name = nameController.text;
+    final fullname = fullnameController.text;
 
     var headers = {'Content-Type': 'application/json'};
 
-    if (email.isEmpty || password.isEmpty || name.isEmpty || username.isEmpty) {
+    if (email.isEmpty ||
+        password.isEmpty ||
+        fullname.isEmpty ||
+        username.isEmpty) {
       Get.snackbar(
         'Error',
         'field tidak boleh kosong',
@@ -48,18 +51,20 @@ class RegisterController extends GetxController {
 
       Map body = {
         'username': username,
-        'fullname': name,
+        'fullname': fullname,
         'email': email,
-        'password': password
+        'password': password,
       };
 
-      http.Response response =
-          await http.post(url, body: jsonEncode(body), headers: headers);
+      http.Response response = await http.post(
+        url,
+        body: jsonEncode(body),
+        headers: headers,
+      );
       final json = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
         if (json['status']) {
-
           Get.snackbar(
             'Success',
             json['message'],
@@ -115,7 +120,7 @@ class RegisterController extends GetxController {
     usernameController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    nameController.dispose();
+    fullnameController.dispose();
     super.onClose();
   }
 

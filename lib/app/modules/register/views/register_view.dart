@@ -36,7 +36,7 @@ class RegisterView extends GetView<RegisterController> {
                 ),
                 const SizedBox(height: 30),
                 TextField(
-                  controller: controller.nameController,
+                  controller: controller.fullnameController,
                   decoration: InputDecoration(
                     labelText: 'Full Name',
                     prefixIcon: const Icon(Icons.person_outline),
@@ -49,7 +49,7 @@ class RegisterView extends GetView<RegisterController> {
                 TextField(
                   controller: controller.usernameController,
                   decoration: InputDecoration(
-                    labelText: 'username',
+                    labelText: 'User Name',
                     prefixIcon: const Icon(Icons.alternate_email_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
