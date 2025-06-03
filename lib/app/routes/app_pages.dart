@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:get/get.dart';
 
 import '../modules/dashboard/bindings/dashboard_binding.dart';
@@ -10,6 +8,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/my-account/bindings/my_account_binding.dart';
 import '../modules/my-account/views/my_account_view.dart';
+import '../modules/recently_viewed/bindings/recently_viewed_binding.dart';
+import '../modules/recently_viewed/views/recently_viewed_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/sell_items/bindings/sell_items_binding.dart';
@@ -20,6 +20,8 @@ import '../modules/transactions/bindings/transactions_binding.dart';
 import '../modules/transactions/views/transactions_view.dart';
 import '../modules/wishlist/bindings/wishlist_binding.dart';
 import '../modules/wishlist/views/wishlist_view.dart';
+
+// ignore_for_file: constant_identifier_names
 
 part 'app_routes.dart';
 
@@ -73,6 +75,11 @@ class AppPages {
       name: _Paths.SELL_ITEMS,
       page: () => const SellItemsView(),
       binding: SellItemsBinding(),
+    ),
+    GetPage(
+      name: _Paths.RECENTLY_VIEWED,
+      page: () => const RecentlyViewedView(),
+      binding: RecentlyViewedBinding(),
     ),
   ];
 }
