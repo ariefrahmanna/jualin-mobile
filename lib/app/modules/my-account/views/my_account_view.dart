@@ -8,8 +8,8 @@ import '../controllers/my_account_controller.dart';
 
 class MyAccountView extends GetView<MyAccountController> {
   const MyAccountView({super.key});
-    @override
-    Widget sectionTitle(String title) {
+  @override
+  Widget sectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
       child: Text(
@@ -73,17 +73,38 @@ class MyAccountView extends GetView<MyAccountController> {
     return Scaffold(
       backgroundColor: neutral10,
       appBar: AppBar(
-        backgroundColor: primaryColor,
-        iconTheme: const IconThemeData(color: neutral10),
+        backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           "My Account",
           style: TextStyle(
-            color: neutral10,
+            color: text, // Use a more readable color for text
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
+        centerTitle: true, // Center the title for a cleaner look
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back(); // Use Get.back() for navigating back
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications_none, color: Colors.black),
+            onPressed: () {
+              // Handle notification icon press
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.person_outline, color: Colors.black),
+            onPressed: () {
+              // Handle profile icon press
+            },
+          ),
+        ],
+        iconTheme: const IconThemeData(color: Colors.black), // Icon color
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -127,32 +148,30 @@ class MyAccountView extends GetView<MyAccountController> {
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.edit_outlined, color: text, size: 20),
+                      icon: const Icon(Icons.edit_outlined,
+                          color: text, size: 20),
                     ),
                   ],
                 ),
               ),
-
               sectionTitle("General"),
               accountItem(icon: Icons.receipt, label: "Transaction"),
               accountItem(
-                icon: Icons.favorite_border,
-                label: "Wishlist",
-                onTap: () => Get.toNamed(Routes.WISHLIST)
-                ),
+                  icon: Icons.favorite_border,
+                  label: "Wishlist",
+                  onTap: () => Get.toNamed(Routes.WISHLIST)),
               accountItem(
-                icon: Icons.list,
-                label: "My Items",
-                onTap: () => Get.toNamed(Routes.SELL_ITEMS)
-              ),
+                  icon: Icons.list,
+                  label: "My Items",
+                  onTap: () => Get.toNamed(Routes.SELL_ITEMS)),
               accountItem(icon: Icons.chat_bubble_outline, label: "Chats"),
-              accountItem(icon: Icons.credit_card_outlined, label: "Payment Methods"),
+              accountItem(
+                  icon: Icons.credit_card_outlined, label: "Payment Methods"),
               accountItem(icon: Icons.place_outlined, label: "My Address"),
               accountItem(icon: Icons.lock_outline, label: "Security"),
-
               sectionTitle("Help"),
-              accountItem(icon: Icons.person_outline, label: "Get in Touch With Us"),
-
+              accountItem(
+                  icon: Icons.person_outline, label: "Get in Touch With Us"),
               const SizedBox(height: 20),
               accountItem(
                 icon: Icons.logout,
