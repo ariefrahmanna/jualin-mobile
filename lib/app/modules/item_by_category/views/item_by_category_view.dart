@@ -36,7 +36,7 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
           if (controller.items.isEmpty) {
             return Center(
               child: Text(
-                'Tidak ada item pada kategori ini.',
+                'No items found in this category',
                 style: TextStyle(
                   color: neutral70,
                   fontSize: 16,

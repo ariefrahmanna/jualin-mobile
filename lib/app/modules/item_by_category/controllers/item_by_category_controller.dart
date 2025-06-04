@@ -57,10 +57,6 @@ class ItemByCategoryController extends GetxController {
     }
   }
 
-  void goToItemDetail(int itemId) {
-    Get.toNamed('/item-detail', arguments: {'item_id': itemId});
-  }
-
   @override
   void onReady() {
     super.onReady();
