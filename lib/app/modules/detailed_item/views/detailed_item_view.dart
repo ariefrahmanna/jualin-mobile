@@ -23,7 +23,9 @@ class DetailedItemView extends GetView<DetailedItemController> {
           ),
         ),
         actions: [
-          Obx(() => IconButton(
+          Obx(
+            () {
+              return IconButton(
                 onPressed: controller.toggleWishlist,
                 icon: Icon(
                   controller.isWishlisted.value
@@ -31,7 +33,9 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       : Icons.favorite_border,
                   color: controller.isWishlisted.value ? favorite : neutral10,
                 ),
-              ))
+              );
+            },
+          )
         ],
       ),
       body: Column(
