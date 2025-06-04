@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 
 import '../controllers/my_account_controller.dart';
@@ -135,6 +136,11 @@ class MyAccountView extends GetView<MyAccountController> {
               sectionTitle("General"),
               accountItem(icon: Icons.receipt, label: "Transaction"),
               accountItem(icon: Icons.favorite_border, label: "Wishlist"),
+              accountItem(
+                icon: Icons.list,
+                label: "My Items",
+                onTap: () => Get.offAllNamed(Routes.SELL_ITEMS)
+              ),
               accountItem(icon: Icons.chat_bubble_outline, label: "Chats"),
               accountItem(icon: Icons.credit_card_outlined, label: "Payment Methods"),
               accountItem(icon: Icons.place_outlined, label: "My Address"),
