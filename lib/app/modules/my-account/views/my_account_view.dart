@@ -135,7 +135,11 @@ class MyAccountView extends GetView<MyAccountController> {
 
               sectionTitle("General"),
               accountItem(icon: Icons.receipt, label: "Transaction"),
-              accountItem(icon: Icons.favorite_border, label: "Wishlist"),
+              accountItem(
+                icon: Icons.favorite_border,
+                label: "Wishlist",
+                onTap: () => Get.offAllNamed(Routes.WISHLIST)
+                ),
               accountItem(
                 icon: Icons.list,
                 label: "My Items",
