@@ -96,7 +96,7 @@ class RecentlyViewedView extends GetView<RecentlyViewedController> {
                 // Tombol Buy ditekan
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor: Color(0xFF4CAF50),
                 minimumSize: const Size(80, 36),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
