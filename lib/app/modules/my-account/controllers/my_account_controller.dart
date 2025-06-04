@@ -52,7 +52,6 @@ class MyAccountController extends GetxController {
     Get.offAllNamed(Routes.LOGIN);
   }
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -67,6 +66,4 @@ class MyAccountController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

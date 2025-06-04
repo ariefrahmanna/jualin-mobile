@@ -7,8 +7,6 @@ import 'package:jualin/app/routes/app_pages.dart';
 class SplashScreenController extends GetxController {
   //TODO: Implement SplashScreenController
 
-  final count = 0.obs;
-
   Future<void> checkToken() async {
     print("SplashScreen: Mulai cek token");
 
@@ -42,6 +40,4 @@ class SplashScreenController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

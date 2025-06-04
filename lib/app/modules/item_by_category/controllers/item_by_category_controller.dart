@@ -9,7 +9,6 @@ class ItemByCategoryController extends GetxController {
   final items = [].obs;
   final isLoading = false.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -71,6 +70,4 @@ class ItemByCategoryController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
