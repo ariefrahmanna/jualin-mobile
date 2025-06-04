@@ -63,20 +63,25 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
                 elevation: 2,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(12),
-                  onTap: () => controller.goToItemDetail(item['id']),
+                  onTap: () {
+                    // TODO: Get.toNamed to item detail page
+                  },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: ClipRRect(
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                          borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(12)),
                           child: Image.network(
                             item['image_url'] ?? '',
                             width: double.infinity,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) => Container(
+                            errorBuilder: (context, error, stackTrace) =>
+                                Container(
                               color: neutral10,
-                              child: const Icon(Icons.broken_image, color: neutral70),
+                              child: const Icon(Icons.broken_image,
+                                  color: neutral70),
                             ),
                           ),
                         ),
