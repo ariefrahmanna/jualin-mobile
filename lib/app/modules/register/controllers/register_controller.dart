@@ -78,11 +78,9 @@ class RegisterController extends GetxController {
       FlutterSecureStorage secureStorage = FlutterSecureStorage();
       String token = json['token'].toString();
 
-
       await secureStorage.write(key: 'token', value: token);
       await secureStorage.write(key: 'username', value: username);
       await secureStorage.write(key: 'fullname', value: fullname);
-
 
       Get.snackbar(
         'Success',
@@ -106,7 +104,6 @@ class RegisterController extends GetxController {
     }
   }
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -125,6 +122,4 @@ class RegisterController extends GetxController {
     fullnameController.dispose();
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

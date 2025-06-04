@@ -97,7 +97,6 @@ class LoginController extends GetxController {
     }
   }
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -114,6 +113,4 @@ class LoginController extends GetxController {
     passwordController.dispose();
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 class WishlistController extends GetxController {
   //TODO: Implement WishlistController
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -20,6 +19,4 @@ class WishlistController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
