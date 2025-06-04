@@ -5,19 +5,22 @@ import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:http/http.dart' as http;
+import 'package:jualin/utils/api_endpoints.dart';
 
 class MyAccountController extends GetxController {
   Future<void> logout() async {
     FlutterSecureStorage secureStorage = FlutterSecureStorage();
     var token = await secureStorage.read(key: 'token');
 
-    var response = await http.delete(
-      Uri.parse('https://your-ngrok-url/api/logout'),
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Accept': 'application/json',
-      },
-    );
+    var url =
+        Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.logout);
+
+    var headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+    var response = await http.delete(url, headers: headers);
     if (response.statusCode == 200) {
       await secureStorage.deleteAll();
       Get.snackbar(
@@ -37,17 +40,6 @@ class MyAccountController extends GetxController {
         colorText: neutral10,
       );
     }
-
-    await secureStorage.deleteAll();
-    Get.snackbar(
-      'Success',
-      'Logged out successfully',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: success,
-      colorText: neutral10,
-    );
-
-    Get.offAllNamed(Routes.LOGIN);
   }
 
   @override
