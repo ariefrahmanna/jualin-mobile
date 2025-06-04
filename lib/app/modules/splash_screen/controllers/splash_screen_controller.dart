@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, unnecessary_overrides
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,12 +11,11 @@ class SplashScreenController extends GetxController {
   final count = 0.obs;
 
   Future<void> checkToken() async {
-
     print("SplashScreen: Mulai cek token");
 
     await Future.delayed(Duration(seconds: 2));
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
+    FlutterSecureStorage secureStorage = FlutterSecureStorage();
+    String? token = await secureStorage.read(key: 'token');
 
     print("SplashScreen: Token = $token");
 

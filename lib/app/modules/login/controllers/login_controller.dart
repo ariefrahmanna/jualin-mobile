@@ -3,12 +3,12 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   var isPasswordVisible = false.obs;
@@ -67,10 +67,14 @@ class LoginController extends GetxController {
         return;
       }
 
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+      FlutterSecureStorage secureStorage = FlutterSecureStorage();
       String token = json['token'].toString();
+      String fullname = json['fullname'].toString();
 
-      await prefs.setString('token', token);
+
+      await secureStorage.write(key: 'token', value: token);
+      await secureStorage.write(key: 'username', value: username);
+      await secureStorage.write(key: 'fullname', value: fullname);
 
       Get.snackbar(
         'Success',
