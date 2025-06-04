@@ -102,7 +102,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
               color: neutral10,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withAlpha((0.05 * 255).round()),
                   blurRadius: 8,
                   offset: const Offset(0, -2),
                 )
