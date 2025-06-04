@@ -138,12 +138,12 @@ class MyAccountView extends GetView<MyAccountController> {
               accountItem(
                 icon: Icons.favorite_border,
                 label: "Wishlist",
-                onTap: () => Get.offAllNamed(Routes.WISHLIST)
+                onTap: () => Get.toNamed(Routes.WISHLIST)
                 ),
               accountItem(
                 icon: Icons.list,
                 label: "My Items",
-                onTap: () => Get.offAllNamed(Routes.SELL_ITEMS)
+                onTap: () => Get.toNamed(Routes.SELL_ITEMS)
               ),
               accountItem(icon: Icons.chat_bubble_outline, label: "Chats"),
               accountItem(icon: Icons.credit_card_outlined, label: "Payment Methods"),
