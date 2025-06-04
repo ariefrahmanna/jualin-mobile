@@ -32,28 +32,49 @@ class RecentlyViewedView extends GetView<RecentlyViewedController> {
             title: 'Kursi Abu',
             price: 'Rp799.000',
             imageName: 'kursi_abu.png',
+            lastViewed: DateTime.now().subtract(const Duration(hours: 5)),
           ),
           const SizedBox(height: 16),
           recentlyViewedItem(
             title: 'Keyboard',
             price: 'Rp299.000',
             imageName: 'keyboard.png',
+            lastViewed:
+                DateTime.now().subtract(const Duration(days: 1)), // yesterday
           ),
           const SizedBox(height: 16),
           recentlyViewedItem(
             title: 'Plushies Pikachu',
             price: 'Rp499.000',
             imageName: 'plushies.png',
+            lastViewed:
+                DateTime.now().subtract(const Duration(days: 32)), // >30 days
           ),
         ],
       ),
     );
   }
 
+  String getLastViewedText(DateTime dateTime) {
+    final now = DateTime.now();
+    final difference = now.difference(dateTime).inDays;
+
+    if (difference == 0) {
+      return 'Last viewed: Today';
+    } else if (difference == 1) {
+      return 'Last viewed: Yesterday';
+    } else if (difference > 30) {
+      return 'Last viewed: >30 days ago';
+    } else {
+      return 'Last viewed: $difference days ago';
+    }
+  }
+
   Widget recentlyViewedItem({
     required String title,
     required String price,
     required String imageName,
+    required DateTime lastViewed,
   }) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -88,6 +109,13 @@ class RecentlyViewedView extends GetView<RecentlyViewedController> {
                         fontSize: 16,
                       )),
                   const SizedBox(height: 4),
+                  Text(
+                    getLastViewedText(lastViewed),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey,
+                    ),
+                  ),
                 ],
               ),
             ),
