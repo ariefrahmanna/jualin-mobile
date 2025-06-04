@@ -10,12 +10,16 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/my-account/bindings/my_account_binding.dart';
 import '../modules/my-account/views/my_account_view.dart';
+import '../modules/recently_added/bindings/recently_added_binding.dart';
+import '../modules/recently_added/views/recently_added_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/sell_items/bindings/sell_items_binding.dart';
 import '../modules/sell_items/views/sell_items_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
+import '../modules/term_condition/bindings/term_condition_binding.dart';
+import '../modules/term_condition/views/term_condition_view.dart';
 import '../modules/transactions/bindings/transactions_binding.dart';
 import '../modules/transactions/views/transactions_view.dart';
 import '../modules/wishlist/bindings/wishlist_binding.dart';
@@ -75,6 +79,16 @@ class AppPages {
       name: _Paths.SELL_ITEMS,
       page: () => const SellItemsView(),
       binding: SellItemsBinding(),
+    ),
+    GetPage(
+      name: _Paths.RECENTLY_ADDED,
+      page: () => const RecentlyAddedView(),
+      binding: RecentlyAddedBinding(),
+    ),
+    GetPage(
+      name: _Paths.TERM_CONDITION,
+      page: () => const TermConditionsView(),
+      binding: TermConditionBinding(),
     ),
     GetPage(
       name: _Paths.ITEM_BY_CATEGORY,
