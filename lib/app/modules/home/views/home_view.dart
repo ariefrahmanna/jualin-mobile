@@ -141,21 +141,48 @@ class HomeView extends GetView<HomeController> {
                     icon: Icons.devices_other,
                     label: 'Electronics',
                     color: Color(0xFFE2F3EC),
+                    onTap: () {
+                      Get.toNamed(
+                        Routes.ITEM_BY_CATEGORY,
+                        arguments: {
+                          'category': 'Electronics',
+                        },
+                      );
+                    },
                   ),
                   buildCategoryItem(
                     icon: Icons.kitchen,
                     label: 'Appliances',
                     color: Color(0xFFE3EAFE),
+                    onTap: () {
+                      Get.toNamed(
+                        Routes.ITEM_BY_CATEGORY,
+                        arguments: {
+                          'category': 'Appliances',
+                        },
+                      );
+                    },
                   ),
                   buildCategoryItem(
                     icon: Icons.chair,
                     label: 'Furniture',
                     color: Color(0xFFFFF1CF),
+                    onTap: () {
+                      Get.toNamed(
+                        Routes.ITEM_BY_CATEGORY,
+                        arguments: {
+                          'category': 'Furniture',
+                        },
+                      );
+                    },
                   ),
                   buildCategoryItem(
                     icon: Icons.more_horiz,
                     label: 'See More',
                     color: neutral50,
+                    onTap: () {
+                      // Aksi untuk "See More"
+                    },
                   ),
                 ],
               ),
@@ -234,34 +261,37 @@ class HomeView extends GetView<HomeController> {
     required IconData icon,
     required String label,
     required Color color,
+    VoidCallback? onTap,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: primaryColor),
-            const SizedBox(height: 8),
-            Text(
-              label,
-              style: const TextStyle(
-                color: text,
-                fontWeight: FontWeight.w600,
+    return InkWell(
+      borderRadius: BorderRadius.circular(16),
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: primaryColor),
+              const SizedBox(height: 8),
+              Text(
+                label,
+                style: const TextStyle(
+                  color: text,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-
-//TODO: make a proper customSearchDelegate
 class CustomSearchDelegate extends SearchDelegate {
   List<String> searchTerms = [
     'Meja',

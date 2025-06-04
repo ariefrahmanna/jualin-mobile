@@ -4,6 +4,8 @@ import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/item_by_category/bindings/item_by_category_binding.dart';
+import '../modules/item_by_category/views/item_by_category_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/my-account/bindings/my_account_binding.dart';
@@ -87,6 +89,11 @@ class AppPages {
       name: _Paths.TERM_CONDITION,
       page: () => const TermConditionsView(),
       binding: TermConditionBinding(),
+    ),
+    GetPage(
+      name: _Paths.ITEM_BY_CATEGORY,
+      page: () => const ItemByCategoryView(),
+      binding: ItemByCategoryBinding(),
     ),
   ];
 }

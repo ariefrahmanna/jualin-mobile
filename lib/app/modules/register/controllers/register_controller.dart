@@ -1,13 +1,13 @@
 // ignore_for_file: unnecessary_overrides
 
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterController extends GetxController {
   final fullnameController = TextEditingController();
@@ -75,10 +75,12 @@ class RegisterController extends GetxController {
         return;
       }
 
+      FlutterSecureStorage secureStorage = FlutterSecureStorage();
       String token = json['token'].toString();
-      SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      await prefs.setString('token', token);
+      await secureStorage.write(key: 'token', value: token);
+      await secureStorage.write(key: 'username', value: username);
+      await secureStorage.write(key: 'fullname', value: fullname);
 
       Get.snackbar(
         'Success',
@@ -102,7 +104,6 @@ class RegisterController extends GetxController {
     }
   }
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -121,6 +122,4 @@ class RegisterController extends GetxController {
     fullnameController.dispose();
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
