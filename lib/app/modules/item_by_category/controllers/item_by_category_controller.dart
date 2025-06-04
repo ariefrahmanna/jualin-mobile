@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -8,7 +9,6 @@ class ItemByCategoryController extends GetxController {
   final items = [].obs;
   final isLoading = false.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -23,31 +23,35 @@ class ItemByCategoryController extends GetxController {
     var secureStorage = FlutterSecureStorage();
     String? token = await secureStorage.read(key: 'token');
     try {
-      final url = Uri.parse(
+      var url = Uri.parse(
         '${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.items}?category=$category',
       );
-      final headers = {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      };
-      final response = await http.get(
+
+      var response = await http.get(
         url,
-        headers: headers,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
       );
-      print("Token: $token");
-      print("URL: $url");
-      print("Headers: $headers");
+
       if (response.statusCode == 200) {
         final List data = json.decode(response.body)['data'];
         items.value = data;
       } else {
         items.clear();
-        Get.snackbar('Error', 'Gagal memuat data item');
+        Get.snackbar('Error', 'Failed to load items');
       }
     } catch (e) {
       items.clear();
-      Get.snackbar('Error', 'Terjadi kesalahan');
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: errors,
+        colorText: neutral10,
+      );
     } finally {
       isLoading.value = false;
     }
@@ -62,6 +66,4 @@ class ItemByCategoryController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

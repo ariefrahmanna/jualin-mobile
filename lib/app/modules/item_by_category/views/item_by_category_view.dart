@@ -8,26 +8,26 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
 
   @override
   Widget build(BuildContext context) {
-    final categoryName = Get.arguments?['category'] ?? 'Category';
+    final category = Get.arguments?['category'] ?? 'Kategori';
 
     return Scaffold(
       backgroundColor: neutral10,
       appBar: AppBar(
         backgroundColor: primaryColor,
         title: Text(
-          categoryName,
-          style: const TextStyle(
+          category,
+          style: TextStyle(
             color: neutral10,
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
-        iconTheme: const IconThemeData(color: neutral10),
+        iconTheme: IconThemeData(color: neutral10),
       ),
       body: Obx(
         () {
           if (controller.isLoading.value) {
-            return const Center(
+            return Center(
               child: CircularProgressIndicator(
                 color: primaryColor,
               ),
@@ -45,8 +45,8 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
             );
           }
           return GridView.builder(
-            padding: const EdgeInsets.all(16),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            padding: EdgeInsets.all(16),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.75,
               crossAxisSpacing: 16,
@@ -71,7 +71,7 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
                     children: [
                       Expanded(
                         child: ClipRRect(
-                          borderRadius: const BorderRadius.vertical(
+                          borderRadius: BorderRadius.vertical(
                             top: Radius.circular(12),
                           ),
                           child: Image.network(
@@ -81,7 +81,7 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
                             errorBuilder: (context, error, stackTrace) {
                               return Container(
                                 color: neutral10,
-                                child: const Icon(
+                                child: Icon(
                                   Icons.broken_image,
                                   color: neutral70,
                                 ),
@@ -91,13 +91,13 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               item['name'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
                                 color: text,
@@ -108,7 +108,7 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
                             const SizedBox(height: 4),
                             Text(
                               'Rp ${item['price']}',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: primaryColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
