@@ -8,8 +8,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/my-account/bindings/my_account_binding.dart';
 import '../modules/my-account/views/my_account_view.dart';
-import '../modules/recently_viewed/bindings/recently_viewed_binding.dart';
-import '../modules/recently_viewed/views/recently_viewed_view.dart';
+import '../modules/recently_added/bindings/recently_added_binding.dart';
+import '../modules/recently_added/views/recently_added_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/sell_items/bindings/sell_items_binding.dart';
@@ -77,9 +77,9 @@ class AppPages {
       binding: SellItemsBinding(),
     ),
     GetPage(
-      name: _Paths.RECENTLY_VIEWED,
-      page: () => const RecentlyViewedView(),
-      binding: RecentlyViewedBinding(),
+      name: _Paths.RECENTLY_ADDED,
+      page: () => const RecentlyAddedView(),
+      binding: RecentlyAddedBinding(),
     ),
   ];
 }

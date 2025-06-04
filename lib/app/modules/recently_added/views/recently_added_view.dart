@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/recently_viewed_controller.dart';
+import '../controllers/recently_added_controller.dart';
 
-class RecentlyViewedView extends GetView<RecentlyViewedController> {
-  const RecentlyViewedView({super.key});
+class RecentlyAddedView extends GetView<RecentlyAddedController> {
+  const RecentlyAddedView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recently Viewed'),
+        title: const Text('Recently Added'),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
@@ -28,26 +28,26 @@ class RecentlyViewedView extends GetView<RecentlyViewedController> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          recentlyViewedItem(
+          recentlyAddedItem(
             title: 'Kursi Abu',
             price: 'Rp799.000',
             imageName: 'kursi_abu.jpg',
-            lastViewed: DateTime.now().subtract(const Duration(hours: 5)),
+            lastAdded: DateTime.now().subtract(const Duration(hours: 5)),
           ),
           const SizedBox(height: 16),
-          recentlyViewedItem(
+          recentlyAddedItem(
             title: 'Keyboard',
             price: 'Rp299.000',
             imageName: 'keyboard.png',
-            lastViewed:
+            lastAdded:
                 DateTime.now().subtract(const Duration(days: 1)), // yesterday
           ),
           const SizedBox(height: 16),
-          recentlyViewedItem(
+          recentlyAddedItem(
             title: 'Plushies Pikachu',
             price: 'Rp499.000',
             imageName: 'plushies.png',
-            lastViewed:
+            lastAdded:
                 DateTime.now().subtract(const Duration(days: 32)), // >30 days
           ),
         ],
@@ -55,26 +55,26 @@ class RecentlyViewedView extends GetView<RecentlyViewedController> {
     );
   }
 
-  String getLastViewedText(DateTime dateTime) {
+  String getLastAddedText(DateTime dateTime) {
     final now = DateTime.now();
     final difference = now.difference(dateTime).inDays;
 
     if (difference == 0) {
-      return 'Last viewed: Today';
+      return 'Last Added: Today';
     } else if (difference == 1) {
-      return 'Last viewed: Yesterday';
+      return 'Last Added: Yesterday';
     } else if (difference > 30) {
-      return 'Last viewed: >30 days ago';
+      return 'Last Added: >30 days ago';
     } else {
-      return 'Last viewed: $difference days ago';
+      return 'Last Added: $difference days ago';
     }
   }
 
-  Widget recentlyViewedItem({
+  Widget recentlyAddedItem({
     required String title,
     required String price,
     required String imageName,
-    required DateTime lastViewed,
+    required DateTime lastAdded,
   }) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -110,7 +110,7 @@ class RecentlyViewedView extends GetView<RecentlyViewedController> {
                       )),
                   const SizedBox(height: 4),
                   Text(
-                    getLastViewedText(lastViewed),
+                    getLastAddedText(lastAdded),
                     style: const TextStyle(
                       fontSize: 13,
                       color: Colors.grey,

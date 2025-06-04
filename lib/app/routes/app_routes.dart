@@ -14,7 +14,7 @@ abstract class Routes {
   static const DASHBOARD = _Paths.DASHBOARD;
   static const TRANSACTIONS = _Paths.TRANSACTIONS;
   static const SELL_ITEMS = _Paths.SELL_ITEMS;
-  static const RECENTLY_VIEWED = _Paths.RECENTLY_VIEWED;
+  static const RECENTLY_ADDED = _Paths.RECENTLY_ADDED;
 }
 
 abstract class _Paths {
@@ -28,5 +28,5 @@ abstract class _Paths {
   static const DASHBOARD = '/dashboard';
   static const TRANSACTIONS = '/transactions';
   static const SELL_ITEMS = '/sell-items';
-  static const RECENTLY_VIEWED = '/recently-viewed';
+  static const RECENTLY_ADDED = '/recently-added';
 }

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class RecentlyViewedController extends GetxController {
-  //TODO: Implement RecentlyViewedController
+class RecentlyAddedController extends GetxController {
+  //TODO: Implement RecentlyAddedController
 
   final count = 0.obs;
   @override
