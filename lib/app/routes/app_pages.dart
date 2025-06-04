@@ -85,7 +85,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.TERM_CONDITION,
-      page: () => const TermConditionView(),
+      page: () => const TermConditionsView(),
       binding: TermConditionBinding(),
     ),
   ];
