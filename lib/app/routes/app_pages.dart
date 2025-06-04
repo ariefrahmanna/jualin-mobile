@@ -16,6 +16,8 @@ import '../modules/sell_items/bindings/sell_items_binding.dart';
 import '../modules/sell_items/views/sell_items_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
+import '../modules/term_condition/bindings/term_condition_binding.dart';
+import '../modules/term_condition/views/term_condition_view.dart';
 import '../modules/transactions/bindings/transactions_binding.dart';
 import '../modules/transactions/views/transactions_view.dart';
 import '../modules/wishlist/bindings/wishlist_binding.dart';
@@ -80,6 +82,11 @@ class AppPages {
       name: _Paths.RECENTLY_ADDED,
       page: () => const RecentlyAddedView(),
       binding: RecentlyAddedBinding(),
+    ),
+    GetPage(
+      name: _Paths.TERM_CONDITION,
+      page: () => const TermConditionView(),
+      binding: TermConditionBinding(),
     ),
   ];
 }

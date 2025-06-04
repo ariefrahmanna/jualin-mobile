@@ -15,6 +15,7 @@ abstract class Routes {
   static const TRANSACTIONS = _Paths.TRANSACTIONS;
   static const SELL_ITEMS = _Paths.SELL_ITEMS;
   static const RECENTLY_ADDED = _Paths.RECENTLY_ADDED;
+  static const TERM_CONDITION = _Paths.TERM_CONDITION;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const TRANSACTIONS = '/transactions';
   static const SELL_ITEMS = '/sell-items';
   static const RECENTLY_ADDED = '/recently-added';
+  static const TERM_CONDITION = '/term-condition';
 }
