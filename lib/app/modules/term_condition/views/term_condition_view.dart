@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jualin/app/themes/colors.dart';
 
 class TermConditionsView extends GetView {
   const TermConditionsView({super.key});
@@ -10,7 +11,7 @@ class TermConditionsView extends GetView {
       appBar: AppBar(
         title: const Text('Terms and Conditions'),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: neutral10,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
@@ -158,7 +159,7 @@ class TermConditionsView extends GetView {
                   Get.back(); // kembali ke halaman sebelumnya
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+                  backgroundColor: primaryColor,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -166,7 +167,7 @@ class TermConditionsView extends GetView {
                 ),
                 child: const Text(
                   'Saya Setuju',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16, color: neutral10),
                 ),
               ),
             ),
