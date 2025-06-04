@@ -22,6 +22,12 @@ class DetailedItemView extends GetView<DetailedItemController> {
           ),
         ),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         actions: [
           Obx(() => IconButton(
                 onPressed: controller.toggleWishlist,
@@ -29,7 +35,9 @@ class DetailedItemView extends GetView<DetailedItemController> {
                   controller.isWishlisted.value
                       ? Icons.favorite
                       : Icons.favorite_border,
-                  color: controller.isWishlisted.value ? favorite : const Color.fromARGB(255, 142, 142, 142),
+                  color: controller.isWishlisted.value
+                      ? favorite
+                      : const Color.fromARGB(255, 142, 142, 142),
                 ),
               ))
         ],
@@ -114,7 +122,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add your buy functionality here
+                      // TO DO add navigation
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
