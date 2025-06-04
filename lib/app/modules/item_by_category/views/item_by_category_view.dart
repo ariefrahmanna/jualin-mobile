@@ -64,12 +64,7 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(12),
                   onTap: () {
-                    Get.toNamed(
-                      '/item-detail',
-                      arguments: {
-                        'item_id': item['id'],
-                      },
-                    );
+                    // TODO: Get.toNamed to item detail page
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
