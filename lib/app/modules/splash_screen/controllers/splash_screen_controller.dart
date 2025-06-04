@@ -3,7 +3,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreenController extends GetxController {
   //TODO: Implement SplashScreenController
