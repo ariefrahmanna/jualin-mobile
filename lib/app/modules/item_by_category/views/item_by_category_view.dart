@@ -77,17 +77,21 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
                       Expanded(
                         child: ClipRRect(
                           borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(12)),
+                            top: Radius.circular(12),
+                          ),
                           child: Image.network(
                             item['image_url'] ?? '',
                             width: double.infinity,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) =>
-                                Container(
-                              color: neutral10,
-                              child: const Icon(Icons.broken_image,
-                                  color: neutral70),
-                            ),
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: neutral10,
+                                child: const Icon(
+                                  Icons.broken_image,
+                                  color: neutral70,
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),
