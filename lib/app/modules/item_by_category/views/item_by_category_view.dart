@@ -63,20 +63,30 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
                 elevation: 2,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(12),
-                  onTap: () => controller.goToItemDetail(item['id']),
+                  onTap: () {
+                    Get.toNamed(
+                      '/item-detail',
+                      arguments: {
+                        'item_id': item['id'],
+                      },
+                    );
+                  },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: ClipRRect(
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                          borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(12)),
                           child: Image.network(
                             item['image_url'] ?? '',
                             width: double.infinity,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) => Container(
+                            errorBuilder: (context, error, stackTrace) =>
+                                Container(
                               color: neutral10,
-                              child: const Icon(Icons.broken_image, color: neutral70),
+                              child: const Icon(Icons.broken_image,
+                                  color: neutral70),
                             ),
                           ),
                         ),
@@ -87,7 +97,7 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              item['name'] ?? '',
+                              item['name'],
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
@@ -98,7 +108,7 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Rp ${item['price'] ?? '0'}',
+                              'Rp ${item['price']}',
                               style: const TextStyle(
                                 color: primaryColor,
                                 fontWeight: FontWeight.bold,
