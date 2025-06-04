@@ -1,0 +1,140 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../controllers/detailed_item_controller.dart';
+import 'package:jualin/app/themes/colors.dart';
+
+class DetailedItemView extends GetView<DetailedItemController> {
+  const DetailedItemView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: neutral10,
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        iconTheme: const IconThemeData(color: neutral10),
+        elevation: 0,
+        title: const Text(
+          "Product Detail",
+          style: TextStyle(
+            color: neutral10,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+        actions: [
+          Obx(() => IconButton(
+                onPressed: controller.toggleWishlist,
+                icon: Icon(
+                  controller.isWishlisted.value
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  color: controller.isWishlisted.value ? favorite : neutral10,
+                ),
+              ))
+        ],
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(16),
+                bottomRight: Radius.circular(16),
+              ),
+              child: Image.asset(
+                controller.imagePath,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      controller.title,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: text,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      controller.price,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: success,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Description",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: text,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      controller.description,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: neutral70,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            decoration: BoxDecoration(
+              color: neutral10,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 8,
+                  offset: const Offset(0, -2),
+                )
+              ],
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      "Add to Cart",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: neutral10,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
