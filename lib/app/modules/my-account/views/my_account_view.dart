@@ -7,8 +7,8 @@ import '../controllers/my_account_controller.dart';
 
 class MyAccountView extends GetView<MyAccountController> {
   const MyAccountView({super.key});
-    @override
-    Widget sectionTitle(String title) {
+
+  Widget sectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
       child: Text(
@@ -119,30 +119,55 @@ class MyAccountView extends GetView<MyAccountController> {
                           SizedBox(height: 4),
                           Text(
                             "oliver.sartono@mail.com",
-                            style: TextStyle(color: neutral70, fontSize: 14),
+                            style: TextStyle(
+                              color: neutral70,
+                              fontSize: 14,
+                            ),
                           ),
                         ],
                       ),
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.edit_outlined, color: text, size: 20),
+                      icon: const Icon(
+                        Icons.edit_outlined,
+                        color: text,
+                        size: 20,
+                      ),
                     ),
                   ],
                 ),
               ),
-
               sectionTitle("General"),
-              accountItem(icon: Icons.receipt, label: "Transaction"),
-              accountItem(icon: Icons.favorite_border, label: "Wishlist"),
-              accountItem(icon: Icons.chat_bubble_outline, label: "Chats"),
-              accountItem(icon: Icons.credit_card_outlined, label: "Payment Methods"),
-              accountItem(icon: Icons.place_outlined, label: "My Address"),
-              accountItem(icon: Icons.lock_outline, label: "Security"),
-
+              accountItem(
+                icon: Icons.receipt,
+                label: "Transaction",
+              ),
+              accountItem(
+                icon: Icons.favorite_border,
+                label: "Wishlist",
+              ),
+              accountItem(
+                icon: Icons.chat_bubble_outline,
+                label: "Chats",
+              ),
+              accountItem(
+                icon: Icons.credit_card_outlined,
+                label: "Payment Methods",
+              ),
+              accountItem(
+                icon: Icons.place_outlined,
+                label: "My Address",
+              ),
+              accountItem(
+                icon: Icons.lock_outline,
+                label: "Security",
+              ),
               sectionTitle("Help"),
-              accountItem(icon: Icons.person_outline, label: "Get in Touch With Us"),
-
+              accountItem(
+                icon: Icons.person_outline,
+                label: "Get in Touch With Us",
+              ),
               const SizedBox(height: 20),
               accountItem(
                 icon: Icons.logout,
