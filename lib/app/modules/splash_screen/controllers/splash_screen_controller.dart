@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print, unnecessary_overrides
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
