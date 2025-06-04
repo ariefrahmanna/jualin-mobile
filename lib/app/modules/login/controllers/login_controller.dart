@@ -71,7 +71,6 @@ class LoginController extends GetxController {
       String token = json['token'].toString();
       String fullname = json['fullname'].toString();
 
-
       await secureStorage.write(key: 'token', value: token);
       await secureStorage.write(key: 'username', value: username);
       await secureStorage.write(key: 'fullname', value: fullname);
@@ -85,6 +84,14 @@ class LoginController extends GetxController {
       );
 
       Get.offAllNamed(Routes.DASHBOARD);
+    } catch (error) {
+      Get.snackbar(
+        'error',
+        error.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: errors,
+        colorText: neutral10,
+      );
     } finally {
       isLoading.value = false;
     }
