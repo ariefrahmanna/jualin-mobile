@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import '../controllers/sell_items_controller.dart';
+
 class SellItemsView extends StatelessWidget {
   const SellItemsView({super.key});
 
@@ -11,8 +12,14 @@ class SellItemsView extends StatelessWidget {
     return Scaffold(
       backgroundColor: neutral10,
       appBar: AppBar(
-        title: const Text('Your Items'),
+        title: const Text('My Items'),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
@@ -33,7 +40,7 @@ class SellItemsView extends StatelessWidget {
           itemCount: Get.find<SellItemsController>().items.length,
           itemBuilder: (context, index) {
             final item = Get.find<SellItemsController>().items[index];
-            return wishlistItem(
+            return sellItems(
               title: item.title,
               price: item.price,
               imageName: item.imagePath,
@@ -46,7 +53,7 @@ class SellItemsView extends StatelessWidget {
     );
   }
 
-  Widget wishlistItem({
+  Widget sellItems({
     required String title,
     required String price,
     required String imageName,
@@ -113,7 +120,7 @@ class SellItemsView extends StatelessWidget {
                         child: Text(
                           value,
                           style: const TextStyle(
-                            fontWeight: FontWeight.normal, // Removed bold
+                            fontWeight: FontWeight.normal,
                             fontSize: 14,
                             color: text,
                           ),
