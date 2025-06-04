@@ -7,8 +7,6 @@ import 'package:jualin/app/themes/colors.dart';
 import 'package:http/http.dart' as http;
 
 class MyAccountController extends GetxController {
-  //TODO: Implement MyAccountController
-
   Future<void> logout() async {
     FlutterSecureStorage secureStorage = FlutterSecureStorage();
     var token = await secureStorage.read(key: 'token');

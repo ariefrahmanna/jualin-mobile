@@ -292,7 +292,6 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-//TODO: make a proper customSearchDelegate
 class CustomSearchDelegate extends SearchDelegate {
   List<String> searchTerms = [
     'Meja',

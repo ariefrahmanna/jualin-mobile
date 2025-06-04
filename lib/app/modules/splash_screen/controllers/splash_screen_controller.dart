@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 
 class SplashScreenController extends GetxController {
-  //TODO: Implement SplashScreenController
-
   Future<void> checkToken() async {
     print("SplashScreen: Mulai cek token");
 
