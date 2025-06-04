@@ -11,17 +11,17 @@ class DetailedItemView extends GetView<DetailedItemController> {
     return Scaffold(
       backgroundColor: neutral10,
       appBar: AppBar(
-        backgroundColor: primaryColor,
-        iconTheme: const IconThemeData(color: neutral10),
+        backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           "Product Detail",
           style: TextStyle(
-            color: neutral10,
+            color: text,
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
+        centerTitle: true,
         actions: [
           Obx(() => IconButton(
                 onPressed: controller.toggleWishlist,
@@ -29,10 +29,11 @@ class DetailedItemView extends GetView<DetailedItemController> {
                   controller.isWishlisted.value
                       ? Icons.favorite
                       : Icons.favorite_border,
-                  color: controller.isWishlisted.value ? favorite : neutral10,
+                  color: controller.isWishlisted.value ? favorite : const Color.fromARGB(255, 142, 142, 142),
                 ),
               ))
         ],
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,18 +113,20 @@ class DetailedItemView extends GetView<DetailedItemController> {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // Add your buy functionality here
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
+                      textStyle: const TextStyle(fontSize: 16),
                     ),
                     child: const Text(
-                      "Add to Cart",
+                      "Buy Now",
                       style: TextStyle(
-                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: neutral10,
                       ),
