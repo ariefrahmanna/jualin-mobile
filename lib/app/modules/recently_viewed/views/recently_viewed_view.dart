@@ -31,7 +31,7 @@ class RecentlyViewedView extends GetView<RecentlyViewedController> {
           recentlyViewedItem(
             title: 'Kursi Abu',
             price: 'Rp799.000',
-            imageName: 'kursi_abu.png',
+            imageName: 'kursi_abu.jpg',
             lastViewed: DateTime.now().subtract(const Duration(hours: 5)),
           ),
           const SizedBox(height: 16),
