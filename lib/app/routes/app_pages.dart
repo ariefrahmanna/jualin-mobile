@@ -1,11 +1,11 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:get/get.dart';
 
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/item_by_category/bindings/item_by_category_binding.dart';
+import '../modules/item_by_category/views/item_by_category_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/my-account/bindings/my_account_binding.dart';
@@ -20,6 +20,8 @@ import '../modules/transactions/bindings/transactions_binding.dart';
 import '../modules/transactions/views/transactions_view.dart';
 import '../modules/wishlist/bindings/wishlist_binding.dart';
 import '../modules/wishlist/views/wishlist_view.dart';
+
+// ignore_for_file: constant_identifier_names
 
 part 'app_routes.dart';
 
@@ -73,6 +75,11 @@ class AppPages {
       name: _Paths.SELL_ITEMS,
       page: () => const SellItemsView(),
       binding: SellItemsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ITEM_BY_CATEGORY,
+      page: () => const ItemByCategoryView(),
+      binding: ItemByCategoryBinding(),
     ),
   ];
 }
