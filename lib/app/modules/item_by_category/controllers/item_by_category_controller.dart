@@ -20,17 +20,24 @@ class ItemByCategoryController extends GetxController {
 
   Future<void> fetchItemsByCategory(String category) async {
     isLoading.value = true;
-    secureStorage = FlutterSecure
+    var secureStorage = FlutterSecureStorage();
+    String? token = await secureStorage.read(key: 'token');
     try {
       final url = Uri.parse(
         '${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.items}?category=$category',
       );
       final headers = {
-        'Authorization' : 'Bearer $token',
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       };
-      final response = await http.get(url);
+      final response = await http.get(
+        url,
+        headers: headers,
+      );
+      print("Token: $token");
+      print("URL: $url");
+      print("Headers: $headers");
       if (response.statusCode == 200) {
         final List data = json.decode(response.body)['data'];
         items.value = data;
