@@ -7,4 +7,5 @@ class AuthEndpoints {
   final String register = 'register';
   final String login = 'login';
   final String items = 'items';
+  final String logout = 'logout';
 }
