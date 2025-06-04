@@ -9,6 +9,10 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
   @override
   Widget build(BuildContext context) {
     final categoryName = Get.arguments?['category'] ?? 'Category';
+
+    return Scaffold(
+      backgroundColor: neutral10,
+      appBar: AppBar(
         backgroundColor: primaryColor,
         title: Text(
           categoryName,
@@ -32,7 +36,7 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
           if (controller.items.isEmpty) {
             return Center(
               child: Text(
-                'No items found in $categoryName',
+                'No items found in this category',
                 style: TextStyle(
                   color: neutral70,
                   fontSize: 16,
