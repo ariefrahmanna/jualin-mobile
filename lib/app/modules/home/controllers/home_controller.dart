@@ -13,16 +13,16 @@ class HomeController extends GetxController {
   var isLoading = false.obs;
   var isSearching = false.obs;
 
+  var filteredSuggestions = [].obs;
+
   var recentlyAddedController = Get.put(RecentlyAddedController());
+  List get allItems => recentlyAddedController.recentlyAddedItems;
 
   Future<void> fetchRecentlyAddedPreview() async {
     try {
       isLoading.value = true;
       await recentlyAddedController.fetchRecentlyAddedItems();
-
-      // Ambil hanya 5 item sebagai preview
-      recentlyAddedItems.value =
-          recentlyAddedController.recentlyAddedItems.take(5).toList();
+      recentlyAddedItems.value = allItems.take(5).toList();
     } catch (e) {
       Get.snackbar(
         'Error',
@@ -69,6 +69,17 @@ class HomeController extends GetxController {
     } finally {
       isSearching.value = false;
     }
+  }
+
+  void searchSuggestions(String query) {
+    if (query.isEmpty) {
+      filteredSuggestions.clear();
+      return;
+    }
+    filteredSuggestions.value = allItems.where((item) {
+      final name = item['name']?.toLowerCase() ?? '';
+      return name.contains(query.toLowerCase());
+    }).toList();
   }
 
   @override
