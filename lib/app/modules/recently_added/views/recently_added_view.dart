@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jualin/app/themes/colors.dart';
 
 import '../controllers/recently_added_controller.dart';
 
@@ -11,19 +12,19 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
       appBar: AppBar(
         title: const Text('Recently Added'),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: neutral10,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_none, color: Colors.black),
+            icon: const Icon(Icons.notifications_none),
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.person_outline, color: Colors.black),
+            icon: const Icon(Icons.person_outline),
             onPressed: () {},
           ),
         ],
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -113,7 +114,7 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
                     getLastAddedText(lastAdded),
                     style: const TextStyle(
                       fontSize: 13,
-                      color: Colors.grey,
+                      color: text,
                     ),
                   ),
                 ],
@@ -124,7 +125,7 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
                 // Tombol Buy ditekan
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF4CAF50),
+                backgroundColor: selectedItemColor,
                 minimumSize: const Size(80, 36),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
