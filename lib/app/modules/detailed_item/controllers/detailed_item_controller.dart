@@ -1,9 +1,6 @@
 import 'package:get/get.dart';
 
 class DetailedItemController extends GetxController {
-  //TODO: Implement DetailedItemController
-
-  final count = 0.obs;
   var isWishlisted = false.obs;
 
   late String title;
@@ -34,6 +31,4 @@ class DetailedItemController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
