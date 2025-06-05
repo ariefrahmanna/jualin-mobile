@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart'; // Import warna yang sudah kamu buat
+import 'package:jualin/utils/widgets/item_card.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -99,11 +100,14 @@ class HomeView extends GetView<HomeController> {
                     itemCount: controller.recentlyAddedItems.length,
                     itemBuilder: (context, index) {
                       final item = controller.recentlyAddedItems[index];
-                      return buildRecentlyViewedItem(
-                        image: item['image_url'] ??
-                            'assets/images/placeholder.png', // Sesuaikan key dengan response API kamu
-                        title: item['name'] ?? 'No Title',
-                        price: 'Rp ${item['price'] ?? 0}',
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 12),
+                        child: ItemCard(
+                          item: item,
+                          onTap: () {
+                            // TODO: Go to item detail
+                          },
+                        ),
                       );
                     },
                   ),
@@ -286,14 +290,7 @@ class HomeView extends GetView<HomeController> {
 }
 
 class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    'Meja',
-    'Kursi',
-    'Sofa',
-    'Gitar',
-    'Pokemon',
-    'Keyboard',
-  ];
+  HomeController homeController = Get.find<HomeController>();
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -301,6 +298,7 @@ class CustomSearchDelegate extends SearchDelegate {
       IconButton(
         onPressed: () {
           query = '';
+          showSuggestions(context);
         },
         icon: const Icon(Icons.clear),
       ),
@@ -319,39 +317,38 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var item in searchTerms) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
+    homeController.searchItems(query);
+    return Obx(() {
+      if (homeController.isSearching.value) {
+        return Center(child: CircularProgressIndicator());
       }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
+      if (homeController.searchResults.isEmpty) {
+        return Center(child: Text('No results found'));
+      }
+      return GridView.builder(
+        padding: EdgeInsets.all(16),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 0.7,
+        ),
+        itemCount: homeController.searchResults.length,
+        itemBuilder: (context, index) {
+          var item = homeController.searchResults[index];
+          return ItemCard(
+            item: item,
+            onTap: () {
+              //TODO: Implement DetailedItem
+            },
+          );
+        },
+      );
+    });
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var item in searchTerms) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
+    return Container();
   }
 }
