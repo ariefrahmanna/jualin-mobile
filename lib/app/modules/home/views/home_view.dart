@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart'; // Import warna yang sudah kamu buat
+import 'package:jualin/utils/widgets/item_card.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -99,11 +100,14 @@ class HomeView extends GetView<HomeController> {
                     itemCount: controller.recentlyAddedItems.length,
                     itemBuilder: (context, index) {
                       final item = controller.recentlyAddedItems[index];
-                      return buildRecentlyViewedItem(
-                        image: item['image_url'] ??
-                            'assets/images/placeholder.png', // Sesuaikan key dengan response API kamu
-                        title: item['name'] ?? 'No Title',
-                        price: 'Rp ${item['price'] ?? 0}',
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 12),
+                        child: ItemCard(
+                          item: item,
+                          onTap: () {
+                            // TODO: Go to item detail
+                          },
+                        ),
                       );
                     },
                   ),
@@ -186,69 +190,6 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  // Widget for Recently Viewed Item
-  Widget buildRecentlyViewedItem({
-    required String image,
-    required String title,
-    required String price,
-  }) {
-    return Container(
-      width: 140,
-      margin: const EdgeInsets.only(right: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: neutral10,
-        boxShadow: [
-          BoxShadow(
-            color: neutral50,
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.network(
-              image,
-              height: 120,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: text,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  price,
-                  style: const TextStyle(
-                    color: text,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   // Widget for Category Item
   Widget buildCategoryItem({
     required IconData icon,
@@ -286,14 +227,7 @@ class HomeView extends GetView<HomeController> {
 }
 
 class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    'Meja',
-    'Kursi',
-    'Sofa',
-    'Gitar',
-    'Pokemon',
-    'Keyboard',
-  ];
+  HomeController homeController = Get.find<HomeController>();
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -301,6 +235,7 @@ class CustomSearchDelegate extends SearchDelegate {
       IconButton(
         onPressed: () {
           query = '';
+          showSuggestions(context);
         },
         icon: const Icon(Icons.clear),
       ),
@@ -319,39 +254,79 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var item in searchTerms) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
+    homeController.searchItems(query);
+    return Obx(() {
+      if (homeController.isSearching.value) {
+        return Center(child: CircularProgressIndicator());
       }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
+      if (homeController.searchResults.isEmpty) {
+        return Center(child: Text('No results found'));
+      }
+      return Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Search results for: "$query"',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 0.7,
+                ),
+                itemCount: homeController.searchResults.length,
+                itemBuilder: (context, index) {
+                  var item = homeController.searchResults[index];
+                  return ItemCard(
+                    item: item,
+                    onTap: () {
+                      // TODO: Implement DetailedItem
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var item in searchTerms) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
+    homeController.searchSuggestions(query);
+    return Obx(() {
+      final suggestions = homeController.filteredSuggestions;
+
+      if (suggestions.isEmpty) {
+        return Padding(
+          padding: EdgeInsets.all(16),
+          child: Text(''),
         );
-      },
-    );
+      }
+
+      return ListView.builder(
+        itemCount: suggestions.length,
+        itemBuilder: (context, index) {
+          final item = suggestions[index];
+          return ListTile(
+            title: Text(item['name']),
+            onTap: () {
+              query = item['name'];
+              showResults(context); 
+            },
+          );
+        },
+      );
+    });
   }
 }
