@@ -6,8 +6,30 @@ import '../controllers/recently_added_controller.dart';
 
 class RecentlyAddedView extends GetView<RecentlyAddedController> {
   const RecentlyAddedView({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final items = [
+      {
+        'title': 'Kursi Abu',
+        'price': 'Rp799.000',
+        'image': 'kursi_abu.jpg',
+        'lastAdded': DateTime.now().subtract(const Duration(hours: 5)),
+      },
+      {
+        'title': 'Keyboard',
+        'price': 'Rp299.000',
+        'image': 'keyboard.png',
+        'lastAdded': DateTime.now().subtract(const Duration(days: 1)),
+      },
+      {
+        'title': 'Plushies Pikachu',
+        'price': 'Rp499.000',
+        'image': 'plushies.png',
+        'lastAdded': DateTime.now().subtract(const Duration(days: 32)),
+      },
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Recently Added'),
@@ -26,32 +48,26 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
         ],
         iconTheme: const IconThemeData(),
       ),
-      body: ListView(
+      body: Padding(
         padding: const EdgeInsets.all(16),
-        children: [
-          recentlyAddedItem(
-            title: 'Kursi Abu',
-            price: 'Rp799.000',
-            imageName: 'kursi_abu.jpg',
-            lastAdded: DateTime.now().subtract(const Duration(hours: 5)),
+        child: GridView.builder(
+          itemCount: items.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 16,
+            crossAxisSpacing: 16,
+            childAspectRatio: 0.68,
           ),
-          const SizedBox(height: 16),
-          recentlyAddedItem(
-            title: 'Keyboard',
-            price: 'Rp299.000',
-            imageName: 'keyboard.png',
-            lastAdded:
-                DateTime.now().subtract(const Duration(days: 1)), // yesterday
-          ),
-          const SizedBox(height: 16),
-          recentlyAddedItem(
-            title: 'Plushies Pikachu',
-            price: 'Rp499.000',
-            imageName: 'plushies.png',
-            lastAdded:
-                DateTime.now().subtract(const Duration(days: 32)), // >30 days
-          ),
-        ],
+          itemBuilder: (context, index) {
+            final item = items[index];
+            return recentlyAddedCard(
+              title: item['title'] as String,
+              price: item['price'] as String,
+              imageName: item['image'] as String,
+              lastAdded: item['lastAdded'] as DateTime,
+            );
+          },
+        ),
       ),
     );
   }
@@ -71,7 +87,7 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
     }
   }
 
-  Widget recentlyAddedItem({
+  Widget recentlyAddedCard({
     required String title,
     required String price,
     required String imageName,
@@ -82,57 +98,54 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
       elevation: 4,
       child: Padding(
         padding: const EdgeInsets.all(12),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
               child: Image.asset(
                 'assets/images/$imageName',
-                width: 80,
-                height: 80,
+                height: 100,
+                width: double.infinity,
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      )),
-                  const SizedBox(height: 8),
-                  Text(price,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      )),
-                  const SizedBox(height: 4),
-                  Text(
-                    getLastAddedText(lastAdded),
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: text,
-                    ),
-                  ),
-                ],
-              ),
+            const SizedBox(height: 8),
+            Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            ElevatedButton(
-              onPressed: () {
-                // Tombol Buy ditekan
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: selectedItemColor,
-                minimumSize: const Size(80, 36),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+            const SizedBox(height: 4),
+            Text(
+              price,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              getLastAddedText(lastAdded),
+              style: const TextStyle(fontSize: 12, color: neutral70),
+            ),
+            const Spacer(),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Aksi tombol Buy
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: selectedItemColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                 ),
-                textStyle: const TextStyle(fontSize: 14),
+                child: const Text(
+                  'Buy',
+                  style: TextStyle(fontSize: 14),
+                ),
               ),
-              child: const Text('Buy'),
             ),
           ],
         ),
