@@ -321,8 +321,8 @@ class CustomSearchDelegate extends SearchDelegate {
           return ListTile(
             title: Text(item['name']),
             onTap: () {
-              query = item['name']; // Update query
-              showResults(context); // Tampilkan hasil pencarian
+              query = item['name'];
+              showResults(context); 
             },
           );
         },
