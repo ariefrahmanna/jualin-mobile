@@ -190,6 +190,82 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
+  Widget buildRecentlyViewedItem({
+    required String image,
+    required String title,
+    required String price,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(
+          Routes.DETAILED_ITEM,
+          arguments: {
+            'title': title,
+            'price': price,
+            'description': 'hihi',
+            'imagePath': image,
+          },
+        );
+      },
+      child: Container(
+        width: 140,
+        margin: const EdgeInsets.only(right: 12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: neutral10,
+          boxShadow: [
+            BoxShadow(
+              color: neutral50,
+              spreadRadius: 1,
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
+              child: Image.asset(
+                image,
+                height: 120,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: text,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    price,
+                    style: const TextStyle(
+                      color: text,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   // Widget for Category Item
   Widget buildCategoryItem({
     required IconData icon,

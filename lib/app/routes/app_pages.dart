@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/detailed_item/bindings/detailed_item_binding.dart';
+import '../modules/detailed_item/views/detailed_item_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/item_by_category/bindings/item_by_category_binding.dart';
@@ -94,6 +96,11 @@ class AppPages {
       name: _Paths.ITEM_BY_CATEGORY,
       page: () => const ItemByCategoryView(),
       binding: ItemByCategoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAILED_ITEM,
+      page: () => const DetailedItemView(),
+      binding: DetailedItemBinding(),
     ),
   ];
 }

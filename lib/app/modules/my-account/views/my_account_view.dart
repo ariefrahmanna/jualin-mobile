@@ -7,418 +7,201 @@ import '../controllers/my_account_controller.dart';
 
 class MyAccountView extends GetView<MyAccountController> {
   const MyAccountView({super.key});
+  Widget sectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: neutral70,
+        ),
+      ),
+    );
+  }
+
+  Widget accountItem({
+    required IconData icon,
+    required String label,
+    Color iconColor = text,
+    Color textColor = text,
+    VoidCallback? onTap,
+  }) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      decoration: BoxDecoration(
+        color: neutral10,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: neutral50),
+      ),
+      child: Material(
+        color: neutral10,
+        borderRadius: BorderRadius.circular(12),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            child: Row(
+              children: [
+                Icon(icon, color: iconColor, size: 24),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: textColor,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                Icon(Icons.arrow_forward_ios, size: 16, color: textColor),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: primaryColor,
-          iconTheme: IconThemeData(color: neutral10),
-          elevation: 0,
-          title: const Text(
-            "My Account",
-            style: TextStyle(color: neutral10, fontWeight: FontWeight.bold),
+      backgroundColor: neutral10,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Text(
+          "My Account",
+          style: TextStyle(
+            color: text, // Use a more readable color for text
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
         ),
-        body: SingleChildScrollView(
+        centerTitle: true, // Center the title for a cleaner look
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back(); // Use Get.back() for navigating back
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications_none, color: Colors.black),
+            onPressed: () {
+              // Handle notification icon press
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.person_outline, color: Colors.black),
+            onPressed: () {
+              // Handle profile icon press
+            },
+          ),
+        ],
+        iconTheme: const IconThemeData(color: Colors.black), // Icon color
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 24),
           child: Column(
             children: [
               Container(
+                margin: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                    color: neutral10,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 8,
-                        offset: Offset(0, 4),
-                      )
-                    ]),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                margin: EdgeInsets.all(20),
+                  color: neutral10,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: neutral50),
+                ),
                 child: Row(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 30,
-                      backgroundColor: Colors.black,
+                      backgroundImage: AssetImage("assets/images/profile.jpg"),
                     ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Oliver Sartono",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        ),
-                        Text("oliversartono@gmail.com")
-                      ],
-                    ),
-                    Spacer(),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.edit))
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20, top: 0, bottom: 0),
-                padding: EdgeInsets.all(16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "General",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                decoration: BoxDecoration(
-                    color: neutral10,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: Offset(0, 4),
-                      )
-                    ]),
-                child: Material(
-                  color: neutral10,
-                  borderRadius: BorderRadius.circular(15),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () {},
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      child: Row(
-                        children: [
-                          Icon(Icons.receipt, color: Colors.black),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            "Transaction",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                decoration: BoxDecoration(
-                    color: neutral10,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: Offset(0, 4),
-                      )
-                    ]),
-                child: Material(
-                  color: neutral10,
-                  borderRadius: BorderRadius.circular(15),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () {},
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      child: Row(
-                        children: [
-                          Icon(Icons.favorite_outline, color: Colors.black),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            "Wishlist",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                decoration: BoxDecoration(
-                    color: neutral10,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: Offset(0, 4),
-                      )
-                    ]),
-                child: Material(
-                  color: neutral10,
-                  borderRadius: BorderRadius.circular(15),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () {},
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      child: Row(
-                        children: [
-                          Icon(Icons.chat_bubble_outline, color: Colors.black),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            "Chats",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                decoration: BoxDecoration(
-                    color: neutral10,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: Offset(0, 4),
-                      )
-                    ]),
-                child: Material(
-                  color: neutral10,
-                  borderRadius: BorderRadius.circular(15),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () {},
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      child: Row(
-                        children: [
-                          Icon(Icons.credit_card_outlined, color: Colors.black),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            "Payment Methods",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                decoration: BoxDecoration(
-                    color: neutral10,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: Offset(0, 4),
-                      )
-                    ]),
-                child: Material(
-                  color: neutral10,
-                  borderRadius: BorderRadius.circular(15),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () {},
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      child: Row(
-                        children: [
-                          Icon(Icons.place_outlined, color: Colors.black),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            "My Address",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                decoration: BoxDecoration(
-                    color: neutral10,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: Offset(0, 4),
-                      )
-                    ]),
-                child: Material(
-                  color: neutral10,
-                  borderRadius: BorderRadius.circular(15),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () {},
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      child: Row(
-                        children: [
-                          Icon(Icons.lock_outline, color: Colors.black),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            "Security",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20, top: 0, bottom: 0),
-                padding: EdgeInsets.all(16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Help",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 20),
-                decoration: BoxDecoration(
-                    color: neutral10,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: Offset(0, 4),
-                      )
-                    ]),
-                child: Material(
-                  color: neutral10,
-                  borderRadius: BorderRadius.circular(15),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () {},
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      child: Row(
-                        children: [
-                          Icon(Icons.person, color: Colors.black),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            "Get Touch With Us",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                  color: neutral10,
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 8,
-                      spreadRadius: 2,
-                      offset: Offset(0, 4),
-                    )
-                  ],
-                ),
-                child: Material(
-                  color: neutral10,
-                  borderRadius: BorderRadius.circular(15),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () {
-                      controller.logout();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Row(
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Icon(Icons.logout, color: Colors.red),
-                          SizedBox(width: 16),
                           Text(
-                            "Logout",
+                            "Oliver Sartono",
                             style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.red,
+                              color: text,
                               fontWeight: FontWeight.bold,
+                              fontSize: 18,
                             ),
                           ),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios, color: Colors.red),
+                          SizedBox(height: 4),
+                          Text(
+                            "oliver.sartono@mail.com",
+                            style: TextStyle(
+                              color: neutral70,
+                              fontSize: 14,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.edit_outlined,
+                        color: text,
+                        size: 20,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 40)
+              sectionTitle("General"),
+              accountItem(
+                icon: Icons.receipt,
+                label: "Transaction",
+              ),
+              accountItem(
+                icon: Icons.favorite_border,
+                label: "Wishlist",
+              ),
+              accountItem(
+                icon: Icons.chat_bubble_outline,
+                label: "Chats",
+              ),
+              accountItem(
+                icon: Icons.credit_card_outlined,
+                label: "Payment Methods",
+              ),
+              accountItem(
+                icon: Icons.place_outlined,
+                label: "My Address",
+              ),
+              accountItem(
+                icon: Icons.lock_outline,
+                label: "Security",
+              ),
+              sectionTitle("Help"),
+              accountItem(
+                icon: Icons.person_outline,
+                label: "Get in Touch With Us",
+              ),
+              const SizedBox(height: 20),
+              accountItem(
+                icon: Icons.logout,
+                label: "Logout",
+                iconColor: errors,
+                textColor: errors,
+                onTap: () {
+                  controller.logout();
+                },
+              ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
