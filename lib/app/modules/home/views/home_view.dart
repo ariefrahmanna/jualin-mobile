@@ -72,7 +72,7 @@ class HomeView extends GetView<HomeController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    'Recently Viewed',
+                    'Recently Added',
                     style: TextStyle(
                       color: text,
                       fontWeight: FontWeight.bold,
@@ -80,43 +80,36 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.RECENTLY_ADDED);
+                    },
                     child: const Text('See More'),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
-              SizedBox(
-                height: 220,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      buildRecentlyViewedItem(
-                        image: 'assets/images/yellow-chair.png',
-                        title: 'Kursi Kuning',
-                        price: 'Rp 499.000',
-                      ),
-                      buildRecentlyViewedItem(
-                        image: 'assets/images/kursi_abu.jpg',
-                        title: 'Kursi DPR',
-                        price: 'Rp 999.000',
-                      ),
-                      buildRecentlyViewedItem(
-                        image: 'assets/images/keyboard.png',
-                        title: 'Mechanical Keyboard',
-                        price: 'Rp 500.000',
-                      ),
-                      buildRecentlyViewedItem(
-                        image: 'assets/images/plushies.png',
-                        title: 'Pikachu Plush',
-                        price: 'Rp 400.000',
-                      ),
-                      // Add more fixed items here
-                    ],
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return SizedBox(
+                  height: 220,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: controller.recentlyAddedItems.length,
+                    itemBuilder: (context, index) {
+                      final item = controller.recentlyAddedItems[index];
+                      return buildRecentlyViewedItem(
+                        image: item['image_url'] ??
+                            'assets/images/placeholder.png', // Sesuaikan key dengan response API kamu
+                        title: item['name'] ?? 'No Title',
+                        price: 'Rp ${item['price'] ?? 0}',
+                      );
+                    },
                   ),
-                ),
-              ),
+                );
+              }),
+
               const SizedBox(height: 24),
 
               // Find by Categories Section
@@ -219,7 +212,7 @@ class HomeView extends GetView<HomeController> {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.asset(
+            child: Image.network(
               image,
               height: 120,
               width: double.infinity,
