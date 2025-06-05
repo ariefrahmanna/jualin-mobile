@@ -57,8 +57,8 @@ class DetailedItemView extends GetView<DetailedItemController> {
                 bottomLeft: Radius.circular(16),
                 bottomRight: Radius.circular(16),
               ),
-              child: Image.asset(
-                controller.imagePath,
+              child: Image.network(
+                controller.item['image_url'],
                 fit: BoxFit.cover,
               ),
             ),
@@ -71,7 +71,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      controller.title,
+                      controller.item['name'],
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -80,7 +80,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      controller.price,
+                      controller.item['price'],
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      controller.description,
+                      controller.item['description'],
                       style: const TextStyle(
                         fontSize: 14,
                         color: neutral70,

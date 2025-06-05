@@ -9,4 +9,5 @@ class AuthEndpoints {
   final String checkToken = 'checkToken';
   final String items = 'items';
   final String logout = 'logout';
+  final String wishlists = 'user/wishlists';
 }
