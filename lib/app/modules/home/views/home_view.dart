@@ -262,25 +262,42 @@ class CustomSearchDelegate extends SearchDelegate {
       if (homeController.searchResults.isEmpty) {
         return Center(child: Text('No results found'));
       }
-      return GridView.builder(
-        padding: EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          childAspectRatio: 0.7,
-        ),
-        itemCount: homeController.searchResults.length,
-        itemBuilder: (context, index) {
-          var item = homeController.searchResults[index];
-          return ItemCard(
-            item: item,
-            onTap: () {
-              //TODO: Implement DetailedItem
-            },
-          );
-        },
-      );
+      return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Search results for: "$query"',
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.7,
+              ),
+              itemCount: homeController.searchResults.length,
+              itemBuilder: (context, index) {
+                var item = homeController.searchResults[index];
+                return ItemCard(
+                  item: item,
+                  onTap: () {
+                    // TODO: Implement DetailedItem
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
     });
   }
 
