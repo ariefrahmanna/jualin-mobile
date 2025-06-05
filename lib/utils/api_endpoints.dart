@@ -6,7 +6,7 @@ class ApiEndpoints {
 class AuthEndpoints {
   final String register = 'register';
   final String login = 'login';
-  final String checkToken = 'checkToken';
+  final String checkToken = 'check-token';
   final String items = 'items';
   final String logout = 'logout';
 }
