@@ -1,13 +1,13 @@
 class ApiEndpoints {
-  static final String baseUrl = 'http://10.0.2.2:8000/api/';
+  static final String baseUrl = 'http://10.0.2.2:8000/api';
   static AuthEndpoints authEndpoints = AuthEndpoints();
 }
 
 class AuthEndpoints {
-  final String register = 'register';
-  final String login = 'login';
-  final String checkToken = 'checkToken';
-  final String items = 'items';
-  final String logout = 'logout';
-  final String wishlists = 'user/wishlists';
+  final String register = '/register';
+  final String login = '/login';
+  final String checkToken = '/checkToken';
+  final String items = '/items';
+  final String logout = '/logout';
+  final String wishlists = '/user/wishlists';
 }
