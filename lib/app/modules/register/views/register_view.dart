@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import '../controllers/register_controller.dart';
+import 'package:flutter/gestures.dart';
 
 class RegisterView extends GetView<RegisterController> {
   const RegisterView({super.key});
@@ -87,9 +88,9 @@ class RegisterView extends GetView<RegisterController> {
                         ),
                       ),
                     )),
-                const SizedBox(height: 10),
-                const Text.rich(
-                  TextSpan(
+                const SizedBox(height: 10), // wajib untuk TapGestureRecognizer
+                RichText(
+                  text: TextSpan(
                     text:
                         'By clicking Create Account, you acknowledge you have read and agreed to our ',
                     style: TextStyle(fontSize: 12, color: neutral50),
@@ -100,14 +101,25 @@ class RegisterView extends GetView<RegisterController> {
                           color: primaryColor,
                           fontWeight: FontWeight.bold,
                         ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.toNamed(Routes.TERM_CONDITION);
+                          },
                       ),
-                      TextSpan(text: ' and '),
+                      TextSpan(
+                        text: ' and ',
+                        style: TextStyle(color: neutral50),
+                      ),
                       TextSpan(
                         text: 'Privacy Policy',
                         style: TextStyle(
                           color: primaryColor,
                           fontWeight: FontWeight.bold,
                         ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            //TODO: implement Privacy Policy Route Pages
+                          },
                       ),
                     ],
                   ),
