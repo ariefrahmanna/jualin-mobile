@@ -8,9 +8,6 @@ class TransactionsView extends GetView<TransactionsController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<TransactionsController>(
-      () => TransactionsController(),
-    );
     return Scaffold(
       backgroundColor: neutral10,
       appBar: AppBar(
