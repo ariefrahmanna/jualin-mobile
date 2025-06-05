@@ -194,7 +194,9 @@ class MyAccountView extends GetView<MyAccountController> {
                 label: "Logout",
                 iconColor: errors,
                 textColor: errors,
-                onTap: () => {},
+                onTap: () {
+                  controller.logout();
+                },
               ),
             ],
           ),
