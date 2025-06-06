@@ -75,14 +75,6 @@ class LoginController extends GetxController {
       await secureStorage.write(key: 'username', value: username);
       await secureStorage.write(key: 'fullname', value: fullname);
 
-      Get.snackbar(
-        'Success',
-        json['message'],
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: success,
-        colorText: neutral10,
-      );
-
       Get.offAllNamed(Routes.DASHBOARD);
     } catch (error) {
       Get.snackbar(
