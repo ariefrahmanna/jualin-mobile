@@ -21,10 +21,11 @@ class DashboardView extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    // Ambil instance controller
     final controller = Get.find<DashboardController>();
 
-    return Obx(() => Scaffold(
+    return Obx(
+      () {
+        return Scaffold(
           body: IndexedStack(
             index: controller.selectedIndex.value,
             children: pages,
@@ -36,7 +37,7 @@ class DashboardView extends GetView<DashboardController> {
               controller.changePage(index);
             },
             selectedItemColor: AppColors.primary,
-            unselectedItemColor: AppColors.neutral50,
+            unselectedItemColor: AppColors.neutral60,
             backgroundColor: AppColors.neutral10,
             items: const [
               BottomNavigationBarItem(
@@ -57,6 +58,8 @@ class DashboardView extends GetView<DashboardController> {
               ),
             ],
           ),
-        ));
+        );
+      },
+    );
   }
 }
