@@ -11,6 +11,8 @@ class AppFonts {
   static FontWeightStyles get h6 => FontWeightStyles(fontSize: 13);
   static FontWeightStyles get h7 => FontWeightStyles(fontSize: 12);
 
+  static ColorStyles get button => ColorStyles();
+
   TextStyle get description => TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
@@ -57,5 +59,15 @@ class FontWeightStyles {
         fontSize: fontSize,
         fontWeight: FontWeight.w400,
         color: AppColors.description,
+      );
+}
+
+class ColorStyles {
+  const ColorStyles();
+
+  TextStyle get primary => TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: AppColors.neutral10,
       );
 }
