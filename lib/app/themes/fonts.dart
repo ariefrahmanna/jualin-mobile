@@ -11,11 +11,11 @@ class AppFonts {
   static FontWeightStyles get h6 => FontWeightStyles(fontSize: 13);
   static FontWeightStyles get h7 => FontWeightStyles(fontSize: 12);
 
-  static const description = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-    color: AppColors.text,
-  );
+  TextStyle get description => TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: AppColors.text,
+      );
 }
 
 class FontWeightStyles {
@@ -51,5 +51,11 @@ class FontWeightStyles {
         fontSize: fontSize,
         fontWeight: FontWeight.w500,
         color: AppColors.primary,
+      );
+
+  TextStyle get shade => TextStyle(
+        fontSize: fontSize,
+        fontWeight: FontWeight.w400,
+        color: AppColors.description,
       );
 }
