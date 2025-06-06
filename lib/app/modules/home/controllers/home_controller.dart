@@ -87,4 +87,10 @@ class HomeController extends GetxController {
     super.onInit();
     fetchRecentlyAddedPreview();
   }
+
+  @override
+  void onReady() {
+    super.onReady();
+    fetchRecentlyAddedPreview();
+  }
 }
