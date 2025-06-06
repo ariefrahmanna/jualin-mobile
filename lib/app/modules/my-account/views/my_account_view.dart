@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:jualin/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/themes/colors.dart';
 
@@ -150,7 +151,9 @@ class MyAccountView extends GetView<MyAccountController> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(Routes.EDIT_ACCOUNT);
+                      },
                       icon: const Icon(
                         Icons.edit_outlined,
                         color: AppColors.text,
