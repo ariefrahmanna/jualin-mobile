@@ -12,7 +12,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.neutral20,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         elevation: 0,
@@ -56,7 +56,7 @@ class HomeView extends GetView<HomeController> {
             onPressed: () {
               Get.toNamed(Routes.MY_ACCOUNT);
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.person_outline,
               color: AppColors.neutral10,
             ),

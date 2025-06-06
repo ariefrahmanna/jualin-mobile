@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
 import '../../../themes/colors.dart';
 import '../controllers/transactions_controller.dart';
 
@@ -9,7 +10,7 @@ class TransactionsView extends GetView<TransactionsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.neutral10,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         title: const Text(
@@ -19,8 +20,18 @@ class TransactionsView extends GetView<TransactionsController> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.toNamed(Routes.MY_ACCOUNT);
+            },
+            icon: Icon(
+              Icons.person_outline,
+              color: AppColors.neutral10,
+            ),
+          ),
+        ],
         centerTitle: true,
-        iconTheme: const IconThemeData(color: AppColors.neutral10),
       ),
       body: Obx(() {
         if (controller.isLoading.value) {

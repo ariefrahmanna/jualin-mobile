@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
+import 'package:jualin/app/themes/colors.dart';
 
 import '../controllers/wishlist_controller.dart';
 
@@ -11,19 +13,27 @@ class WishlistView extends GetView<WishlistController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Wishlist'),
+        title: Text(
+          'Wishlist',
+          style: TextStyle(
+            color: AppColors.neutral10,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.primary,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_none, color: Colors.black),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.person_outline, color: Colors.black),
-            onPressed: () {},
+            icon: Icon(
+              Icons.person_outline,
+              color: AppColors.neutral10,
+            ),
+            onPressed: () {
+              Get.toNamed(Routes.MY_ACCOUNT);
+            },
           ),
         ],
         iconTheme: const IconThemeData(color: Colors.black),
