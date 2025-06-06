@@ -18,6 +18,12 @@ class AppFonts {
         fontWeight: FontWeight.w400,
         color: AppColors.text,
       );
+
+  static final appBarTitle = TextStyle(
+    fontSize: 48,
+    fontWeight: FontWeight.w400,
+    color: AppColors.neutral10,
+  );
 }
 
 class FontWeightStyles {
