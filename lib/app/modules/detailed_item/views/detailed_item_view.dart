@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/detailed_item_controller.dart';
 import 'package:jualin/app/themes/colors.dart';
+import 'package:jualin/app/themes/fonts.dart';
 
 class DetailedItemView extends GetView<DetailedItemController> {
   const DetailedItemView({super.key});
@@ -9,9 +10,9 @@ class DetailedItemView extends GetView<DetailedItemController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.neutral10,
+      backgroundColor: AppColors.neutral20,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.neutral20,
         elevation: 0,
         title: const Text(
           "Product Detail",
@@ -28,27 +29,6 @@ class DetailedItemView extends GetView<DetailedItemController> {
             Get.back();
           },
         ),
-        actions: [
-          Obx(
-            () {
-              return IconButton(
-                onPressed: () {
-                  if (!controller.isLoadingWishlist.value) {
-                    controller.toggleWishlist();
-                  }
-                },
-                icon: Icon(
-                  controller.isWishlisted.value
-                      ? Icons.favorite
-                      : Icons.favorite_border,
-                  color: controller.isWishlisted.value
-                      ? AppColors.favorite
-                      : const Color.fromARGB(255, 142, 142, 142),
-                ),
-              );
-            },
-          ),
-        ],
         iconTheme: const IconThemeData(
           color: Colors.black,
         ),
@@ -124,33 +104,57 @@ class DetailedItemView extends GetView<DetailedItemController> {
               color: AppColors.neutral10,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withAlpha((0.05 * 255).round()),
-                  blurRadius: 8,
-                  offset: const Offset(0, -2),
+                  color: Colors.black,
+                  blurRadius: 1,
                 )
               ],
             ),
             child: Row(
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // TO DO add navigation
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      textStyle: const TextStyle(fontSize: 16),
+                Container(
+                  decoration: ShapeDecoration(
+                    color: AppColors.neutral10,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: AppColors.primary),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Text(
-                      "Buy Now",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.neutral10,
+                  ),
+                  child: Obx(
+                    () {
+                      return IconButton(
+                        onPressed: () {
+                          if (!controller.isLoadingWishlist.value) {
+                            controller.toggleWishlist();
+                          }
+                        },
+                        icon: Icon(
+                          controller.isWishlisted.value
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: AppColors.primary,
+                          size: 30,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.all(10)),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 18,
+                      vertical: 12,
+                    ),
+                    decoration: ShapeDecoration(
+                      color: AppColors.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
+                    ),
+                    child: Text(
+                      'Buy',
+                      style: AppFonts.button.primary,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
