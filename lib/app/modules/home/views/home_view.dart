@@ -14,7 +14,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: AppColors.neutral20,
       appBar: AppBar(
-        backgroundColor: AppColors.neutral20,
+        backgroundColor: AppColors.primary,
         elevation: 0,
         title: GestureDetector(
           onTap: () {
@@ -33,12 +33,18 @@ class HomeView extends GetView<HomeController> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Icon(Icons.search, color: AppColors.neutral100),
+                  child: Icon(
+                    Icons.search,
+                    color: AppColors.neutral100,
+                  ),
                 ),
                 const Expanded(
                   child: Text(
                     'Search items',
-                    style: TextStyle(color: AppColors.neutral60, fontSize: 16),
+                    style: TextStyle(
+                      color: AppColors.text,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ],
@@ -50,13 +56,19 @@ class HomeView extends GetView<HomeController> {
             onPressed: () {
               Get.toNamed(Routes.MY_ACCOUNT);
             },
-            icon: const Icon(Icons.person_outline, color: AppColors.neutral90),
+            icon: const Icon(
+              Icons.person_outline,
+              color: AppColors.neutral10,
+            ),
           ),
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 10,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -83,7 +95,7 @@ class HomeView extends GetView<HomeController> {
               const SizedBox(height: 12),
               Obx(() {
                 if (controller.isLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator());
                 }
                 return SizedBox(
                   height: 220,
