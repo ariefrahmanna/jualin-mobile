@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/themes/colors.dart';
+import 'package:jualin/utils/widgets/item_card.dart';
 
 import '../controllers/recently_added_controller.dart';
 
@@ -9,27 +10,6 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
 
   @override
   Widget build(BuildContext context) {
-    final items = [
-      {
-        'title': 'Kursi Abu',
-        'price': 'Rp799.000',
-        'image': 'kursi_abu.jpg',
-        'lastAdded': DateTime.now().subtract(const Duration(hours: 5)),
-      },
-      {
-        'title': 'Keyboard',
-        'price': 'Rp299.000',
-        'image': 'keyboard.png',
-        'lastAdded': DateTime.now().subtract(const Duration(days: 1)),
-      },
-      {
-        'title': 'Plushies Pikachu',
-        'price': 'Rp499.000',
-        'image': 'plushies.png',
-        'lastAdded': DateTime.now().subtract(const Duration(days: 32)),
-      },
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Recently Added'),
@@ -51,7 +31,7 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: GridView.builder(
-          itemCount: items.length,
+          itemCount: controller.recentlyAddedItems.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 16,
@@ -59,12 +39,12 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
             childAspectRatio: 0.68,
           ),
           itemBuilder: (context, index) {
-            final item = items[index];
-            return recentlyAddedCard(
-              title: item['title'] as String,
-              price: item['price'] as String,
-              imageName: item['image'] as String,
-              lastAdded: item['lastAdded'] as DateTime,
+            var item = controller.recentlyAddedItems[index];
+            return ItemCard(
+              item: item,
+              onTap: () {
+                //TODO: implement item detailed page
+              },
             );
           },
         ),
