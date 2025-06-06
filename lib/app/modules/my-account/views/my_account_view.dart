@@ -82,33 +82,29 @@ class MyAccountView extends GetView<MyAccountController> {
         title: const Text(
           "My Account",
           style: TextStyle(
-            color: AppColors.text, // Use a more readable color for text
+            color: AppColors.text,
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
-        centerTitle: true, // Center the title for a cleaner look
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Get.back(); // Use Get.back() for navigating back
+            Get.back();
           },
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_none, color: Colors.black),
-            onPressed: () {
-              // Handle notification icon press
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: const Icon(Icons.person_outline, color: Colors.black),
-            onPressed: () {
-              // Handle profile icon press
-            },
+            onPressed: () {},
           ),
         ],
-        iconTheme: const IconThemeData(color: Colors.black), // Icon color
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
         child: Padding(
