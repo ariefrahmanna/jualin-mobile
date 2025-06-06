@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
+import 'package:jualin/app/themes/fonts.dart';
 import 'package:jualin/utils/widgets/item_card.dart';
 
 import '../controllers/home_controller.dart';
@@ -35,7 +36,7 @@ class HomeView extends GetView<HomeController> {
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Icon(
                     Icons.search,
-                    color: AppColors.neutral100,
+                    color: AppColors.primary,
                   ),
                 ),
                 const Expanded(
@@ -76,19 +77,18 @@ class HomeView extends GetView<HomeController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Recently Added',
-                    style: TextStyle(
-                      color: AppColors.text,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
+                    style: AppFonts.h2.bold,
                   ),
                   TextButton(
                     onPressed: () {
                       Get.toNamed(Routes.RECENTLY_ADDED);
                     },
-                    child: const Text('See More'),
+                    child: Text(
+                      'See More',
+                      style: AppFonts.h5.primary,
+                    ),
                   ),
                 ],
               ),
@@ -126,13 +126,9 @@ class HomeView extends GetView<HomeController> {
               const SizedBox(height: 24),
 
               // Find by Categories Section
-              const Text(
+              Text(
                 'Find by Categories',
-                style: TextStyle(
-                  color: AppColors.text,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
+                style: AppFonts.h2.bold,
               ),
               const SizedBox(height: 16),
               GridView.count(
