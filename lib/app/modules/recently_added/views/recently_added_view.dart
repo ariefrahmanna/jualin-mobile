@@ -14,7 +14,7 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
       appBar: AppBar(
         title: const Text('Recently Added'),
         centerTitle: true,
-        backgroundColor: neutral10,
+        backgroundColor: AppColors.neutral10,
         elevation: 0,
         actions: [
           IconButton(
@@ -93,19 +93,28 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
             const SizedBox(height: 8),
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 4),
             Text(
               price,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
             ),
             const SizedBox(height: 4),
             Text(
               getLastAddedText(lastAdded),
-              style: const TextStyle(fontSize: 12, color: neutral70),
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.neutral70,
+              ),
             ),
             const Spacer(),
             SizedBox(
@@ -115,7 +124,7 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
                   // Aksi tombol Buy
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: selectedItemColor,
+                  backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),

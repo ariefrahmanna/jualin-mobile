@@ -11,7 +11,7 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: neutral10,
+      backgroundColor: AppColors.neutral10,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -32,7 +32,7 @@ class RegisterView extends GetView<RegisterController> {
                   'Fill in your details below to get started on a seamless shopping experience.',
                   style: TextStyle(
                     fontSize: 16,
-                    color: neutral50,
+                    color: AppColors.neutral50,
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -93,12 +93,12 @@ class RegisterView extends GetView<RegisterController> {
                   text: TextSpan(
                     text:
                         'By clicking Create Account, you acknowledge you have read and agreed to our ',
-                    style: TextStyle(fontSize: 12, color: neutral50),
+                    style: TextStyle(fontSize: 12, color: AppColors.neutral50),
                     children: [
                       TextSpan(
                         text: 'Terms of Use',
                         style: TextStyle(
-                          color: primaryColor,
+                          color: AppColors.primary,
                           fontWeight: FontWeight.bold,
                         ),
                         recognizer: TapGestureRecognizer()
@@ -108,12 +108,12 @@ class RegisterView extends GetView<RegisterController> {
                       ),
                       TextSpan(
                         text: ' and ',
-                        style: TextStyle(color: neutral50),
+                        style: TextStyle(color: AppColors.neutral50),
                       ),
                       TextSpan(
                         text: 'Privacy Policy',
                         style: TextStyle(
-                          color: primaryColor,
+                          color: AppColors.primary,
                           fontWeight: FontWeight.bold,
                         ),
                         recognizer: TapGestureRecognizer()
@@ -133,7 +133,7 @@ class RegisterView extends GetView<RegisterController> {
                             ? null
                             : controller.login,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
+                          backgroundColor: AppColors.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -144,8 +144,8 @@ class RegisterView extends GetView<RegisterController> {
                                 height: 24,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2.5,
-                                  valueColor:
-                                      AlwaysStoppedAnimation<Color>(neutral10),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      AppColors.neutral10),
                                 ),
                               )
                             : const Text(
@@ -153,7 +153,7 @@ class RegisterView extends GetView<RegisterController> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: neutral10,
+                                  color: AppColors.neutral10,
                                 ),
                               ),
                       ),
@@ -168,7 +168,7 @@ class RegisterView extends GetView<RegisterController> {
                       child: const Text(
                         'Login',
                         style: TextStyle(
-                          color: primaryColor,
+                          color: AppColors.primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -195,7 +195,7 @@ class RegisterView extends GetView<RegisterController> {
                       color: Colors.red, size: 30),
                   label: const Text(
                     'Continue with Google',
-                    style: TextStyle(fontSize: 16, color: primaryColor),
+                    style: TextStyle(fontSize: 16, color: AppColors.primary),
                   ),
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -214,7 +214,7 @@ class RegisterView extends GetView<RegisterController> {
                       const Icon(Icons.facebook, color: Colors.blue, size: 30),
                   label: const Text(
                     'Continue with Facebook',
-                    style: TextStyle(fontSize: 16, color: primaryColor),
+                    style: TextStyle(fontSize: 16, color: AppColors.primary),
                   ),
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(

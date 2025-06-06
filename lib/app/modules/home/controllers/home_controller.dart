@@ -27,8 +27,8 @@ class HomeController extends GetxController {
       Get.snackbar(
         'Error',
         e.toString(),
-        backgroundColor: errors,
-        colorText: neutral10,
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
       );
     } finally {
       isLoading.value = false;
@@ -59,13 +59,21 @@ class HomeController extends GetxController {
         searchResults.value = data;
       } else {
         searchResults.clear();
-        Get.snackbar('Error', 'Search failed',
-            backgroundColor: errors, colorText: neutral10);
+        Get.snackbar(
+          'Error',
+          'Search failed',
+          backgroundColor: AppColors.error,
+          colorText: AppColors.neutral10,
+        );
       }
     } catch (e) {
       searchResults.clear();
-      Get.snackbar('Error', e.toString(),
-          backgroundColor: errors, colorText: neutral10);
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
+      );
     } finally {
       isSearching.value = false;
     }

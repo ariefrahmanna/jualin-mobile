@@ -38,8 +38,8 @@ class RegisterController extends GetxController {
         'Error',
         'field tidak boleh kosong',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: errors,
-        colorText: neutral10,
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
       );
       return;
     }
@@ -69,8 +69,8 @@ class RegisterController extends GetxController {
           'error',
           json['message'],
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: errors,
-          colorText: neutral10,
+          backgroundColor: AppColors.error,
+          colorText: AppColors.neutral10,
         );
         return;
       }
@@ -86,8 +86,8 @@ class RegisterController extends GetxController {
         'Success',
         json['message'],
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: success,
-        colorText: neutral10,
+        backgroundColor: AppColors.success,
+        colorText: AppColors.neutral10,
       );
 
       Get.offAllNamed(Routes.DASHBOARD);
@@ -96,8 +96,8 @@ class RegisterController extends GetxController {
         'error',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: errors,
-        colorText: neutral10,
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
       );
     } finally {
       isLoading.value = false;

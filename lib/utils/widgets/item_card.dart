@@ -14,7 +14,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: neutral10,
+      color: AppColors.neutral10,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -23,7 +23,7 @@ class ItemCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         onTap: onTap,
         child: SizedBox(
-          height: 230, 
+          height: 230,
           width: 140,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,10 +40,10 @@ class ItemCard extends StatelessWidget {
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       height: 120,
-                      color: neutral10,
+                      color: AppColors.neutral10,
                       child: Icon(
                         Icons.broken_image,
-                        color: neutral70,
+                        color: AppColors.neutral70,
                       ),
                     );
                   },
@@ -59,7 +59,7 @@ class ItemCard extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
-                        color: text,
+                        color: AppColors.text,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -68,7 +68,7 @@ class ItemCard extends StatelessWidget {
                     Text(
                       'Rp ${item['price']}',
                       style: const TextStyle(
-                        color: primaryColor,
+                        color: AppColors.primary,
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),

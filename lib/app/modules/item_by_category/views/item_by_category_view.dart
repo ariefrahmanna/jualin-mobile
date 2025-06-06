@@ -13,25 +13,25 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
     final category = Get.arguments?['category'] ?? 'Kategori';
 
     return Scaffold(
-      backgroundColor: neutral10,
+      backgroundColor: AppColors.neutral10,
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primary,
         title: Text(
           category,
           style: TextStyle(
-            color: neutral10,
+            color: AppColors.neutral10,
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
-        iconTheme: IconThemeData(color: neutral10),
+        iconTheme: IconThemeData(color: AppColors.neutral10),
       ),
       body: Obx(
         () {
           if (controller.isLoading.value) {
             return Center(
               child: CircularProgressIndicator(
-                color: primaryColor,
+                color: AppColors.primary,
               ),
             );
           }
@@ -40,7 +40,7 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
               child: Text(
                 'No items found in this category',
                 style: TextStyle(
-                  color: neutral70,
+                  color: AppColors.neutral70,
                   fontSize: 16,
                 ),
               ),

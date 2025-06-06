@@ -15,7 +15,7 @@ class MyAccountView extends GetView<MyAccountController> {
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: neutral70,
+          color: AppColors.neutral70,
         ),
       ),
     );
@@ -24,25 +24,31 @@ class MyAccountView extends GetView<MyAccountController> {
   Widget accountItem({
     required IconData icon,
     required String label,
-    Color iconColor = text,
-    Color textColor = text,
+    Color iconColor = AppColors.text,
+    Color textColor = AppColors.text,
     VoidCallback? onTap,
   }) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 8,
+      ),
       decoration: BoxDecoration(
-        color: neutral10,
+        color: AppColors.neutral10,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: neutral50),
+        border: Border.all(color: AppColors.neutral50),
       ),
       child: Material(
-        color: neutral10,
+        color: AppColors.neutral10,
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 16,
+            ),
             child: Row(
               children: [
                 Icon(icon, color: iconColor, size: 24),
@@ -69,14 +75,14 @@ class MyAccountView extends GetView<MyAccountController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: neutral10,
+      backgroundColor: AppColors.neutral10,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           "My Account",
           style: TextStyle(
-            color: text, // Use a more readable color for text
+            color: AppColors.text, // Use a more readable color for text
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
@@ -113,9 +119,9 @@ class MyAccountView extends GetView<MyAccountController> {
                 margin: const EdgeInsets.all(24),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: neutral10,
+                  color: AppColors.neutral10,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: neutral50),
+                  border: Border.all(color: AppColors.neutral50),
                 ),
                 child: Row(
                   children: [
@@ -131,7 +137,7 @@ class MyAccountView extends GetView<MyAccountController> {
                           Text(
                             "Oliver Sartono",
                             style: TextStyle(
-                              color: text,
+                              color: AppColors.text,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),
@@ -140,7 +146,7 @@ class MyAccountView extends GetView<MyAccountController> {
                           Text(
                             "oliver.sartono@mail.com",
                             style: TextStyle(
-                              color: neutral70,
+                              color: AppColors.neutral70,
                               fontSize: 14,
                             ),
                           ),
@@ -151,7 +157,7 @@ class MyAccountView extends GetView<MyAccountController> {
                       onPressed: () {},
                       icon: const Icon(
                         Icons.edit_outlined,
-                        color: text,
+                        color: AppColors.text,
                         size: 20,
                       ),
                     ),
@@ -192,8 +198,8 @@ class MyAccountView extends GetView<MyAccountController> {
               accountItem(
                 icon: Icons.logout,
                 label: "Logout",
-                iconColor: errors,
-                textColor: errors,
+                iconColor: AppColors.error,
+                textColor: AppColors.error,
                 onTap: () {
                   controller.logout();
                 },

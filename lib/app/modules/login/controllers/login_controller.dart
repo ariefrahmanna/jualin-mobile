@@ -32,8 +32,8 @@ class LoginController extends GetxController {
         'Error',
         'Username dan Passsword tidak boleh kosong',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: errors,
-        colorText: neutral10,
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
       );
       return;
     }
@@ -61,8 +61,8 @@ class LoginController extends GetxController {
           'error',
           json['message'],
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: errors,
-          colorText: neutral10,
+          backgroundColor: AppColors.error,
+          colorText: AppColors.neutral10,
         );
         return;
       }
@@ -81,8 +81,8 @@ class LoginController extends GetxController {
         'error',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: errors,
-        colorText: neutral10,
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
       );
     } finally {
       isLoading.value = false;

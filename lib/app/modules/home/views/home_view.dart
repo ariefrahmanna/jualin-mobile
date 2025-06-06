@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
-import 'package:jualin/app/themes/colors.dart'; // Import warna yang sudah kamu buat
+import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/widgets/item_card.dart';
 
 import '../controllers/home_controller.dart';
@@ -12,9 +12,9 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: neutral10,
+      backgroundColor: AppColors.neutral20,
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.neutral20,
         elevation: 0,
         title: GestureDetector(
           onTap: () {
@@ -26,24 +26,20 @@ class HomeView extends GetView<HomeController> {
           child: Container(
             height: 40,
             decoration: BoxDecoration(
-              color: neutral50,
+              color: AppColors.neutral10,
               borderRadius: BorderRadius.circular(30),
             ),
             child: Row(
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Icon(Icons.search, color: neutral90),
+                  child: Icon(Icons.search, color: AppColors.neutral100),
                 ),
                 const Expanded(
                   child: Text(
                     'Search items',
-                    style: TextStyle(color: neutral90, fontSize: 16),
+                    style: TextStyle(color: AppColors.neutral60, fontSize: 16),
                   ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.camera_alt_outlined, color: neutral90),
                 ),
               ],
             ),
@@ -51,14 +47,10 @@ class HomeView extends GetView<HomeController> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_none, color: neutral90),
-          ),
-          IconButton(
             onPressed: () {
               Get.toNamed(Routes.MY_ACCOUNT);
             },
-            icon: const Icon(Icons.person_outline, color: neutral90),
+            icon: const Icon(Icons.person_outline, color: AppColors.neutral90),
           ),
         ],
       ),
@@ -75,7 +67,7 @@ class HomeView extends GetView<HomeController> {
                   const Text(
                     'Recently Added',
                     style: TextStyle(
-                      color: text,
+                      color: AppColors.text,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
@@ -125,7 +117,7 @@ class HomeView extends GetView<HomeController> {
               const Text(
                 'Find by Categories',
                 style: TextStyle(
-                  color: text,
+                  color: AppColors.text,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -181,7 +173,7 @@ class HomeView extends GetView<HomeController> {
                   buildCategoryItem(
                     icon: Icons.more_horiz,
                     label: 'See More',
-                    color: neutral50,
+                    color: AppColors.neutral50,
                     onTap: () {
                       // Aksi untuk "See More"
                     },
@@ -217,10 +209,10 @@ class HomeView extends GetView<HomeController> {
         margin: const EdgeInsets.only(right: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: neutral10,
+          color: AppColors.neutral10,
           boxShadow: [
             BoxShadow(
-              color: neutral50,
+              color: AppColors.neutral50,
               spreadRadius: 1,
               blurRadius: 8,
               offset: const Offset(0, 2),
@@ -248,7 +240,7 @@ class HomeView extends GetView<HomeController> {
                   Text(
                     title,
                     style: const TextStyle(
-                      color: text,
+                      color: AppColors.text,
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                     ),
@@ -257,7 +249,7 @@ class HomeView extends GetView<HomeController> {
                   Text(
                     price,
                     style: const TextStyle(
-                      color: text,
+                      color: AppColors.text,
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                     ),
@@ -290,12 +282,12 @@ class HomeView extends GetView<HomeController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, color: primaryColor),
+              Icon(icon, color: AppColors.primary),
               const SizedBox(height: 8),
               Text(
                 label,
                 style: const TextStyle(
-                  color: text,
+                  color: AppColors.text,
                   fontWeight: FontWeight.w600,
                 ),
               ),

@@ -9,14 +9,14 @@ class DetailedItemView extends GetView<DetailedItemController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: neutral10,
+      backgroundColor: AppColors.neutral10,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           "Product Detail",
           style: TextStyle(
-            color: text,
+            color: AppColors.text,
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
@@ -42,14 +42,16 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       ? Icons.favorite
                       : Icons.favorite_border,
                   color: controller.isWishlisted.value
-                      ? favorite
+                      ? AppColors.favorite
                       : const Color.fromARGB(255, 142, 142, 142),
                 ),
               );
             },
           ),
         ],
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +81,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: text,
+                        color: AppColors.text,
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -88,7 +90,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: success,
+                        color: AppColors.success,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -97,7 +99,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: text,
+                        color: AppColors.text,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -105,7 +107,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       controller.item['description'],
                       style: const TextStyle(
                         fontSize: 14,
-                        color: neutral70,
+                        color: AppColors.neutral70,
                       ),
                     ),
                   ],
@@ -114,9 +116,12 @@ class DetailedItemView extends GetView<DetailedItemController> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24,
+              vertical: 16,
+            ),
             decoration: BoxDecoration(
-              color: neutral10,
+              color: AppColors.neutral10,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withAlpha((0.05 * 255).round()),
@@ -133,7 +138,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       // TO DO add navigation
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
+                      backgroundColor: AppColors.primary,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -144,7 +149,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       "Buy Now",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: neutral10,
+                        color: AppColors.neutral10,
                       ),
                     ),
                   ),

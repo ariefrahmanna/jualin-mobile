@@ -11,9 +11,11 @@ class TermConditionsView extends GetView {
       appBar: AppBar(
         title: const Text('Terms and Conditions'),
         centerTitle: true,
-        backgroundColor: neutral10,
+        backgroundColor: AppColors.neutral10,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -159,7 +161,7 @@ class TermConditionsView extends GetView {
                   Get.back(); // kembali ke halaman sebelumnya
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryColor,
+                  backgroundColor: AppColors.primary,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -167,7 +169,10 @@ class TermConditionsView extends GetView {
                 ),
                 child: const Text(
                   'Saya Setuju',
-                  style: TextStyle(fontSize: 16, color: neutral10),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.neutral10,
+                  ),
                 ),
               ),
             ),

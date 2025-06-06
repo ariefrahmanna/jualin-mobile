@@ -7,7 +7,6 @@ import 'package:jualin/utils/api_endpoints.dart';
 import 'package:http/http.dart' as http;
 
 class RecentlyAddedController extends GetxController {
-  //TODO: Implement RecentlyAddedController
   var recentlyAddedItems = [].obs;
   var isLoading = false.obs;
 
@@ -32,13 +31,21 @@ class RecentlyAddedController extends GetxController {
         recentlyAddedItems.value = data;
       } else {
         recentlyAddedItems.clear();
-        Get.snackbar('Error', 'unable to fetch data',
-            backgroundColor: errors, colorText: neutral10);
+        Get.snackbar(
+          'Error',
+          'unable to fetch data',
+          backgroundColor: AppColors.error,
+          colorText: AppColors.neutral10,
+        );
       }
     } catch (e) {
       recentlyAddedItems.clear();
-      Get.snackbar('Error', 'unable to fetch data',
-          backgroundColor: errors, colorText: neutral10);
+      Get.snackbar(
+        'Error',
+        'unable to fetch data',
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
+      );
     } finally {
       isLoading.value = false;
     }

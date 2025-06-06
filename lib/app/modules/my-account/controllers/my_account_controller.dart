@@ -27,8 +27,8 @@ class MyAccountController extends GetxController {
         'Success',
         'Logged out successfully',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: success,
-        colorText: neutral10,
+        backgroundColor: AppColors.success,
+        colorText: AppColors.neutral10,
       );
       Get.offAllNamed(Routes.LOGIN);
     } else {
@@ -36,8 +36,8 @@ class MyAccountController extends GetxController {
         'Error',
         'Unable to log out',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: errors,
-        colorText: neutral10,
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
       );
     }
   }

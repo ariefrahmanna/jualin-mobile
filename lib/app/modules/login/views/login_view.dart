@@ -11,7 +11,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: neutral10,
+      backgroundColor: AppColors.neutral10,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -32,7 +32,7 @@ class LoginView extends GetView<LoginController> {
                   'Login to start shopping and get awesome deals today!',
                   style: TextStyle(
                     fontSize: 16,
-                    color: text,
+                    color: AppColors.text,
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -73,7 +73,7 @@ class LoginView extends GetView<LoginController> {
                     onPressed: () {},
                     child: const Text(
                       'Forgot your password?',
-                      style: TextStyle(color: primaryColor),
+                      style: TextStyle(color: AppColors.primary),
                     ),
                   ),
                 ),
@@ -88,22 +88,23 @@ class LoginView extends GetView<LoginController> {
                                 await controller.login();
                               },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
+                          backgroundColor: AppColors.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                         child: controller.isLoading.value
                             ? const CircularProgressIndicator(
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(neutral10),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  AppColors.neutral10,
+                                ),
                               )
                             : const Text(
                                 'Log In',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: neutral10,
+                                  color: AppColors.neutral10,
                                 ),
                               ),
                       ),
@@ -128,34 +129,37 @@ class LoginView extends GetView<LoginController> {
                     'Log In with Google',
                     style: TextStyle(
                       fontSize: 16,
-                      color: primaryColor,
+                      color: AppColors.primary,
                     ),
                   ),
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    side: const BorderSide(color: primaryColor),
+                    side: BorderSide(color: AppColors.primary),
                     minimumSize: const Size(double.infinity, 50),
                   ),
                 ),
                 const SizedBox(height: 10),
                 OutlinedButton.icon(
                   onPressed: () {},
-                  icon:
-                      const Icon(Icons.facebook, color: Colors.blue, size: 30),
+                  icon: const Icon(
+                    Icons.facebook,
+                    color: Colors.blue,
+                    size: 30,
+                  ),
                   label: const Text(
                     'Log In with Facebook',
                     style: TextStyle(
                       fontSize: 16,
-                      color: primaryColor,
+                      color: AppColors.primary,
                     ),
                   ),
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    side: const BorderSide(color: primaryColor),
+                    side: const BorderSide(color: AppColors.primary),
                     minimumSize: const Size(double.infinity, 50),
                   ),
                 ),
@@ -171,7 +175,7 @@ class LoginView extends GetView<LoginController> {
                       child: const Text(
                         'Register',
                         style: TextStyle(
-                          color: primaryColor,
+                          color: AppColors.primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

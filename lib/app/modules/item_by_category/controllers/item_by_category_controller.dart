@@ -49,8 +49,8 @@ class ItemByCategoryController extends GetxController {
         'Error',
         e.toString(),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: errors,
-        colorText: neutral10,
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
       );
     } finally {
       isLoading.value = false;

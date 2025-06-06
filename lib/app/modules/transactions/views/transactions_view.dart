@@ -9,23 +9,23 @@ class TransactionsView extends GetView<TransactionsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: neutral10,
+      backgroundColor: AppColors.neutral10,
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primary,
         title: const Text(
           'My Transactions',
           style: TextStyle(
-            color: neutral10,
+            color: AppColors.neutral10,
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
-        iconTheme: const IconThemeData(color: neutral10),
+        iconTheme: const IconThemeData(color: AppColors.neutral10),
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(
-            child: CircularProgressIndicator(color: primaryColor),
+            child: CircularProgressIndicator(color: AppColors.primary),
           );
         }
         if (controller.transactions.isEmpty) {
@@ -33,7 +33,7 @@ class TransactionsView extends GetView<TransactionsController> {
             child: Text(
               'No transactions found',
               style: TextStyle(
-                color: neutral70,
+                color: AppColors.neutral70,
                 fontSize: 16,
               ),
             ),
@@ -45,19 +45,22 @@ class TransactionsView extends GetView<TransactionsController> {
           itemBuilder: (context, index) {
             final trx = controller.transactions[index];
             return Card(
-              color: neutral10,
+              color: AppColors.neutral10,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               elevation: 2,
               margin: const EdgeInsets.only(bottom: 16),
               child: ListTile(
-                leading: Icon(Icons.receipt_long, color: primaryColor),
+                leading: Icon(
+                  Icons.receipt_long,
+                  color: AppColors.primary,
+                ),
                 title: Text(
                   trx['item_name'] ?? '-',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: text,
+                    color: AppColors.text,
                   ),
                 ),
                 subtitle: Column(
@@ -65,14 +68,17 @@ class TransactionsView extends GetView<TransactionsController> {
                   children: [
                     Text(
                       'Tanggal: ${trx['date'] ?? '-'}',
-                      style: const TextStyle(fontSize: 13, color: neutral70),
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: AppColors.neutral70,
+                      ),
                     ),
                     Text(
                       'Status: ${trx['status'] ?? '-'}',
                       style: TextStyle(
                         fontSize: 13,
                         color: trx['status'] == 'success'
-                            ? Colors.green
+                            ? AppColors.primary
                             : (trx['status'] == 'pending'
                                 ? Colors.orange
                                 : Colors.red),
@@ -83,7 +89,7 @@ class TransactionsView extends GetView<TransactionsController> {
                 trailing: Text(
                   'Rp ${trx['total'] ?? '0'}',
                   style: const TextStyle(
-                    color: primaryColor,
+                    color: AppColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

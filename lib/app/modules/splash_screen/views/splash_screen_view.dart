@@ -13,7 +13,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
     controller.runtimeType;
 
     return Scaffold(
-      backgroundColor: neutral10,
+      backgroundColor: AppColors.neutral10,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
