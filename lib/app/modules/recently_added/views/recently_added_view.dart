@@ -12,21 +12,19 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recently Added'),
+        title: Text(
+          'Recently Added',
+          style: TextStyle(
+            color: AppColors.neutral10,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
-        backgroundColor: AppColors.neutral10,
+        backgroundColor: AppColors.primary,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_none),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.person_outline),
-            onPressed: () {},
-          ),
-        ],
-        iconTheme: const IconThemeData(),
+        iconTheme: const IconThemeData(
+          color: AppColors.neutral10,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
