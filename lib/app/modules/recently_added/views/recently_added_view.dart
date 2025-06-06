@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/widgets/item_card.dart';
 
@@ -41,7 +42,9 @@ class RecentlyAddedView extends GetView<RecentlyAddedController> {
             return ItemCard(
               item: item,
               onTap: () {
-                //TODO: implement item detailed page
+                Get.toNamed(Routes.DETAILED_ITEM, arguments: {
+                  'item': item,
+                });
               },
             );
           },
