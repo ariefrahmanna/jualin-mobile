@@ -18,6 +18,7 @@ abstract class Routes {
   static const TERM_CONDITION = _Paths.TERM_CONDITION;
   static const ITEM_BY_CATEGORY = _Paths.ITEM_BY_CATEGORY;
   static const DETAILED_ITEM = _Paths.DETAILED_ITEM;
+  static const EDIT_ACCOUNT = _Paths.EDIT_ACCOUNT;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const TERM_CONDITION = '/term-condition';
   static const ITEM_BY_CATEGORY = '/item-by-category';
   static const DETAILED_ITEM = '/detailed-item';
+  static const EDIT_ACCOUNT = '/edit-account';
 }

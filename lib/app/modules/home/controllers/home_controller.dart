@@ -22,7 +22,7 @@ class HomeController extends GetxController {
     try {
       isLoading.value = true;
       await recentlyAddedController.fetchRecentlyAddedItems();
-      recentlyAddedItems.value = allItems;
+      recentlyAddedItems.value = allItems.take(5).toList();
     } catch (e) {
       Get.snackbar(
         'Error',
@@ -85,6 +85,11 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
     fetchRecentlyAddedPreview();
   }
 }

@@ -1,10 +1,9 @@
-// ignore_for_file: unnecessary_overrides
-
 import 'package:get/get.dart';
 
-class SellItemsController extends GetxController {
-  //TODO: Implement SellItemsController
+class EditAccountController extends GetxController {
+  //TODO: Implement EditAccountController
 
+  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,4 +18,6 @@ class SellItemsController extends GetxController {
   void onClose() {
     super.onClose();
   }
+
+  void increment() => count.value++;
 }

@@ -36,7 +36,8 @@ class DashboardView extends GetView<DashboardController> {
               controller.changePage(index);
             },
             selectedItemColor: primaryColor,
-            unselectedItemColor: unselectedItemColor,
+            unselectedItemColor: neutral80,
+            backgroundColor: neutral20,
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),

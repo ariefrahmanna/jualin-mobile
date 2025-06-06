@@ -33,17 +33,17 @@ class HomeView extends GetView<HomeController> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Icon(Icons.search, color: text),
+                  child: Icon(Icons.search, color: neutral90),
                 ),
                 const Expanded(
                   child: Text(
                     'Search items',
-                    style: TextStyle(color: text, fontSize: 16),
+                    style: TextStyle(color: neutral90, fontSize: 16),
                   ),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.camera_alt_outlined, color: text),
+                  icon: const Icon(Icons.camera_alt_outlined, color: neutral90),
                 ),
               ],
             ),
@@ -52,13 +52,13 @@ class HomeView extends GetView<HomeController> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications_none, color: text),
+            icon: const Icon(Icons.notifications_none, color: neutral90),
           ),
           IconButton(
             onPressed: () {
               Get.toNamed(Routes.MY_ACCOUNT);
             },
-            icon: const Icon(Icons.person_outline, color: text),
+            icon: const Icon(Icons.person_outline, color: neutral90),
           ),
         ],
       ),
