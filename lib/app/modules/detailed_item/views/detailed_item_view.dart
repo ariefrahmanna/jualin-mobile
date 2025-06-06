@@ -32,7 +32,11 @@ class DetailedItemView extends GetView<DetailedItemController> {
           Obx(
             () {
               return IconButton(
-                onPressed: controller.toggleWishlist,
+                onPressed: () {
+                  if (!controller.isLoadingWishlist.value) {
+                    controller.toggleWishlist();
+                  }
+                },
                 icon: Icon(
                   controller.isWishlisted.value
                       ? Icons.favorite
@@ -43,7 +47,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                 ),
               );
             },
-          )
+          ),
         ],
         iconTheme: const IconThemeData(color: Colors.black),
       ),
