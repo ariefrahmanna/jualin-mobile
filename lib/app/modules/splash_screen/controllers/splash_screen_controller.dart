@@ -11,6 +11,13 @@ class SplashScreenController extends GetxController {
     await Future.delayed(Duration(seconds: 2));
     FlutterSecureStorage secureStorage = FlutterSecureStorage();
     String? token = await secureStorage.read(key: 'token');
+
+    if (token == null || token.isEmpty) {
+      await secureStorage.deleteAll();
+      Get.offAllNamed(Routes.LOGIN);
+      return;
+    }
+
     var url =
         Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.checkToken);
     var response = await http.get(
@@ -25,11 +32,10 @@ class SplashScreenController extends GetxController {
     if (response.statusCode != 200 || !jsonDecode(response.body)['status']) {
       await secureStorage.deleteAll();
       Get.offAllNamed(Routes.LOGIN);
-    } else if (token != null && token.isNotEmpty) {
-      Get.offAllNamed(Routes.DASHBOARD);
-    } else {
-      Get.offAllNamed(Routes.LOGIN);
+      return;
     }
+
+    Get.offAllNamed(Routes.DASHBOARD);
   }
 
   @override
