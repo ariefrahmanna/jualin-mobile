@@ -14,7 +14,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: neutral10,
       appBar: AppBar(
-        backgroundColor: neutral10,
+        backgroundColor: primaryColor,
         elevation: 0,
         title: GestureDetector(
           onTap: () {
@@ -105,7 +105,12 @@ class HomeView extends GetView<HomeController> {
                         child: ItemCard(
                           item: item,
                           onTap: () {
-                            // TODO: Go to item detail
+                            Get.toNamed(
+                              Routes.DETAILED_ITEM,
+                              arguments: {
+                                'item': item,
+                              },
+                            );
                           },
                         ),
                       );
@@ -365,7 +370,12 @@ class CustomSearchDelegate extends SearchDelegate {
                   return ItemCard(
                     item: item,
                     onTap: () {
-                      // TODO: Implement DetailedItem
+                      Get.toNamed(
+                        Routes.DETAILED_ITEM,
+                        arguments: {
+                          'item': item,
+                        },
+                      );
                     },
                   );
                 },
@@ -398,7 +408,7 @@ class CustomSearchDelegate extends SearchDelegate {
             title: Text(item['name']),
             onTap: () {
               query = item['name'];
-              showResults(context); 
+              showResults(context);
             },
           );
         },

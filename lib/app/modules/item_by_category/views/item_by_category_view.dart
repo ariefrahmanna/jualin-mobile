@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/utils/widgets/item_card.dart';
 import '../../../themes/colors.dart';
 import '../controllers/item_by_category_controller.dart';
@@ -59,7 +60,12 @@ class ItemByCategoryView extends GetView<ItemByCategoryController> {
               return ItemCard(
                 item: item,
                 onTap: () {
-                  //TODO: implement detailedItem navigation
+                  Get.toNamed(
+                    Routes.DETAILED_ITEM,
+                    arguments: {
+                      'item': item,
+                    },
+                  );
                 },
               );
             },
