@@ -81,6 +81,7 @@ class RegisterController extends GetxController {
       await secureStorage.write(key: 'token', value: token);
       await secureStorage.write(key: 'username', value: username);
       await secureStorage.write(key: 'fullname', value: fullname);
+      await secureStorage.write(key: 'email', value: email);
 
       Get.snackbar(
         'Success',
