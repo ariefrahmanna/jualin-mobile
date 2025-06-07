@@ -27,7 +27,7 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const SPLASH_SCREEN = '/splash-screen';
   static const REGISTER = '/register';
-  static const MY_ACCOUNT = '/my-account';
+  static const MY_ACCOUNT = '/my_account';
   static const WISHLIST = '/wishlist';
   static const DASHBOARD = '/dashboard';
   static const TRANSACTIONS = '/transactions';
