@@ -45,6 +45,32 @@ class WishlistController extends GetxController {
     }
   }
 
+  Future<void> toggleWishlist(Map<String, dynamic> item) async {
+  final itemId = item['id'];
+
+  var exists = wishlists.any((e) => e['id'] == itemId);
+  if (exists) {
+    final storage = FlutterSecureStorage();
+    final token = await storage.read(key: 'token');
+    var url = Uri.parse(
+          "${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.removeWishlist}/${item['id']}",
+        );
+    final response = await http.delete(
+      url,
+      headers: {'Authorization': 'Bearer $token'},
+    );
+
+    final json = jsonDecode(response.body);
+    if (!json['status']) throw json['message'];
+    wishlists.removeWhere((e) => e['id'] == itemId);
+
+  } else {
+
+  }
+  wishlists.refresh();
+}
+
+
   @override
   void onInit() {
     super.onInit();

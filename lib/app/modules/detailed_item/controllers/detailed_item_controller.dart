@@ -9,9 +9,10 @@ import 'package:jualin/utils/api_endpoints.dart';
 
 class DetailedItemController extends GetxController {
   var item = <String, dynamic>{}.obs;
+  WishlistController wishlistController = Get.put(WishlistController());
   var isWishlisted = false.obs;
   var isLoadingWishlist = false.obs;
-  WishlistController wishlistController = Get.put(WishlistController());
+
 
   void toggleWishlist() async {
     isLoadingWishlist.value = true;

@@ -56,6 +56,7 @@ class WishlistView extends GetView<WishlistController> {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 16),
                 child: wishlistItem(
+                  item: item,
                   title: item['name'],
                   price: "Rp${item['price']}",
                   imageUrl: item['image_url'],
@@ -71,6 +72,7 @@ class WishlistView extends GetView<WishlistController> {
   }
 
   Widget wishlistItem({
+    required Map<String, dynamic> item,
     required String title,
     required String price,
     required String imageUrl,
@@ -116,14 +118,15 @@ class WishlistView extends GetView<WishlistController> {
               Column(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.favorite, color: AppColors.favorite),
+                    icon: const Icon(Icons.remove_circle_outlined ,
+                        color: AppColors.favorite),
                     onPressed: () {
-                      // Tambahkan logika remove wishlist
+                      controller.toggleWishlist(item);
                     },
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // Tambahkan logika beli
+                      // TODO: Tambahkan logika beli
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
