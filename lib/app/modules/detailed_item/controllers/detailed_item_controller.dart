@@ -50,7 +50,6 @@ class DetailedItemController extends GetxController {
         final json = jsonDecode(response.body);
         if (!json['status']) throw json['message'];
 
-
         wishlistController.wishlists.add(item);
       }
 
@@ -72,6 +71,8 @@ class DetailedItemController extends GetxController {
   void onInit() {
     super.onInit();
     item.value = Get.arguments['item'];
+    isWishlisted.value =
+        wishlistController.wishlists.any((e) => e['id'] == item['id']);
   }
 
   @override
