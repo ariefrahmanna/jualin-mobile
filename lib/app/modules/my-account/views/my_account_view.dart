@@ -128,27 +128,27 @@ class MyAccountView extends GetView<MyAccountController> {
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            "Oliver Sartono",
-                            style: TextStyle(
-                              color: AppColors.text,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            "oliver.sartono@mail.com",
-                            style: TextStyle(
-                              color: AppColors.neutral70,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: Obx(() => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                controller.fullname.value,
+                                style: const TextStyle(
+                                  color: AppColors.text,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                controller.email.value,
+                                style: const TextStyle(
+                                  color: AppColors.neutral70,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          )),
                     ),
                     IconButton(
                       onPressed: () {

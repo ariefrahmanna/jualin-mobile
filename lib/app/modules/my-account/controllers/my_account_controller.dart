@@ -8,6 +8,9 @@ import 'package:http/http.dart' as http;
 import 'package:jualin/utils/api_endpoints.dart';
 
 class MyAccountController extends GetxController {
+  RxString fullname = ''.obs;
+  RxString email = ''.obs;
+
   Future<void> logout() async {
     FlutterSecureStorage secureStorage = FlutterSecureStorage();
     var token = await secureStorage.read(key: 'token');
@@ -42,6 +45,16 @@ class MyAccountController extends GetxController {
     }
   }
 
+  Future<void> readProfile() async {
+    FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    String? awaitFullname = await secureStorage.read(key: 'fullname');
+    String? awaitEmail = await secureStorage.read(key: 'email');
+    print('FULLNAME: $awaitFullname');
+    print('EMAIL: $awaitEmail');
+    fullname.value = awaitFullname ?? '';
+    email.value = awaitEmail ?? '';
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -50,6 +63,7 @@ class MyAccountController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    readProfile();
   }
 
   @override

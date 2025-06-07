@@ -69,14 +69,13 @@ class LoginController extends GetxController {
 
       FlutterSecureStorage secureStorage = FlutterSecureStorage();
       String token = json['token'].toString();
-      String fullname = json['fullname'].toString();
-      String email = json['email'].toString();
+      String fullname = json['data']['fullname'].toString();
+      String email = json['data']['email'].toString();
 
       await secureStorage.write(key: 'token', value: token);
       await secureStorage.write(key: 'username', value: username);
       await secureStorage.write(key: 'fullname', value: fullname);
       await secureStorage.write(key: 'email', value: email);
-
       Get.offAllNamed(Routes.DASHBOARD);
     } catch (error) {
       Get.snackbar(
