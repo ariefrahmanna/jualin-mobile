@@ -11,6 +11,7 @@ class AddItemController extends GetxController {
   var priceController = TextEditingController();
   var categoryController = TextEditingController();
   var imageUrlController = TextEditingController();
+  var descriptionController = TextEditingController();
   var isLoading = false.obs;
 
   final count = 0.obs;
@@ -24,7 +25,7 @@ class AddItemController extends GetxController {
     super.onReady();
   }
 
-    Future<void> addItem() async {
+  Future<void> addItem() async {
     if (!formKey.currentState!.validate()) return;
     isLoading.value = true;
     var secureStorage = const FlutterSecureStorage();
@@ -43,6 +44,7 @@ class AddItemController extends GetxController {
         'price': priceController.text,
         'category': categoryController.text,
         'image_url': imageUrlController.text,
+        'description': descriptionController.text,
       });
       var response = await http.post(url, headers: headers, body: body);
       if (response.statusCode == 201) {
@@ -57,7 +59,6 @@ class AddItemController extends GetxController {
       isLoading.value = false;
     }
   }
-
 
   @override
   void onClose() {

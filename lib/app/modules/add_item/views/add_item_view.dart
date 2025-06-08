@@ -12,6 +12,7 @@ class AddItemView extends GetView<AddItemController> {
     var priceController = controller.priceController;
     var categoryController = controller.categoryController;
     var imageUrlController = controller.imageUrlController;
+    var descriptionController = controller.descriptionController;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -62,6 +63,28 @@ class AddItemView extends GetView<AddItemController> {
                   ),
                   validator: (value) => value == null || value.isEmpty
                       ? 'Name is required'
+                      : null,
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: descriptionController,
+                  maxLines: 3,
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                    labelStyle: TextStyle(color: AppColors.primary),
+                    filled: true,
+                    fillColor: AppColors.neutral10,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: AppColors.primary, width: 2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  validator: (value) => value == null || value.isEmpty
+                      ? 'Description is required'
                       : null,
                 ),
                 const SizedBox(height: 16),
