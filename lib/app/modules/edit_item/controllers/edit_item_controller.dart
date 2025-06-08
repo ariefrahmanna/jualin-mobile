@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/modules/sell_items/controllers/sell_items_controller.dart';
-import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
