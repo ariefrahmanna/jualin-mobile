@@ -56,9 +56,9 @@ class EditAccountController extends GetxController {
         headers: headers,
         body: jsonEncode(body),
       );
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+
       final json = jsonDecode(response.body);
+
       if (response.statusCode != 200 || (json['status'] == false)) {
         Get.snackbar(
           'Error',
