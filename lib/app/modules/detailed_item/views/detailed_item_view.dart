@@ -109,19 +109,22 @@ class DetailedItemView extends GetView<DetailedItemController> {
                         );
                       },
                       child: Obx(
-                        () => controller.isLoading.value
-                            ? Container(
-                                width: 150,
-                                height: 20,
-                                decoration: BoxDecoration(
-                                  color: AppColors.neutral40,
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                              )
-                            : Text(
-                                controller.user['fullname'],
-                                style: AppFonts.userLink,
+                        () {
+                          if (controller.isLoading.value) {
+                            return Container(
+                              width: 150,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                color: AppColors.neutral40,
+                                borderRadius: BorderRadius.circular(4),
                               ),
+                            );
+                          }
+                          return Text(
+                            controller.user['fullname'],
+                            style: AppFonts.userLink,
+                          );
+                        },
                       ),
                     ),
                   ],
