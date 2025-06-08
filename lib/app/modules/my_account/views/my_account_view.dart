@@ -95,16 +95,6 @@ class MyAccountView extends GetView<MyAccountController> {
             Get.back();
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_none, color: Colors.black),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.person_outline, color: Colors.black),
-            onPressed: () {},
-          ),
-        ],
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
