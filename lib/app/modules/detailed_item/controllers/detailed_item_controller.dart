@@ -13,7 +13,6 @@ class DetailedItemController extends GetxController {
   var isWishlisted = false.obs;
   var isLoadingWishlist = false.obs;
 
-
   void toggleWishlist() async {
     isLoadingWishlist.value = true;
     var secureStorage = FlutterSecureStorage();
@@ -21,9 +20,7 @@ class DetailedItemController extends GetxController {
 
     try {
       if (isWishlisted.value) {
-        var url = Uri.parse(
-          "${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.removeWishlist}/${item['id']}",
-        );
+        var url = Uri.parse(ApiEndpoints.removeWishlistByItemId(item['id']));
 
         final response = await http.delete(
           url,
@@ -35,9 +32,7 @@ class DetailedItemController extends GetxController {
 
         wishlistController.wishlists.removeWhere((e) => e['id'] == item['id']);
       } else {
-        final url = Uri.parse(
-          "${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.wishlists}",
-        );
+        final url = Uri.parse(ApiEndpoints.addWishlist);
 
         final response = await http.post(
           url,

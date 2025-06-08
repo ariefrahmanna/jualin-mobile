@@ -19,8 +19,7 @@ class WishlistController extends GetxController {
 
     try {
       final response = await http.get(
-        Uri.parse(
-            '${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.userWishlists}'),
+        Uri.parse(ApiEndpoints.getUserWishlists),
         headers: {
           'Authorization': 'Bearer $token',
           'Accept': 'application/json',
@@ -46,40 +45,34 @@ class WishlistController extends GetxController {
   }
 
   Future<void> toggleWishlist(Map<String, dynamic> item) async {
-  final itemId = item['id'];
+    final itemId = item['id'];
+    var exists = wishlists.any((e) => e['id'] == itemId);
 
-  var exists = wishlists.any((e) => e['id'] == itemId);
-  if (exists) {
-    final storage = FlutterSecureStorage();
-    final token = await storage.read(key: 'token');
-    var url = Uri.parse(
-          "${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.removeWishlist}/${item['id']}",
-        );
-    final response = await http.delete(
-      url,
-      headers: {'Authorization': 'Bearer $token'},
-    );
+    if (exists) {
+      final storage = FlutterSecureStorage();
+      final token = await storage.read(key: 'token');
+      final response = await http.delete(
+        Uri.parse(ApiEndpoints.removeWishlistByItemId(itemId)),
+        headers: {'Authorization': 'Bearer $token'},
+      );
 
-    final json = jsonDecode(response.body);
-    if (!json['status']) throw json['message'];
-    wishlists.removeWhere((e) => e['id'] == itemId);
+      final json = jsonDecode(response.body);
+      if (!json['status']) throw json['message'];
+      wishlists.removeWhere((e) => e['id'] == itemId);
+    }
 
-  } else {
-
+    wishlists.refresh();
   }
-  wishlists.refresh();
-}
-
 
   @override
   void onInit() {
     super.onInit();
+    fetchWishlist();
   }
 
   @override
   void onReady() {
     super.onReady();
-    fetchWishlist();
   }
 
   @override
