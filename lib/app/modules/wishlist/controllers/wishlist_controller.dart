@@ -19,8 +19,7 @@ class WishlistController extends GetxController {
 
     try {
       final response = await http.get(
-        Uri.parse(
-            '${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.userWishlists}'),
+        Uri.parse(ApiEndpoints.getUserWishlists),
         headers: {
           'Authorization': 'Bearer $token',
           'Accept': 'application/json',
@@ -52,11 +51,8 @@ class WishlistController extends GetxController {
     if (exists) {
       final storage = FlutterSecureStorage();
       final token = await storage.read(key: 'token');
-      var url = Uri.parse(
-        "${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.removeWishlist}/${item['id']}",
-      );
       final response = await http.delete(
-        url,
+        Uri.parse(ApiEndpoints.removeWishlistByItemId(itemId)),
         headers: {'Authorization': 'Bearer $token'},
       );
 
