@@ -22,14 +22,7 @@ class EditAccountController extends GetxController {
     String contactNumber = contactNumberController.text.trim();
 
     if (fullname.isEmpty || email.isEmpty || contactNumber.isEmpty) {
-      Get.snackbar(
-        'Error',
-        'Field tidak boleh kosong',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.error,
-        colorText: AppColors.neutral10,
-      );
-      return;
+      throw 'Field cannot be empty';
     }
 
     isLoading.value = true;
