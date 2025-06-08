@@ -128,7 +128,7 @@ class SellItemsView extends GetView<SellItemsController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () {
-          //TODO: add items functionality
+          Get.toNamed(Routes.ADD_ITEM);
         },
         child: const Icon(Icons.add, color: AppColors.neutral10),
       ),
