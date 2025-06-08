@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/add_item/bindings/add_item_binding.dart';
+import '../modules/add_item/views/add_item_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/detailed_item/bindings/detailed_item_binding.dart';
@@ -108,6 +110,11 @@ class AppPages {
       name: _Paths.EDIT_ACCOUNT,
       page: () => const EditAccountView(),
       binding: EditAccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_ITEM,
+      page: () => const AddItemView(),
+      binding: AddItemBinding(),
     ),
   ];
 }
