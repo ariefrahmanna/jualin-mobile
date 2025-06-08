@@ -49,8 +49,6 @@ class MyAccountController extends GetxController {
     FlutterSecureStorage secureStorage = const FlutterSecureStorage();
     String? awaitFullname = await secureStorage.read(key: 'fullname');
     String? awaitEmail = await secureStorage.read(key: 'email');
-    print('FULLNAME: $awaitFullname');
-    print('EMAIL: $awaitEmail');
     fullname.value = awaitFullname ?? '';
     email.value = awaitEmail ?? '';
   }

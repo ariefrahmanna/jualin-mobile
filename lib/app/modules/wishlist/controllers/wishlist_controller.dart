@@ -63,7 +63,8 @@ class WishlistController extends GetxController {
       final json = jsonDecode(response.body);
       if (!json['status']) throw json['message'];
       wishlists.removeWhere((e) => e['id'] == itemId);
-    } else {}
+    }
+
     wishlists.refresh();
   }
 
