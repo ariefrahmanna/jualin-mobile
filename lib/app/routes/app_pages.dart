@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/add_item/bindings/add_item_binding.dart';
+import '../modules/add_item/views/add_item_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/detail_profile/bindings/detail_profile_binding.dart';
@@ -8,6 +10,8 @@ import '../modules/detailed_item/bindings/detailed_item_binding.dart';
 import '../modules/detailed_item/views/detailed_item_view.dart';
 import '../modules/edit_account/bindings/edit_account_binding.dart';
 import '../modules/edit_account/views/edit_account_view.dart';
+import '../modules/edit_item/bindings/edit_item_binding.dart';
+import '../modules/edit_item/views/edit_item_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/item_by_category/bindings/item_by_category_binding.dart';
@@ -115,6 +119,16 @@ class AppPages {
       name: _Paths.DETAIL_PROFILE,
       page: () => const DetailProfileView(),
       binding: DetailProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_ITEM,
+      page: () => const AddItemView(),
+      binding: AddItemBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_ITEM,
+      page: () => const EditItemView(),
+      binding: EditItemBinding(),
     ),
   ];
 }
