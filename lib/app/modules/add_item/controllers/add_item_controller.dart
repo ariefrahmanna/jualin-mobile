@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -14,7 +15,6 @@ class AddItemController extends GetxController {
   var descriptionController = TextEditingController();
   var isLoading = false.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -51,10 +51,16 @@ class AddItemController extends GetxController {
         Get.back();
         Get.snackbar('Success', 'Item added successfully');
       } else {
-        Get.snackbar('Error', 'Failed to add item');
+        var body = json.decode(response.body);
+        throw body['message'] ?? 'Failed to add item';
       }
     } catch (e) {
-      Get.snackbar('Error', 'An error occurred');
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
+      );
     } finally {
       isLoading.value = false;
     }
@@ -68,6 +74,4 @@ class AddItemController extends GetxController {
     imageUrlController.dispose();
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
