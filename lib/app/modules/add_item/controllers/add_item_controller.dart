@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:jualin/app/modules/sell_items/controllers/sell_items_controller.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
 import 'package:http/http.dart' as http;
@@ -13,6 +14,7 @@ class AddItemController extends GetxController {
   var categoryController = TextEditingController();
   var imageUrlController = TextEditingController();
   var descriptionController = TextEditingController();
+  SellItemsController sellItemsController = Get.put(SellItemsController());
   var isLoading = false.obs;
 
   @override
@@ -45,7 +47,8 @@ class AddItemController extends GetxController {
         'description': descriptionController.text,
       });
       var response = await http.post(url, headers: headers, body: body);
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
+        sellItemsController.fetchSellItems();
         Get.back();
         Get.snackbar('Success', 'Item added successfully');
       } else {

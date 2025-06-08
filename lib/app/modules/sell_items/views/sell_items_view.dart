@@ -72,7 +72,7 @@ class SellItemsView extends GetView<SellItemsController> {
                               arguments: {'item': item});
                         },
                         onEdit: () {
-                          //TODO:  ke halaman edit
+                          Get.toNamed(Routes.EDIT_ITEM, arguments: {'item': item});
                         },
                       );
                     },
@@ -117,7 +117,7 @@ class SellItemsView extends GetView<SellItemsController> {
                               arguments: {'item': item});
                         },
                         onEdit: () {
-                          //TODO:  ke halaman edit
+                          Get.toNamed(Routes.EDIT_ITEM, arguments: {'item': item});
                         },
                       );
                     },
