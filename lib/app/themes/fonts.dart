@@ -24,6 +24,13 @@ class AppFonts {
     fontWeight: FontWeight.w400,
     color: AppColors.neutral10,
   );
+
+  static final userLink = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: AppColors.text,
+    decoration: TextDecoration.underline,
+  );
 }
 
 class FontWeightStyles {
