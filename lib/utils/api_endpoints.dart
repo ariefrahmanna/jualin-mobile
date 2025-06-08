@@ -14,6 +14,8 @@ class ApiEndpoints {
   // Items
   static const getUserItems = "$baseUrl/user/items";
   static const items = "$baseUrl/items";
+  static String getItemsByCategory(String category) =>
+      "$baseUrl/items?category=$category";
   static String seearchItems(String query) => "$baseUrl/items?seearch=$query";
   static String itemsById(int itemId) => "$baseUrl/items/$itemId";
 
