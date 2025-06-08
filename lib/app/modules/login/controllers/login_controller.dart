@@ -41,8 +41,7 @@ class LoginController extends GetxController {
     isLoading.value = true;
 
     try {
-      var url =
-          Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.login);
+      var url = Uri.parse(ApiEndpoints.login);
 
       Map body = {
         'username': username,
