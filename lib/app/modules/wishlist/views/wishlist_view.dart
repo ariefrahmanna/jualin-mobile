@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
+import 'package:jualin/utils/currency_formatter.dart';
 
 import '../controllers/wishlist_controller.dart';
 
@@ -107,7 +108,7 @@ class WishlistView extends GetView<WishlistController> {
                           fontSize: 16,
                         )),
                     const SizedBox(height: 8),
-                    Text(price,
+                    Text(CurrencyFormatter.toRupiah(price),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -118,7 +119,7 @@ class WishlistView extends GetView<WishlistController> {
               Column(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.remove_circle_outlined ,
+                    icon: const Icon(Icons.remove_circle_outlined,
                         color: AppColors.favorite),
                     onPressed: () {
                       controller.toggleWishlist(item);

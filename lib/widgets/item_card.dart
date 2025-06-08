@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jualin/app/themes/colors.dart';
+import 'package:jualin/utils/currency_formatter.dart';
 
 class ItemCard extends StatelessWidget {
   final Map<String, dynamic> item;
@@ -66,7 +67,8 @@ class ItemCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Rp ${item['price']}',
+                      // 'Rp ${item['price']}',
+                      CurrencyFormatter.toRupiah(item['price']),
                       style: const TextStyle(
                         color: AppColors.primary,
                         fontWeight: FontWeight.bold,

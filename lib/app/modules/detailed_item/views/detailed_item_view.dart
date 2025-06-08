@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
+import 'package:jualin/utils/currency_formatter.dart';
 import '../controllers/detailed_item_controller.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/app/themes/fonts.dart';
@@ -67,7 +68,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      controller.item['price'],
+                      CurrencyFormatter.toRupiah(controller.item['price']),
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

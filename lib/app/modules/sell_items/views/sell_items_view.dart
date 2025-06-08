@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
+import 'package:jualin/utils/currency_formatter.dart';
 import '../controllers/sell_items_controller.dart';
 
 class SellItemsView extends GetView<SellItemsController> {
@@ -175,7 +176,7 @@ class SellItemsView extends GetView<SellItemsController> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "Rp${item['price'] ?? 0}",
+                      CurrencyFormatter.toRupiah(item['price']),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
