@@ -68,7 +68,8 @@ class SellItemsView extends GetView<SellItemsController> {
                               arguments: {'item': item});
                         },
                         onEdit: () {
-                          Get.toNamed(Routes.EDIT_ITEM, arguments: {'item': item});
+                          Get.toNamed(Routes.EDIT_ITEM,
+                              arguments: {'item': item});
                         },
                       );
                     },
@@ -113,7 +114,8 @@ class SellItemsView extends GetView<SellItemsController> {
                               arguments: {'item': item});
                         },
                         onEdit: () {
-                          Get.toNamed(Routes.EDIT_ITEM, arguments: {'item': item});
+                          Get.toNamed(Routes.EDIT_ITEM,
+                              arguments: {'item': item});
                         },
                       );
                     },
@@ -193,7 +195,7 @@ class SellItemsView extends GetView<SellItemsController> {
                   ),
                   Container(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
                     decoration: BoxDecoration(
                       color: AppColors.neutral20,
                       borderRadius: BorderRadius.circular(8),
