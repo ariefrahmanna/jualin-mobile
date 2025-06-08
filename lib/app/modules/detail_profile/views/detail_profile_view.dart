@@ -42,62 +42,99 @@ class DetailProfileView extends GetView<DetailProfileController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Profile picture placeholder
               Center(
                 child: CircleAvatar(
                   radius: 40,
-                  backgroundColor: AppColors.neutral70.withOpacity(0.2),
+                  backgroundColor: AppColors.secondary,
                   child: const Icon(
                     Icons.person,
                     size: 40,
-                    color: AppColors.neutral70,
+                    color: AppColors.neutral10,
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              // Username
-              Text(
-                '@${controller.user['username'] ?? ''}',
-                style: AppFonts.h2.bold.copyWith(
-                  color: AppColors.primary,
+              Container(
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    Text(
+                      controller.user['fullname'],
+                      style: AppFonts.h2.bold,
+                    ),
+                    const SizedBox(height: 4),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: AppColors.neutral30,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.phone,
+                            size: 16,
+                            color: AppColors.neutral70,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            controller.user['contact_number'],
+                            style: AppFonts.h4.bold,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 8),
-              // Fullname
-              Text(
-                controller.user['fullname'] ?? '',
-                style: AppFonts.h2.regular.copyWith(
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 20),
-              // ...existing code...
               const SizedBox(height: 20),
               Text("Items", style: AppFonts.h2.bold),
               const SizedBox(height: 8),
-              controller.items.isEmpty
-                  ? const Center(child: Text('No items'))
-                  : GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        childAspectRatio: 0.68,
+              Obx(
+                () {
+                  if (controller.isLoading.value) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
                       ),
-                      itemCount: controller.items.length,
-                      itemBuilder: (context, index) {
-                        final item = controller.items[index];
-                        return ItemCard(
-                          item: item,
-                          onTap: () {
-                            Get.toNamed(Routes.DETAILED_ITEM, arguments: item);
-                          },
-                        );
-                      },
+                    );
+                  }
+                  if (controller.items.isEmpty) {
+                    return Center(
+                      child: Text(
+                        'No items found in this category',
+                        style: TextStyle(
+                          color: AppColors.neutral70,
+                          fontSize: 16,
+                        ),
+                      ),
+                    );
+                  }
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                      childAspectRatio: 0.68,
                     ),
+                    itemCount: controller.items.length,
+                    itemBuilder: (context, index) {
+                      final item = controller.items[index];
+                      return ItemCard(
+                        item: item,
+                        onTap: () {
+                          Get.toNamed(Routes.DETAILED_ITEM, arguments: item);
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ),

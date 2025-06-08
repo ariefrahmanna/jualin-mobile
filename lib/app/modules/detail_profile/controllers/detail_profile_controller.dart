@@ -8,7 +8,7 @@ import 'package:jualin/utils/api_endpoints.dart';
 
 class DetailProfileController extends GetxController {
   var user = <String, dynamic>{}.obs;
-  var items = <Map<String, dynamic>>[].obs;
+  var items = [].obs;
   var isLoading = false.obs;
 
   Future<void> fetchItems() async {
@@ -47,6 +47,7 @@ class DetailProfileController extends GetxController {
   void onInit() {
     super.onInit();
     user.value = Get.arguments['user'];
+    fetchItems();
   }
 
   @override
