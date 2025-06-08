@@ -12,4 +12,5 @@ class AuthEndpoints {
   final String wishlists = '/wishlists';
   final String userWishlists = '/user/wishlists';
   final String removeWishlist = '/wishlists/items';
+  final String userItems = '/user/items';
 }
