@@ -118,7 +118,7 @@ class EditAccountView extends GetView<EditAccountController> {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage("assets/images/profile.jpg"),
+                    backgroundColor: AppColors.secondary,
                   ),
                   Positioned(
                     bottom: 0,

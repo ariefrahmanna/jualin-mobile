@@ -124,7 +124,7 @@ class MyAccountView extends GetView<MyAccountController> {
                   children: [
                     const CircleAvatar(
                       radius: 30,
-                      backgroundImage: AssetImage("assets/images/profile.jpg"),
+                      backgroundColor: AppColors.secondary,
                     ),
                     const SizedBox(width: 16),
                     Expanded(
