@@ -1,7 +1,17 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:jualin/utils/api_endpoints.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'dart:convert';
 
 class AddItemController extends GetxController {
-  //TODO: Implement AddItemController
+  var formKey = GlobalKey<FormState>();
+  var nameController = TextEditingController();
+  var priceController = TextEditingController();
+  var categoryController = TextEditingController();
+  var imageUrlController = TextEditingController();
+  var isLoading = false.obs;
 
   final count = 0.obs;
   @override
@@ -14,8 +24,47 @@ class AddItemController extends GetxController {
     super.onReady();
   }
 
+    Future<void> addItem() async {
+    if (!formKey.currentState!.validate()) return;
+    isLoading.value = true;
+    var secureStorage = const FlutterSecureStorage();
+    String? token = await secureStorage.read(key: 'token');
+    try {
+      var url = Uri.parse(
+        '${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.items}',
+      );
+      var headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      };
+      var body = json.encode({
+        'name': nameController.text,
+        'price': priceController.text,
+        'category': categoryController.text,
+        'image_url': imageUrlController.text,
+      });
+      var response = await http.post(url, headers: headers, body: body);
+      if (response.statusCode == 201) {
+        Get.back();
+        Get.snackbar('Success', 'Item added successfully');
+      } else {
+        Get.snackbar('Error', 'Failed to add item');
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'An error occurred');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+
   @override
   void onClose() {
+    nameController.dispose();
+    priceController.dispose();
+    categoryController.dispose();
+    imageUrlController.dispose();
     super.onClose();
   }
 
