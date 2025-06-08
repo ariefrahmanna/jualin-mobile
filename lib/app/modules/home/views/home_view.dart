@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/app/themes/fonts.dart';
-import 'package:jualin/utils/widgets/item_card.dart';
+import 'package:jualin/widgets/item_card.dart';
 
 import '../controllers/home_controller.dart';
 
