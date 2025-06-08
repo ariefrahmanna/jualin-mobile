@@ -105,20 +105,22 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       onTap: () {
                         Get.toNamed(
                           Routes.DETAIL_PROFILE,
-                          arguments: {'user_id': controller.item['user_id']},
+                          arguments: {controller.user},
                         );
                       },
                       child: Text(
-                        controller.item['user_id'].toString() ??
-                            'Unknown Seller',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.text,
-                          decoration: TextDecoration.underline,
-                        ),
+                        controller.user['fullname'].toString(),
+                        style: AppFonts.userLink,
                       ),
                     ),
+                    const SizedBox(height: 5),
+                    Text(
+                      controller.user['contact_number'].toString(),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppColors.text
+                        ),
+                    )
                   ],
                 ),
               ),
