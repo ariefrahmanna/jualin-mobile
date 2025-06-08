@@ -9,9 +9,43 @@ import 'package:jualin/utils/api_endpoints.dart';
 
 class DetailedItemController extends GetxController {
   var item = <String, dynamic>{}.obs;
+  var user = <String, dynamic>{}.obs;
   WishlistController wishlistController = Get.put(WishlistController());
   var isWishlisted = false.obs;
   var isLoadingWishlist = false.obs;
+  var isLoading = false.obs;
+
+  Future<void> fetchUserDetails() async {
+    isLoading.value = true;
+    var secureStorage = FlutterSecureStorage();
+
+    Uri url = Uri.parse(ApiEndpoints.getUserById(item['user_id']));
+
+    try {
+      String? token = await secureStorage.read(key: 'token');
+      var response = await http.get(
+        url,
+        headers: {'Authorization': 'Bearer $token'},
+      );
+      var json = jsonDecode(response.body);
+
+      if (response.statusCode != 200 || !json['status']) {
+        throw json['message'];
+      }
+
+      user.value = json['data'];
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
+      );
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   void toggleWishlist() async {
     isLoadingWishlist.value = true;
@@ -69,6 +103,7 @@ class DetailedItemController extends GetxController {
     item.value = Get.arguments['item'];
     isWishlisted.value =
         wishlistController.wishlists.any((e) => e['id'] == item['id']);
+    fetchUserDetails();
   }
 
   @override

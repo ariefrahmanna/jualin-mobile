@@ -19,6 +19,7 @@ abstract class Routes {
   static const ITEM_BY_CATEGORY = _Paths.ITEM_BY_CATEGORY;
   static const DETAILED_ITEM = _Paths.DETAILED_ITEM;
   static const EDIT_ACCOUNT = _Paths.EDIT_ACCOUNT;
+  static const DETAIL_PROFILE = _Paths.DETAIL_PROFILE;
   static const ADD_ITEM = _Paths.ADD_ITEM;
   static const EDIT_ITEM = _Paths.EDIT_ITEM;
 }
@@ -39,6 +40,7 @@ abstract class _Paths {
   static const ITEM_BY_CATEGORY = '/item-by-category';
   static const DETAILED_ITEM = '/detailed-item';
   static const EDIT_ACCOUNT = '/edit-account';
+  static const DETAIL_PROFILE = '/detail-profile';
   static const ADD_ITEM = '/add-item';
   static const EDIT_ITEM = '/edit-item';
 }

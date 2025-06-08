@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
 import '../controllers/detailed_item_controller.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/app/themes/fonts.dart';
@@ -88,6 +89,42 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       style: const TextStyle(
                         fontSize: 14,
                         color: AppColors.neutral70,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Meet the Seller",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.text,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(
+                          Routes.DETAIL_PROFILE,
+                          arguments: {'user': controller.user},
+                        );
+                      },
+                      child: Obx(
+                        () {
+                          if (controller.isLoading.value) {
+                            return Container(
+                              width: 150,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                color: AppColors.neutral40,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            );
+                          }
+                          return Text(
+                            controller.user['fullname'],
+                            style: AppFonts.userLink,
+                          );
+                        },
                       ),
                     ),
                   ],
