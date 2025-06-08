@@ -105,22 +105,25 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       onTap: () {
                         Get.toNamed(
                           Routes.DETAIL_PROFILE,
-                          arguments: {controller.user},
+                          arguments: {'user': controller.user},
                         );
                       },
-                      child: Text(
-                        controller.user['fullname'].toString(),
-                        style: AppFonts.userLink,
+                      child: Obx(
+                        () => controller.isLoading.value
+                            ? Container(
+                                width: 150,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  color: AppColors.neutral40,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              )
+                            : Text(
+                                controller.user['fullname'],
+                                style: AppFonts.userLink,
+                              ),
                       ),
                     ),
-                    const SizedBox(height: 5),
-                    Text(
-                      controller.user['contact_number'].toString(),
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: AppColors.text
-                        ),
-                    )
                   ],
                 ),
               ),
