@@ -15,8 +15,7 @@ class MyAccountController extends GetxController {
     FlutterSecureStorage secureStorage = FlutterSecureStorage();
     var token = await secureStorage.read(key: 'token');
 
-    var url =
-        Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.logout);
+    var url = Uri.parse(ApiEndpoints.logout);
 
     var headers = {
       'Authorization': 'Bearer $token',
