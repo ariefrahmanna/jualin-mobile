@@ -10,6 +10,8 @@ import 'package:jualin/utils/api_endpoints.dart';
 class MyAccountController extends GetxController {
   RxString fullname = ''.obs;
   RxString email = ''.obs;
+  RxString contactNumber = ''.obs;
+  RxString username = ''.obs; // Tambahkan ini
 
   Future<void> logout() async {
     FlutterSecureStorage secureStorage = FlutterSecureStorage();
@@ -46,10 +48,15 @@ class MyAccountController extends GetxController {
 
   Future<void> readProfile() async {
     FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    String? awaitUsername = await secureStorage.read(key: 'username');
     String? awaitFullname = await secureStorage.read(key: 'fullname');
     String? awaitEmail = await secureStorage.read(key: 'email');
+    String? awaitContactNumber =
+        await secureStorage.read(key: 'contact_number');
     fullname.value = awaitFullname ?? '';
     email.value = awaitEmail ?? '';
+    contactNumber.value = awaitContactNumber ?? '';
+    username.value = awaitUsername ?? ''; // Ambil username dari secure storage
   }
 
   @override

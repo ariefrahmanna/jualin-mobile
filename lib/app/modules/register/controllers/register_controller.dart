@@ -14,6 +14,7 @@ class RegisterController extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final usernameController = TextEditingController();
+  final contactNumberController = TextEditingController();
 
   final isPasswordVisible = false.obs;
   var isLoading = false.obs;
@@ -27,13 +28,15 @@ class RegisterController extends GetxController {
     final email = emailController.text.trim();
     final password = passwordController.text;
     final fullname = fullnameController.text;
+    final contactNumber = contactNumberController.text.trim();
 
     var headers = {'Content-Type': 'application/json'};
 
     if (email.isEmpty ||
         password.isEmpty ||
         fullname.isEmpty ||
-        username.isEmpty) {
+        username.isEmpty ||
+        contactNumber.isEmpty) {
       Get.snackbar(
         'Error',
         'field tidak boleh kosong',
@@ -54,6 +57,7 @@ class RegisterController extends GetxController {
         'fullname': fullname,
         'email': email,
         'password': password,
+        'contact_number': contactNumber,
       };
 
       http.Response response = await http.post(
@@ -81,6 +85,7 @@ class RegisterController extends GetxController {
       await secureStorage.write(key: 'username', value: username);
       await secureStorage.write(key: 'fullname', value: fullname);
       await secureStorage.write(key: 'email', value: email);
+      await secureStorage.write(key: 'contact_number', value: contactNumber);
 
       Get.snackbar(
         'Success',

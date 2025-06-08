@@ -57,6 +57,16 @@ class RegisterView extends GetView<RegisterController> {
                     ),
                   ),
                 ),
+                TextField(
+                  controller: controller.contactNumberController,
+                  decoration: InputDecoration(
+                    labelText: 'Contact Number',
+                    prefixIcon: const Icon(Icons.phone),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 20),
                 TextField(
                   controller: controller.emailController,

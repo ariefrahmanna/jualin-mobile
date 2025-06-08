@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:jualin/app/themes/colors.dart';
@@ -8,7 +9,8 @@ import 'package:jualin/utils/api_endpoints.dart';
 class EditAccountController extends GetxController {
   var fullNameController = TextEditingController();
   var emailController = TextEditingController();
-  var phoneController = TextEditingController();
+  var contactNumberController = TextEditingController();
+  String username = '';
 
   var isLoading = false.obs;
 
@@ -16,9 +18,9 @@ class EditAccountController extends GetxController {
   Future<void> saveChanges() async {
     String fullname = fullNameController.text.trim();
     String email = emailController.text.trim();
-    String phone = phoneController.text.trim();
+    String contactNumber = contactNumberController.text.trim();
 
-    if (fullname.isEmpty || email.isEmpty || phone.isEmpty) {
+    if (fullname.isEmpty || email.isEmpty || contactNumber.isEmpty) {
       Get.snackbar(
         'Error',
         'Field tidak boleh kosong',
@@ -36,9 +38,10 @@ class EditAccountController extends GetxController {
       Uri url = Uri.parse(ApiEndpoints.currentUser);
 
       Map<String, String> body = {
+        'username': username,
         'fullname': fullname,
         'email': email,
-        'phone': phone,
+        'contact_number': contactNumber,
       };
 
       var headers = {'Content-Type': 'application/json'};
@@ -48,9 +51,9 @@ class EditAccountController extends GetxController {
         headers: headers,
         body: jsonEncode(body),
       );
-
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
       final json = jsonDecode(response.body);
-
       if (response.statusCode != 200 || (json['status'] == false)) {
         Get.snackbar(
           'Error',
@@ -70,11 +73,15 @@ class EditAccountController extends GetxController {
         backgroundColor: AppColors.success,
         colorText: AppColors.neutral10,
       );
+      FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+      await secureStorage.write(key: 'fullname', value: fullname);
+      await secureStorage.write(key: 'email', value: email);
+      await secureStorage.write(key: 'contact_number', value: contactNumber);
       Get.back();
     } catch (e) {
       Get.snackbar(
         'Error',
-        'Terjadi kesalahan, silakan coba lagi',
+        e.toString(),
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColors.error,
         colorText: AppColors.neutral10,
@@ -84,11 +91,36 @@ class EditAccountController extends GetxController {
     }
   }
 
+  void setInitialData(
+      {required String username,
+      required String fullname,
+      required String email,
+      required String phone}) {
+    this.username = username;
+    fullNameController.text = fullname;
+    emailController.text = email;
+    contactNumberController.text = phone;
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    final args = Get.arguments;
+    if (args != null) {
+      setInitialData(
+        username: args['username'] ?? '',
+        fullname: args['fullname'] ?? '',
+        email: args['email'] ?? '',
+        phone: args['contactNumber'] ?? '',
+      );
+    }
+  }
+
   @override
   void onClose() {
     fullNameController.dispose();
     emailController.dispose();
-    phoneController.dispose();
+    contactNumberController.dispose();
     super.onClose();
   }
 }

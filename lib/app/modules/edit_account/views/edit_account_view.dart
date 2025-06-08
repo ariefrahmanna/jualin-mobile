@@ -148,8 +148,8 @@ class EditAccountView extends GetView<EditAccountController> {
                 controller: controller.emailController,
                 keyboardType: TextInputType.emailAddress),
             formField(
-                label: "Phone Number",
-                controller: controller.phoneController,
+                label: "Contact Number",
+                controller: controller.contactNumberController,
                 keyboardType: TextInputType.phone),
             const SizedBox(height: 24),
             Padding(
