@@ -70,11 +70,13 @@ class LoginController extends GetxController {
       String token = json['token'].toString();
       String fullname = json['data']['fullname'].toString();
       String email = json['data']['email'].toString();
+      String contactNumber = json['data']['contact_number'].toString();
 
       await secureStorage.write(key: 'token', value: token);
       await secureStorage.write(key: 'username', value: username);
       await secureStorage.write(key: 'fullname', value: fullname);
       await secureStorage.write(key: 'email', value: email);
+      await secureStorage.write(key: 'contact_number', value: contactNumber);
       Get.offAllNamed(Routes.DASHBOARD);
     } catch (error) {
       Get.snackbar(

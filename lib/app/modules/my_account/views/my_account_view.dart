@@ -152,13 +152,14 @@ class MyAccountView extends GetView<MyAccountController> {
                     ),
                     IconButton(
                       onPressed: () {
-                        Get.toNamed(Routes.EDIT_ACCOUNT);
+                        Get.toNamed(Routes.EDIT_ACCOUNT, arguments: {
+                          'username': controller.username.value,
+                          'fullname': controller.fullname.value,
+                          'email': controller.email.value,
+                          'contactNumber': controller.contactNumber.value,
+                        });
                       },
-                      icon: const Icon(
-                        Icons.edit_outlined,
-                        color: AppColors.text,
-                        size: 20,
-                      ),
+                      icon: const Icon(Icons.edit_outlined),
                     ),
                   ],
                 ),
