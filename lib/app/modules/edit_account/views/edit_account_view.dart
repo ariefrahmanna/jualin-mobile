@@ -51,6 +51,46 @@ class EditAccountView extends GetView<EditAccountController> {
     );
   }
 
+  void _showCancelDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.neutral10,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: const Text(
+          "Cancel Changes?",
+          style: TextStyle(
+            color: AppColors.text,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: const Text(
+          "Are you sure you want to discard your changes?",
+          style: TextStyle(color: AppColors.neutral80),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Get.back(), // Close dialog
+            child: const Text(
+              "No",
+              style: TextStyle(color: AppColors.primary),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.back(); // Close dialog
+              Get.back(); // Back to previous page
+            },
+            child: const Text(
+              "Yes",
+              style: TextStyle(color: AppColors.error),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +106,7 @@ class EditAccountView extends GetView<EditAccountController> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.text),
-          onPressed: () => Get.back(),
+          onPressed: () => _showCancelDialog(context),
         ),
       ),
       body: SingleChildScrollView(
