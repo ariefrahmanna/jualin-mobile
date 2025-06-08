@@ -58,12 +58,12 @@ class MyAccountController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    readProfile();
   }
 
   @override
   void onReady() {
     super.onReady();
-    readProfile();
   }
 
   @override
