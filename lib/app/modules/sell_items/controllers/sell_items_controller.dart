@@ -10,7 +10,7 @@ import 'package:jualin/utils/api_endpoints.dart';
 
 class SellItemsController extends GetxController {
   //TODO: Implement SellItemsController
-
+  var status = 'listed'.obs;
   var listedItems = [].obs;
   var unlistedItems = [].obs;
   var isLoading = false.obs;
@@ -20,8 +20,7 @@ class SellItemsController extends GetxController {
     isLoading.value = true;
     try {
       var token = await secureStorage.read(key: 'token');
-      var url = Uri.parse(
-          ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.userItems);
+      var url = Uri.parse(ApiEndpoints.getUserItems);
       var headers = {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -48,6 +47,34 @@ class SellItemsController extends GetxController {
       );
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> onStatusChanged(int itemId, String newStatus) async {
+    try {
+      var token = await secureStorage.read(key: 'token');
+      var url = Uri.parse(ApiEndpoints.itemsById(itemId));
+      var headers = {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      };
+      var body = jsonEncode({
+        'status': newStatus.toLowerCase(),
+      });
+      var response = await http.put(url, headers: headers, body: body);
+      if (response.statusCode == 200) {
+        fetchSellItems();
+      } else {
+        throw jsonDecode(response.body)['message'] ?? 'Gagal mengubah status';
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
+      );
     }
   }
 

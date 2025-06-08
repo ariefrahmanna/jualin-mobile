@@ -195,28 +195,53 @@ class SellItemsView extends GetView<SellItemsController> {
                     onPressed: onEdit,
                     tooltip: 'Edit Item',
                   ),
-                  DropdownButton<String>(
-                    value:
-                        controller.status.value, // gunakan Obx jika status adalah RxString
-                    onChanged: (String? newValue) {
-                      if (newValue != null) {
-                        controller.status.value = newValue; // RxString
-                        onStatusChanged(
-                            newValue); // trigger callback atau simpan ke API
-                      }
-                    },
-                    items: <String>['Listed', 'Unlisted']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    underline: Container(), // menghilangkan garis bawah
-                    style: const TextStyle(fontSize: 14, color: Colors.black),
-                    dropdownColor: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.neutral20,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: AppColors.neutral40),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        value: item['status'],
+                        onChanged: (String? newValue) {
+                          if (newValue != null && newValue != item['status']) {
+                            controller.onStatusChanged(item['id'], newValue);
+                          }
+                        },
+                        items:
+                            <String>['listed', 'unlisted'].map((String value) {
+                          Icon icon = value == 'listed'
+                              ? const Icon(Icons.check_circle,
+                                  color: AppColors.secondary, size: 18)
+                              : const Icon(Icons.cancel,
+                                  color: AppColors.error, size: 18);
+
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Row(
+                              children: [
+                                icon,
+                                const SizedBox(width: 8),
+                                Text(
+                                  value,
+                                  style: TextStyle(
+                                    color: AppColors.neutral90,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                        icon: const Icon(Icons.arrow_drop_down,
+                            color: AppColors.neutral60),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ],
