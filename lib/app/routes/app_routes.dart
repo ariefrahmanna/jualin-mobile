@@ -20,6 +20,7 @@ abstract class Routes {
   static const DETAILED_ITEM = _Paths.DETAILED_ITEM;
   static const EDIT_ACCOUNT = _Paths.EDIT_ACCOUNT;
   static const ADD_ITEM = _Paths.ADD_ITEM;
+  static const EDIT_ITEM = _Paths.EDIT_ITEM;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const DETAILED_ITEM = '/detailed-item';
   static const EDIT_ACCOUNT = '/edit-account';
   static const ADD_ITEM = '/add-item';
+  static const EDIT_ITEM = '/edit-item';
 }
