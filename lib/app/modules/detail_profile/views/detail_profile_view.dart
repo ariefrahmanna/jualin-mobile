@@ -1,45 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jualin/app/modules/detail_profile/controllers/detail_profile_controller.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/app/themes/fonts.dart';
 import 'package:jualin/widgets/item_card.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 
-class DetailProfileView extends StatelessWidget {
+class DetailProfileView extends GetView<DetailProfileController> {
   const DetailProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //TODO: Replace with actual user data fetching logic
-
-    final user = {
-      'username': 'Orangsawah',
-      'fullname': 'Orang-orangan Sawah',
-    };
-
-    final items = [
-      {
-        'name': 'hihi',
-        'price': '10000000',
-        'image_url': '',
-      },
-      {
-        'name': 'heehe',
-        'price': '2000',
-        'image_url': 'https',
-      },
-      {
-        'name': 'heehe',
-        'price': '2000',
-        'image_url': 'https',
-      },
-      {
-        'name': 'heehe',
-        'price': '2000',
-        'image_url': 'https',
-      },
-    ];
-
     return Scaffold(
       backgroundColor: AppColors.neutral20,
       appBar: AppBar(
@@ -86,7 +57,7 @@ class DetailProfileView extends StatelessWidget {
               const SizedBox(height: 16),
               // Username
               Text(
-                '@${user['username'] ?? ''}',
+                '@${controller.user['username'] ?? ''}',
                 style: AppFonts.h2.bold.copyWith(
                   color: AppColors.primary,
                 ),
@@ -94,7 +65,7 @@ class DetailProfileView extends StatelessWidget {
               const SizedBox(height: 8),
               // Fullname
               Text(
-                user['fullname'] ?? '',
+                controller.user['fullname'] ?? '',
                 style: AppFonts.h2.regular.copyWith(
                   color: AppColors.primary,
                 ),
@@ -104,7 +75,7 @@ class DetailProfileView extends StatelessWidget {
               const SizedBox(height: 20),
               Text("Items", style: AppFonts.h2.bold),
               const SizedBox(height: 8),
-              items.isEmpty
+              controller.items.isEmpty
                   ? const Center(child: Text('No items'))
                   : GridView.builder(
                       shrinkWrap: true,
@@ -116,9 +87,9 @@ class DetailProfileView extends StatelessWidget {
                         crossAxisSpacing: 16,
                         childAspectRatio: 0.68,
                       ),
-                      itemCount: items.length,
+                      itemCount: controller.items.length,
                       itemBuilder: (context, index) {
-                        final item = items[index];
+                        final item = controller.items[index];
                         return ItemCard(
                           item: item,
                           onTap: () {
