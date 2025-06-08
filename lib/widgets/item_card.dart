@@ -6,10 +6,10 @@ class ItemCard extends StatelessWidget {
   final VoidCallback? onTap;
 
   const ItemCard({
-    Key? key,
+    super.key,
     required this.item,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
