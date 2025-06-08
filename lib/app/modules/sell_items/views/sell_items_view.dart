@@ -36,10 +36,8 @@ class SellItemsView extends GetView<SellItemsController> {
         return ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            // Section: Listed Items
             Align(
-              alignment: Alignment
-                  .centerLeft, // atau Alignment.topLeft sesuai kebutuhan
+              alignment: Alignment.centerLeft,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -84,8 +82,7 @@ class SellItemsView extends GetView<SellItemsController> {
 
             // Section: Unlisted Items
             Align(
-              alignment: Alignment
-                  .centerLeft, // atau Alignment.topLeft sesuai kebutuhan
+              alignment: Alignment.centerLeft,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -198,21 +195,27 @@ class SellItemsView extends GetView<SellItemsController> {
                     onPressed: onEdit,
                     tooltip: 'Edit Item',
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Contoh aksi: buka detail
-                      onTap();
+                  DropdownButton<String>(
+                    value:
+                        controller.status.value, // gunakan Obx jika status adalah RxString
+                    onChanged: (String? newValue) {
+                      if (newValue != null) {
+                        controller.status.value = newValue; // RxString
+                        onStatusChanged(
+                            newValue); // trigger callback atau simpan ke API
+                      }
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      minimumSize: const Size(80, 36),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text('Detail',
-                        style: TextStyle(
-                            fontSize: 14, color: AppColors.neutral10)),
+                    items: <String>['Listed', 'Unlisted']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    underline: Container(), // menghilangkan garis bawah
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                    dropdownColor: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ],
               ),
