@@ -1,16 +1,27 @@
 class ApiEndpoints {
-  static final String baseUrl = 'http://10.0.2.2:8000/api';
-  static AuthEndpoints authEndpoints = AuthEndpoints();
-}
+  static const baseUrl = 'http://10.0.2.2:8000/api';
 
-class AuthEndpoints {
-  final String register = '/register';
-  final String login = '/login';
-  final String checkToken = '/check-token';
-  final String items = '/items';
-  final String logout = '/logout';
-  final String wishlists = '/wishlists';
-  final String userWishlists = '/user/wishlists';
-  final String removeWishlist = '/wishlists/items';
-  final String userItems = '/user/items';
+  // Auth
+  static const register = "$baseUrl/register";
+  static const login = "$baseUrl/login";
+  static const logout = "$baseUrl/logout";
+  static const checkToken = "$baseUrl/check-token";
+
+  // Users
+  static const currentUser = "$baseUrl/user";
+  static String getUserById(int userId) => "$baseUrl/users/$userId";
+
+  // Items
+  static const getUserItems = "$baseUrl/user/items";
+  static const items = "$baseUrl/items";
+  static String getItemsByCategory(String category) =>
+      "$baseUrl/items?category=$category";
+  static String seearchItems(String query) => "$baseUrl/items?search=$query";
+  static String itemsById(int itemId) => "$baseUrl/items/$itemId";
+
+  // Wishlists
+  static const getUserWishlists = "$baseUrl/user/wishlists";
+  static const addWishlist = "$baseUrl/wishlists";
+  static String removeWishlistByItemId(int itemId) =>
+      "$baseUrl/wishlists/items/$itemId";
 }

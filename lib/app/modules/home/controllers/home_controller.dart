@@ -44,8 +44,7 @@ class HomeController extends GetxController {
     try {
       var secureStorage = FlutterSecureStorage();
       String? token = await secureStorage.read(key: 'token');
-      var url = Uri.parse(
-          '${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.items}?search=$query');
+      var url = Uri.parse(ApiEndpoints.seearchItems(query));
       var headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',

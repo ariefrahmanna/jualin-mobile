@@ -17,8 +17,7 @@ class RecentlyAddedController extends GetxController {
     String? token = await secureStorage.read(key: 'token');
 
     try {
-      var url = Uri.parse(
-          '${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.items}');
+      var url = Uri.parse(ApiEndpoints.items);
       var headers = {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',

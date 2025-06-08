@@ -47,8 +47,7 @@ class RegisterController extends GetxController {
     isLoading.value = true;
 
     try {
-      Uri url =
-          Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.register);
+      Uri url = Uri.parse(ApiEndpoints.register);
 
       Map body = {
         'username': username,

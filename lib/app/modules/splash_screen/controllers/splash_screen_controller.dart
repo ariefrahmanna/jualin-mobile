@@ -18,8 +18,7 @@ class SplashScreenController extends GetxController {
       return;
     }
 
-    var url =
-        Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.checkToken);
+    var url = Uri.parse(ApiEndpoints.checkToken);
     var response = await http.get(
       url,
       headers: {

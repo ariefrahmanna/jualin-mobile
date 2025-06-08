@@ -36,10 +36,8 @@ class SellItemsView extends GetView<SellItemsController> {
         return ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            // Section: Listed Items
             Align(
-              alignment: Alignment
-                  .centerLeft, // atau Alignment.topLeft sesuai kebutuhan
+              alignment: Alignment.centerLeft,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -84,8 +82,7 @@ class SellItemsView extends GetView<SellItemsController> {
 
             // Section: Unlisted Items
             Align(
-              alignment: Alignment
-                  .centerLeft, // atau Alignment.topLeft sesuai kebutuhan
+              alignment: Alignment.centerLeft,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -198,22 +195,53 @@ class SellItemsView extends GetView<SellItemsController> {
                     onPressed: onEdit,
                     tooltip: 'Edit Item',
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Contoh aksi: buka detail
-                      onTap();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      minimumSize: const Size(80, 36),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.neutral20,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: AppColors.neutral40),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        value: item['status'],
+                        onChanged: (String? newValue) {
+                          if (newValue != null && newValue != item['status']) {
+                            controller.onStatusChanged(item['id'], newValue);
+                          }
+                        },
+                        items:
+                            <String>['listed', 'unlisted'].map((String value) {
+                          Icon icon = value == 'listed'
+                              ? const Icon(Icons.check_circle,
+                                  color: AppColors.secondary, size: 18)
+                              : const Icon(Icons.cancel,
+                                  color: AppColors.error, size: 18);
+
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Row(
+                              children: [
+                                icon,
+                                const SizedBox(width: 8),
+                                Text(
+                                  value,
+                                  style: TextStyle(
+                                    color: AppColors.neutral90,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                        icon: const Icon(Icons.arrow_drop_down,
+                            color: AppColors.neutral60),
                       ),
                     ),
-                    child: const Text('Detail',
-                        style: TextStyle(
-                            fontSize: 14, color: AppColors.neutral10)),
-                  ),
+                  )
                 ],
               ),
             ],

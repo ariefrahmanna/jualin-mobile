@@ -15,8 +15,7 @@ class MyAccountController extends GetxController {
     FlutterSecureStorage secureStorage = FlutterSecureStorage();
     var token = await secureStorage.read(key: 'token');
 
-    var url =
-        Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.logout);
+    var url = Uri.parse(ApiEndpoints.logout);
 
     var headers = {
       'Authorization': 'Bearer $token',
@@ -49,8 +48,6 @@ class MyAccountController extends GetxController {
     FlutterSecureStorage secureStorage = const FlutterSecureStorage();
     String? awaitFullname = await secureStorage.read(key: 'fullname');
     String? awaitEmail = await secureStorage.read(key: 'email');
-    print('FULLNAME: $awaitFullname');
-    print('EMAIL: $awaitEmail');
     fullname.value = awaitFullname ?? '';
     email.value = awaitEmail ?? '';
   }
@@ -58,12 +55,12 @@ class MyAccountController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    readProfile();
   }
 
   @override
   void onReady() {
     super.onReady();
-    readProfile();
   }
 
   @override

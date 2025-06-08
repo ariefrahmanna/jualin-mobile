@@ -23,9 +23,7 @@ class ItemByCategoryController extends GetxController {
     var secureStorage = FlutterSecureStorage();
     String? token = await secureStorage.read(key: 'token');
     try {
-      var url = Uri.parse(
-        '${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.items}?category=$category',
-      );
+      var url = Uri.parse(ApiEndpoints.getItemsByCategory(category));
 
       var response = await http.get(
         url,
