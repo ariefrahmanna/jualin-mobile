@@ -15,7 +15,7 @@ class DetailedItemController extends GetxController {
   var isLoadingWishlist = false.obs;
   var isLoading = false.obs;
 
-  void fetchUserDetails() async {
+  Future<void> fetchUserDetails() async {
     isLoading.value = true;
     var secureStorage = FlutterSecureStorage();
 
