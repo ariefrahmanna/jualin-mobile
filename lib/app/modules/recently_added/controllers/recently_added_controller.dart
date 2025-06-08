@@ -18,7 +18,7 @@ class RecentlyAddedController extends GetxController {
 
     try {
       var url = Uri.parse(
-          '${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.items}');
+          '${ApiEndpoints.baseUrl}${ApiEndpoints.items}');
       var headers = {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',

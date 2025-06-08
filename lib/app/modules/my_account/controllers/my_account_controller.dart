@@ -16,7 +16,7 @@ class MyAccountController extends GetxController {
     var token = await secureStorage.read(key: 'token');
 
     var url =
-        Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.logout);
+        Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.logout);
 
     var headers = {
       'Authorization': 'Bearer $token',

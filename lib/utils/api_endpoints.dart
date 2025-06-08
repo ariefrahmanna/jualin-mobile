@@ -1,5 +1,6 @@
 class ApiEndpoints {
-  static const baseUrl = 'http://10.0.2.2:8000/api';
+  static const baseUrl =
+      'https://8d68-2404-8000-1024-13ce-148d-2bbd-275c-2d56.ngrok-free.app/api';
 
   // Auth
   static const register = "$baseUrl/register";
