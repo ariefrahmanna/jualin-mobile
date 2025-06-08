@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
 
@@ -34,7 +35,8 @@ class EditAccountController extends GetxController {
     isLoading.value = true;
 
     try {
-      // Ganti dengan endpoint update user sesuai backend Anda
+      FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+      String? token = await secureStorage.read(key: 'token');
       Uri url = Uri.parse(ApiEndpoints.currentUser);
 
       Map<String, String> body = {
@@ -44,7 +46,10 @@ class EditAccountController extends GetxController {
         'contact_number': contactNumber,
       };
 
-      var headers = {'Content-Type': 'application/json'};
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      };
 
       http.Response response = await http.put(
         url,
@@ -73,11 +78,10 @@ class EditAccountController extends GetxController {
         backgroundColor: AppColors.success,
         colorText: AppColors.neutral10,
       );
-      FlutterSecureStorage secureStorage = const FlutterSecureStorage();
       await secureStorage.write(key: 'fullname', value: fullname);
       await secureStorage.write(key: 'email', value: email);
       await secureStorage.write(key: 'contact_number', value: contactNumber);
-      Get.back();
+      Get.offAllNamed(Routes.MY_ACCOUNT);
     } catch (e) {
       Get.snackbar(
         'Error',
