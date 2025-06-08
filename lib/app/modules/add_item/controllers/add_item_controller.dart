@@ -31,9 +31,7 @@ class AddItemController extends GetxController {
     var secureStorage = const FlutterSecureStorage();
     String? token = await secureStorage.read(key: 'token');
     try {
-      var url = Uri.parse(
-        '${ApiEndpoints.baseUrl}${ApiEndpoints.authEndpoints.items}',
-      );
+      var url = Uri.parse(ApiEndpoints.items);
       var headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
