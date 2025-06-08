@@ -29,10 +29,6 @@ class SellItemsView extends GetView<SellItemsController> {
         centerTitle: true,
       ),
       body: Obx(() {
-        if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
         return ListView(
           padding: const EdgeInsets.all(16),
           children: [

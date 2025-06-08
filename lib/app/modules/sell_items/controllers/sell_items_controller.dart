@@ -9,15 +9,12 @@ import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
 
 class SellItemsController extends GetxController {
-  //TODO: Implement SellItemsController
   var status = 'listed'.obs;
   var listedItems = [].obs;
   var unlistedItems = [].obs;
-  var isLoading = false.obs;
   var secureStorage = FlutterSecureStorage();
 
   Future<void> fetchSellItems() async {
-    isLoading.value = true;
     try {
       var token = await secureStorage.read(key: 'token');
       var url = Uri.parse(ApiEndpoints.getUserItems);
@@ -45,8 +42,6 @@ class SellItemsController extends GetxController {
         backgroundColor: AppColors.error,
         colorText: AppColors.neutral10,
       );
-    } finally {
-      isLoading.value = false;
     }
   }
 
