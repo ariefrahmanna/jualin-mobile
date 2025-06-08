@@ -60,16 +60,12 @@ class EditAccountController extends GetxController {
       final json = jsonDecode(response.body);
 
       if (response.statusCode != 200 || (json['status'] == false)) {
-        Get.snackbar(
-          'Error',
-          json['message'] ?? 'Failed to update account',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: AppColors.error,
-          colorText: AppColors.neutral10,
-        );
-        isLoading.value = false;
-        return;
+        throw json['message'] ?? 'Failed to update account';
       }
+
+      await secureStorage.write(key: 'fullname', value: fullname);
+      await secureStorage.write(key: 'email', value: email);
+      await secureStorage.write(key: 'contact_number', value: contactNumber);
 
       Get.snackbar(
         'Success',
@@ -78,9 +74,7 @@ class EditAccountController extends GetxController {
         backgroundColor: AppColors.success,
         colorText: AppColors.neutral10,
       );
-      await secureStorage.write(key: 'fullname', value: fullname);
-      await secureStorage.write(key: 'email', value: email);
-      await secureStorage.write(key: 'contact_number', value: contactNumber);
+
       Get.offAllNamed(Routes.MY_ACCOUNT);
     } catch (e) {
       Get.snackbar(
