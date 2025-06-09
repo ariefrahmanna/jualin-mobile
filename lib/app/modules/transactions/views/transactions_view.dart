@@ -104,7 +104,7 @@ class TransactionsView extends GetView<TransactionsController> {
                       status,
                       style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.primary,
+                        color: AppColors.pending,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
