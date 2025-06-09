@@ -59,7 +59,7 @@ class EditAccountController extends GetxController {
       await secureStorage.write(key: 'fullname', value: fullname);
       await secureStorage.write(key: 'email', value: email);
       await secureStorage.write(key: 'contact_number', value: contactNumber);
-
+      Get.back();
       Get.snackbar(
         'Success',
         'Account updated successfully',
@@ -67,8 +67,6 @@ class EditAccountController extends GetxController {
         backgroundColor: AppColors.success,
         colorText: AppColors.neutral10,
       );
-
-      Get.offAllNamed(Routes.MY_ACCOUNT);
     } catch (e) {
       Get.snackbar(
         'Error',
