@@ -57,6 +57,7 @@ class RegisterView extends GetView<RegisterController> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 20),
                 TextField(
                   controller: controller.contactNumberController,
                   decoration: InputDecoration(
