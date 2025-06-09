@@ -278,7 +278,7 @@ class SellItemsView extends GetView<SellItemsController> {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.pending.withOpacity(0.15),
+                            color: AppColors.neutral10,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: const Text(
