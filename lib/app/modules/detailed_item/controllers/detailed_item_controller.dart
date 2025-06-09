@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:jualin/app/modules/transactions/controllers/transactions_controller.dart';
 import 'package:jualin/app/modules/wishlist/controllers/wishlist_controller.dart';
 import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
@@ -11,10 +12,12 @@ import 'package:jualin/utils/api_endpoints.dart';
 class DetailedItemController extends GetxController {
   var item = <String, dynamic>{}.obs;
   var user = <String, dynamic>{}.obs;
-  WishlistController wishlistController = Get.put(WishlistController());
   var isWishlisted = false.obs;
   var isLoadingWishlist = false.obs;
   var isLoading = false.obs;
+  WishlistController wishlistController = Get.put(WishlistController());
+  TransactionsController transactionsController =
+      Get.put(TransactionsController());
 
   Future<void> fetchUserDetails() async {
     isLoading.value = true;
@@ -124,6 +127,7 @@ class DetailedItemController extends GetxController {
           colorText: AppColors.neutral10,
         );
         Get.offNamed(Routes.DASHBOARD, arguments: {'index': 2});
+        transactionsController.fetchTransactions();
       } else {
         throw json['message'];
       }

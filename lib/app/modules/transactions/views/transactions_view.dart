@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jualin/app/routes/app_pages.dart';
-import '../../../themes/colors.dart';
+import 'package:jualin/app/themes/colors.dart';
+import 'package:jualin/utils/currency_formatter.dart';
 import '../controllers/transactions_controller.dart';
 
 class TransactionsView extends GetView<TransactionsController> {
@@ -12,7 +12,6 @@ class TransactionsView extends GetView<TransactionsController> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
         title: const Text(
           'My Transactions',
           style: TextStyle(
@@ -20,95 +19,102 @@ class TransactionsView extends GetView<TransactionsController> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.toNamed(Routes.MY_ACCOUNT);
-            },
-            icon: Icon(
-              Icons.person_outline,
-              color: AppColors.neutral10,
-            ),
-          ),
-        ],
         centerTitle: true,
+        backgroundColor: AppColors.primary,
+        elevation: 0,
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(
-            child: CircularProgressIndicator(color: AppColors.primary),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
         if (controller.transactions.isEmpty) {
-          return Center(
-            child: Text(
-              'No transactions found',
-              style: TextStyle(
-                color: AppColors.neutral70,
-                fontSize: 16,
-              ),
-            ),
-          );
+          return const Center(child: Text('No Transactions'));
         }
         return ListView.builder(
           padding: const EdgeInsets.all(16),
           itemCount: controller.transactions.length,
           itemBuilder: (context, index) {
-            final trx = controller.transactions[index];
-            return Card(
-              color: AppColors.neutral10,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: 2,
-              margin: const EdgeInsets.only(bottom: 16),
-              child: ListTile(
-                leading: Icon(
-                  Icons.receipt_long,
-                  color: AppColors.primary,
-                ),
-                title: Text(
-                  trx['item_name'] ?? '-',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.text,
-                  ),
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Tanggal: ${trx['date'] ?? '-'}',
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.neutral70,
-                      ),
-                    ),
-                    Text(
-                      'Status: ${trx['status'] ?? '-'}',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: trx['status'] == 'success'
-                            ? AppColors.primary
-                            : (trx['status'] == 'pending'
-                                ? Colors.orange
-                                : Colors.red),
-                      ),
-                    ),
-                  ],
-                ),
-                trailing: Text(
-                  'Rp ${trx['total'] ?? '0'}',
-                  style: const TextStyle(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            final item = controller.transactions[index];
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: transactionItem(
+                item: item,
+                title: item['name'],
+                price: "Rp${item['price']}",
+                imageUrl: item['image_url'],
+                status: item['status'],
+                onTap: () {
+                  // Aksi jika ingin ke detail item
+                  // Get.toNamed(Routes.DETAILED_ITEM, arguments: {'item': item});
+                },
               ),
             );
           },
         );
       }),
+    );
+  }
+
+  Widget transactionItem({
+    required Map<String, dynamic> item,
+    required String title,
+    required String price,
+    required String imageUrl,
+    required String status,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 4,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  imageUrl,
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Icon(Icons.broken_image),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        )),
+                    const SizedBox(height: 8),
+                    Text(CurrencyFormatter.toRupiah(price),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        )),
+                    const SizedBox(height: 8),
+                    Text(
+                      status,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
