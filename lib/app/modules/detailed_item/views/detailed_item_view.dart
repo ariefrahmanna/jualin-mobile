@@ -188,6 +188,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                         textCancel: 'Cancel',
                         textConfirm: 'Buy',
                         confirmTextColor: Colors.white,
+                        buttonColor: AppColors.primary,
                         onConfirm: () {
                           Get.back();
                           controller.buyyItem();
