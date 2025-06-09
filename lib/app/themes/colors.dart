@@ -9,7 +9,7 @@ class AppColors {
   static const Color favorite = Color(0xFFE9494F);
   static const Color success = Color(0xFF1F5F21);
   static const Color error = Color(0xFF870B02);
-  static const Color pending = Color(0xFFFFC107);
+  static const Color pending = Color(0xFFD5A207);
 
   static const Color neutral10 = Color(0xFFFFFFFF);
   static const Color neutral20 = Color(0xFFF5F5F5);
