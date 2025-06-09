@@ -126,7 +126,7 @@ class DetailedItemController extends GetxController {
           backgroundColor: AppColors.success,
           colorText: AppColors.neutral10,
         );
-        Get.offNamed(Routes.DASHBOARD, arguments: {'index': 2});
+        Get.offAllNamed(Routes.DASHBOARD, arguments: {'index': 2});
         transactionsController.fetchTransactions();
       } else {
         throw json['message'];
