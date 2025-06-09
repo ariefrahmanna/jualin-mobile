@@ -47,7 +47,7 @@ class AddItemController extends GetxController {
         'description': descriptionController.text,
       });
       var response = await http.post(url, headers: headers, body: body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         sellItemsController.fetchSellItems();
         Get.back();
         Get.snackbar('Success', 'Item added successfully');
