@@ -22,8 +22,13 @@ class TransactionsView extends GetView<TransactionsController> {
         ),
         actions: [
           IconButton(
-            onPressed: () => Get.toNamed(Routes.MY_ACCOUNT),
-            icon: const Icon(Icons.person_outline, color: AppColors.neutral10),
+            onPressed: () {
+              Get.toNamed(Routes.MY_ACCOUNT);
+            },
+            icon: Icon(
+              Icons.person_outline,
+              color: AppColors.neutral10,
+            ),
           ),
         ],
         centerTitle: true,
@@ -51,8 +56,10 @@ class TransactionsView extends GetView<TransactionsController> {
                 imageUrl: item['image_url'],
                 status: item['status'],
                 onTap: () {
-                  // Aksi jika ingin ke detail item
-                  // Get.toNamed(Routes.DETAILED_ITEM, arguments: {'item': item});
+                  Get.toNamed(
+                    Routes.DETAILED_ITEM,
+                    arguments: {'item': item},
+                  );
                 },
               ),
             );
@@ -86,8 +93,9 @@ class TransactionsView extends GetView<TransactionsController> {
                   width: 80,
                   height: 80,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) =>
-                      Icon(Icons.broken_image),
+                  errorBuilder: (context, error, stackTrace) {
+                    return Icon(Icons.broken_image);
+                  },
                 ),
               ),
               const SizedBox(width: 16),
@@ -101,11 +109,13 @@ class TransactionsView extends GetView<TransactionsController> {
                           fontSize: 16,
                         )),
                     const SizedBox(height: 8),
-                    Text(CurrencyFormatter.toRupiah(price),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        )),
+                    Text(
+                      CurrencyFormatter.toRupiah(price),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
                     const SizedBox(height: 8),
                     Text(
                       status,

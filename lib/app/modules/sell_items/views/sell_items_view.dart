@@ -33,7 +33,6 @@ class SellItemsView extends GetView<SellItemsController> {
         return ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            // Pending Items Section
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
@@ -65,12 +64,16 @@ class SellItemsView extends GetView<SellItemsController> {
                       return sellItemCard(
                         item: item,
                         onTap: () {
-                          Get.toNamed(Routes.DETAILED_ITEM,
-                              arguments: {'item': item});
+                          Get.toNamed(
+                            Routes.DETAILED_ITEM,
+                            arguments: {'item': item},
+                          );
                         },
                         onEdit: () {
-                          Get.toNamed(Routes.EDIT_ITEM,
-                              arguments: {'item': item});
+                          Get.toNamed(
+                            Routes.EDIT_ITEM,
+                            arguments: {'item': item},
+                          );
                         },
                       );
                     },
@@ -80,8 +83,7 @@ class SellItemsView extends GetView<SellItemsController> {
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                 decoration: BoxDecoration(
                   color: AppColors.success,
                   borderRadius: BorderRadius.circular(8),
@@ -108,12 +110,16 @@ class SellItemsView extends GetView<SellItemsController> {
                       return sellItemCard(
                         item: item,
                         onTap: () {
-                          Get.toNamed(Routes.DETAILED_ITEM,
-                              arguments: {'item': item});
+                          Get.toNamed(
+                            Routes.DETAILED_ITEM,
+                            arguments: {'item': item},
+                          );
                         },
                         onEdit: () {
-                          Get.toNamed(Routes.EDIT_ITEM,
-                              arguments: {'item': item});
+                          Get.toNamed(
+                            Routes.EDIT_ITEM,
+                            arguments: {'item': item},
+                          );
                         },
                       );
                     },
@@ -152,12 +158,16 @@ class SellItemsView extends GetView<SellItemsController> {
                       return sellItemCard(
                         item: item,
                         onTap: () {
-                          Get.toNamed(Routes.DETAILED_ITEM,
-                              arguments: {'item': item});
+                          Get.toNamed(
+                            Routes.DETAILED_ITEM,
+                            arguments: {'item': item},
+                          );
                         },
                         onEdit: () {
-                          Get.toNamed(Routes.EDIT_ITEM,
-                              arguments: {'item': item});
+                          Get.toNamed(
+                            Routes.EDIT_ITEM,
+                            arguments: {'item': item},
+                          );
                         },
                       );
                     },
@@ -170,7 +180,7 @@ class SellItemsView extends GetView<SellItemsController> {
         onPressed: () {
           Get.toNamed(Routes.ADD_ITEM);
         },
-        child: const Icon(Icons.add, color: AppColors.neutral10),
+        child: Icon(Icons.add, color: AppColors.neutral10),
       ),
     );
   }
@@ -264,7 +274,9 @@ class SellItemsView extends GetView<SellItemsController> {
                   item['status']?.toString().toLowerCase() == 'pending'
                       ? Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 6),
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: AppColors.pending.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(8),
@@ -292,17 +304,24 @@ class SellItemsView extends GetView<SellItemsController> {
                                 if (newValue != null &&
                                     newValue != item['status']) {
                                   controller.onStatusChanged(
-                                      item['id'], newValue);
+                                    item['id'],
+                                    newValue,
+                                  );
                                 }
                               },
                               items: <String>['listed', 'unlisted']
                                   .map((String value) {
                                 Icon icon = value == 'listed'
-                                    ? const Icon(Icons.check_circle,
-                                        color: AppColors.secondary, size: 18)
-                                    : const Icon(Icons.cancel,
-                                        color: AppColors.error, size: 18);
-
+                                    ? Icon(
+                                        Icons.check_circle,
+                                        color: AppColors.secondary,
+                                        size: 18,
+                                      )
+                                    : const Icon(
+                                        Icons.cancel,
+                                        color: AppColors.error,
+                                        size: 18,
+                                      );
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Row(
