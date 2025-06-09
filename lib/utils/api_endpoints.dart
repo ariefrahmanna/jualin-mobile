@@ -26,4 +26,9 @@ class ApiEndpoints {
   static const addWishlist = "$baseUrl/wishlists";
   static String removeWishlistByItemId(int itemId) =>
       "$baseUrl/wishlists/items/$itemId";
+
+  //PendingItems
+  static const getPendingPurchases = "$baseUrl/user/pending-purchases";
+  static const buyItems = "$baseUrl/pending-purchases";
+  static String deletePendingPurchases(int itemId) => "$baseUrl/pending-purchases/items/$itemId";
 }
