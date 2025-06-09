@@ -12,6 +12,7 @@ class SellItemsController extends GetxController {
   var status = 'listed'.obs;
   var listedItems = [].obs;
   var unlistedItems = [].obs;
+  var pendingItems = [].obs;
   var secureStorage = FlutterSecureStorage();
 
   Future<void> fetchSellItems() async {
@@ -26,12 +27,22 @@ class SellItemsController extends GetxController {
       var response = await http.get(url, headers: headers);
       var body = json.decode(response.body);
       if (response.statusCode == 200 && body['status']) {
+        print(body['data']);
         var items = List<Map<String, dynamic>>.from(body['data']);
 
-        listedItems.value =
-            items.where((item) => item['status'] == 'listed').toList();
-        unlistedItems.value =
-            items.where((item) => item['status'] == 'unlisted').toList();
+        listedItems.value = items
+            .where((item) =>
+                item['status']?.toString().toLowerCase().trim() == 'listed')
+            .toList();
+        unlistedItems.value = items
+            .where((item) =>
+                item['status']?.toString().toLowerCase().trim() == 'unlisted')
+            .toList();
+        pendingItems.value = pendingItems.value = items
+            .where((item) =>
+                item['status']?.toString().toLowerCase().trim() == 'pending')
+            .toList();
+        print(pendingItems);
       } else {
         throw body['message'] ?? 'Failed to load items';
       }

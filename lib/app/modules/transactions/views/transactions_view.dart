@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/currency_formatter.dart';
 import '../controllers/transactions_controller.dart';
@@ -19,6 +20,12 @@ class TransactionsView extends GetView<TransactionsController> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.MY_ACCOUNT),
+            icon: const Icon(Icons.person_outline, color: AppColors.neutral10),
+          ),
+        ],
         centerTitle: true,
         backgroundColor: AppColors.primary,
         elevation: 0,

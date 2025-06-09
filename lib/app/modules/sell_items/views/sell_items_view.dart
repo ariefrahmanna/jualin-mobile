@@ -33,6 +33,50 @@ class SellItemsView extends GetView<SellItemsController> {
         return ListView(
           padding: const EdgeInsets.all(16),
           children: [
+            // Pending Items Section
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.pending,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Text(
+                  'Pending Items',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.background,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            controller.pendingItems.isEmpty
+                ? const Text('No pending items.')
+                : ListView.builder(
+                    itemCount: controller.pendingItems.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final item = controller.pendingItems[index];
+                      return sellItemCard(
+                        item: item,
+                        onTap: () {
+                          Get.toNamed(Routes.DETAILED_ITEM,
+                              arguments: {'item': item});
+                        },
+                        onEdit: () {
+                          Get.toNamed(Routes.EDIT_ITEM,
+                              arguments: {'item': item});
+                        },
+                      );
+                    },
+                  ),
+            const SizedBox(height: 24),
+            // Listed Items Section
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
@@ -52,7 +96,6 @@ class SellItemsView extends GetView<SellItemsController> {
                 ),
               ),
             ),
-
             const SizedBox(height: 8),
             controller.listedItems.isEmpty
                 ? const Text('No listed items.')
@@ -75,10 +118,9 @@ class SellItemsView extends GetView<SellItemsController> {
                       );
                     },
                   ),
-
             const SizedBox(height: 24),
 
-            // Section: Unlisted Items
+            // Unlisted Items Section
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
@@ -89,7 +131,7 @@ class SellItemsView extends GetView<SellItemsController> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Text(
-                  'unlisted Items',
+                  'Unlisted Items',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -98,7 +140,6 @@ class SellItemsView extends GetView<SellItemsController> {
                 ),
               ),
             ),
-
             const SizedBox(height: 8),
             controller.unlistedItems.isEmpty
                 ? const Text('No unlisted items.')
@@ -194,53 +235,73 @@ class SellItemsView extends GetView<SellItemsController> {
                     onPressed: onEdit,
                     tooltip: 'Edit Item',
                   ),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: AppColors.neutral20,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.neutral40),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: item['status'],
-                        onChanged: (String? newValue) {
-                          if (newValue != null && newValue != item['status']) {
-                            controller.onStatusChanged(item['id'], newValue);
-                          }
-                        },
-                        items:
-                            <String>['listed', 'unlisted'].map((String value) {
-                          Icon icon = value == 'listed'
-                              ? const Icon(Icons.check_circle,
-                                  color: AppColors.secondary, size: 18)
-                              : const Icon(Icons.cancel,
-                                  color: AppColors.error, size: 18);
-
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Row(
-                              children: [
-                                icon,
-                                const SizedBox(width: 8),
-                                Text(
-                                  value,
-                                  style: TextStyle(
-                                    color: AppColors.neutral90,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
+                  const SizedBox(height: 8),
+                  // Status Dropdown atau Badge
+                  item['status']?.toString().toLowerCase() == 'pending'
+                      ? Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: AppColors.pending.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text(
+                            'Pending',
+                            style: TextStyle(
+                              color: AppColors.pending,
+                              fontWeight: FontWeight.bold,
                             ),
-                          );
-                        }).toList(),
-                        icon: const Icon(Icons.arrow_drop_down,
-                            color: AppColors.neutral60),
-                      ),
-                    ),
-                  )
+                          ),
+                        )
+                      : Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: AppColors.neutral20,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: AppColors.neutral40),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: item['status'],
+                              onChanged: (String? newValue) {
+                                if (newValue != null &&
+                                    newValue != item['status']) {
+                                  controller.onStatusChanged(
+                                      item['id'], newValue);
+                                }
+                              },
+                              items: <String>['listed', 'unlisted']
+                                  .map((String value) {
+                                Icon icon = value == 'listed'
+                                    ? const Icon(Icons.check_circle,
+                                        color: AppColors.secondary, size: 18)
+                                    : const Icon(Icons.cancel,
+                                        color: AppColors.error, size: 18);
+
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Row(
+                                    children: [
+                                      icon,
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        value,
+                                        style: TextStyle(
+                                          color: AppColors.neutral90,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                              icon: const Icon(Icons.arrow_drop_down,
+                                  color: AppColors.neutral60),
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ],
