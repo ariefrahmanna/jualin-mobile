@@ -230,10 +230,34 @@ class SellItemsView extends GetView<SellItemsController> {
               // Tombol Aksi
               Column(
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.blue),
-                    onPressed: onEdit,
-                    tooltip: 'Edit Item',
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit, color: Colors.blue),
+                        onPressed: onEdit,
+                        tooltip: 'Edit Item',
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        onPressed: () {
+                          Get.defaultDialog(
+                            title: 'Delete Item',
+                            middleText:
+                                'Are you sure you want to delete this item?',
+                            textCancel: 'Cancel',
+                            textConfirm: 'Delete',
+                            confirmTextColor: Colors.white,
+                            buttonColor: AppColors.error,
+                            onConfirm: () {
+                              Get.back();
+                              controller.deleteItem(item['id']);
+                            },
+                          );
+                        },
+                        tooltip: 'Delete Item',
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 8),
                   // Status Dropdown atau Badge

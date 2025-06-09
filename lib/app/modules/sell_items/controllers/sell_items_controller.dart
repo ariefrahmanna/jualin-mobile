@@ -84,6 +84,36 @@ class SellItemsController extends GetxController {
     }
   }
 
+  Future<void> deleteItem(int itemId) async {
+  try {
+    var token = await secureStorage.read(key: 'token');
+    var url = Uri.parse(ApiEndpoints.itemsById(itemId));
+    var headers = {
+      'Authorization': 'Bearer $token',
+      'Accept': 'application/json',
+    };
+    var response = await http.delete(url, headers: headers);
+    if (response.statusCode == 200) {
+      Get.snackbar(
+        'Success',
+        'Item deleted successfully',
+        backgroundColor: AppColors.success,
+        colorText: AppColors.neutral10,
+      );
+      fetchSellItems();
+    } else {
+      throw jsonDecode(response.body)['message'] ?? 'Failed to delete item';
+    }
+  } catch (e) {
+    Get.snackbar(
+      'Error',
+      e.toString(),
+      backgroundColor: AppColors.error,
+      colorText: AppColors.neutral10,
+    );
+  }
+}
+
   @override
   void onInit() {
     super.onInit();
