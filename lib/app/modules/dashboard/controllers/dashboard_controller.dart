@@ -9,18 +9,24 @@ class DashboardController extends GetxController {
     selectedIndex.value = index;
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  void setIndexFromArguments(dynamic args) {
+    if (args != null && args['index'] != null) {
+      selectedIndex.value = args['index'];
+    }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+    @override
+    void onInit() {
+      super.onInit();
+    }
 
-  @override
-  void onClose() {
-    super.onClose();
+    @override
+    void onReady() {
+      super.onReady();
+    }
+
+    @override
+    void onClose() {
+      super.onClose();
+    }
   }
 }

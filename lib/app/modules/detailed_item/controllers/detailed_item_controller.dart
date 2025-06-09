@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:jualin/app/modules/wishlist/controllers/wishlist_controller.dart';
+import 'package:jualin/app/routes/app_pages.dart';
 import 'package:jualin/app/themes/colors.dart';
 import 'package:jualin/utils/api_endpoints.dart';
 
@@ -94,6 +95,45 @@ class DetailedItemController extends GetxController {
       );
     } finally {
       isLoadingWishlist.value = false;
+    }
+  }
+
+  Future<void> buyyItem() async {
+    final storage = const FlutterSecureStorage();
+    String? token = await storage.read(key: 'token');
+    final itemId = item['id'];
+
+    try {
+      final response = await http.post(
+        Uri.parse(ApiEndpoints.buyItems),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: jsonEncode({'item_id': itemId}),
+      );
+
+      final json = jsonDecode(response.body);
+
+      if (response.statusCode == 201 && json['status'] == true) {
+        Get.snackbar(
+          'Success',
+          'Item added to pending purchases!',
+          backgroundColor: AppColors.success,
+          colorText: AppColors.neutral10,
+        );
+        Get.offNamed(Routes.DASHBOARD, arguments: {'index': 2});
+      } else {
+        throw json['message'];
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        backgroundColor: AppColors.error,
+        colorText: AppColors.neutral10,
+      );
     }
   }
 

@@ -95,6 +95,8 @@ class WishlistView extends GetView<WishlistController> {
                   width: 80,
                   height: 80,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Icon(Icons.broken_image),
                 ),
               ),
               const SizedBox(width: 16),
