@@ -33,8 +33,8 @@ class TransactionsController extends GetxController {
         List data = json.decode(response.body)['data'];
         transactions.value = data;
         for (var item in List<Map<String, dynamic>>.from(data)) {
-          if (item['status']?.toString().toLowerCase() == 'listed') {
-            // Panggil hapus transaksi
+          var currentStatus = item['status']?.toString().toLowerCase();
+          if (!['pending', 'sold'].contains(currentStatus)) {
             await deleteTransaction(item['id']);
           }
         }
@@ -65,29 +65,19 @@ class TransactionsController extends GetxController {
     var secureStorage = const FlutterSecureStorage();
     String? token = await secureStorage.read(key: 'token');
     try {
-      // Ganti endpoint di bawah sesuai API kamu
       final url = Uri.parse(ApiEndpoints.deletePendingPurchases(itemId));
       final headers = {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
       };
       final response = await http.delete(url, headers: headers);
-      if (response.statusCode == 200) {
-        Get.snackbar(
-          'Success',
-          'Transaction deleted successfully',
-          backgroundColor: AppColors.success,
-          colorText: AppColors.neutral10,
-        );
-        await fetchTransactions();
-      } else {
-        Get.snackbar(
-          'Error',
-          'Failed to delete transaction',
-          backgroundColor: AppColors.error,
-          colorText: AppColors.neutral10,
-        );
+      var body = jsonDecode(response.body);
+
+      if (body['status'] == false) {
+        throw 'Failed to delete transaction';
       }
+
+      await fetchTransactions();
     } catch (e) {
       Get.snackbar(
         'Error',
