@@ -30,149 +30,154 @@ class SellItemsView extends GetView<SellItemsController> {
         centerTitle: true,
       ),
       body: Obx(() {
-        return ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                decoration: BoxDecoration(
-                  color: AppColors.pending,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Text(
-                  'Pending Items',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.background,
+        return RefreshIndicator(
+          onRefresh: () async {
+            await controller.fetchSellItems();
+          },
+          child: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.pending,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Text(
+                    'Pending Items',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.background,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 8),
-            controller.pendingItems.isEmpty
-                ? const Text('No pending items.')
-                : ListView.builder(
-                    itemCount: controller.pendingItems.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final item = controller.pendingItems[index];
-                      return sellItemCard(
-                        item: item,
-                        onTap: () {
-                          Get.toNamed(
-                            Routes.DETAILED_ITEM,
-                            arguments: {'item': item},
-                          );
-                        },
-                        onEdit: () {
-                          Get.toNamed(
-                            Routes.EDIT_ITEM,
-                            arguments: {'item': item},
-                          );
-                        },
-                      );
-                    },
+              const SizedBox(height: 8),
+              controller.pendingItems.isEmpty
+                  ? const Text('No pending items.')
+                  : ListView.builder(
+                      itemCount: controller.pendingItems.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final item = controller.pendingItems[index];
+                        return sellItemCard(
+                          item: item,
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DETAILED_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                          onEdit: () {
+                            Get.toNamed(
+                              Routes.EDIT_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                        );
+                      },
+                    ),
+              const SizedBox(height: 24),
+              // Listed Items Section
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.success,
+                    borderRadius: BorderRadius.circular(8),
                   ),
-            const SizedBox(height: 24),
-            // Listed Items Section
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                decoration: BoxDecoration(
-                  color: AppColors.success,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Text(
-                  'Listed Items',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.background,
+                  child: const Text(
+                    'Listed Items',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.background,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 8),
-            controller.listedItems.isEmpty
-                ? const Text('No listed items.')
-                : ListView.builder(
-                    itemCount: controller.listedItems.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final item = controller.listedItems[index];
-                      return sellItemCard(
-                        item: item,
-                        onTap: () {
-                          Get.toNamed(
-                            Routes.DETAILED_ITEM,
-                            arguments: {'item': item},
-                          );
-                        },
-                        onEdit: () {
-                          Get.toNamed(
-                            Routes.EDIT_ITEM,
-                            arguments: {'item': item},
-                          );
-                        },
-                      );
-                    },
-                  ),
-            const SizedBox(height: 24),
+              const SizedBox(height: 8),
+              controller.listedItems.isEmpty
+                  ? const Text('No listed items.')
+                  : ListView.builder(
+                      itemCount: controller.listedItems.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final item = controller.listedItems[index];
+                        return sellItemCard(
+                          item: item,
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DETAILED_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                          onEdit: () {
+                            Get.toNamed(
+                              Routes.EDIT_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                        );
+                      },
+                    ),
+              const SizedBox(height: 24),
 
-            // Unlisted Items Section
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                decoration: BoxDecoration(
-                  color: AppColors.error,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Text(
-                  'Unlisted Items',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.background,
+              // Unlisted Items Section
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.error,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Text(
+                    'Unlisted Items',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.background,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 8),
-            controller.unlistedItems.isEmpty
-                ? const Text('No unlisted items.')
-                : ListView.builder(
-                    itemCount: controller.unlistedItems.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final item = controller.unlistedItems[index];
-                      return sellItemCard(
-                        item: item,
-                        onTap: () {
-                          Get.toNamed(
-                            Routes.DETAILED_ITEM,
-                            arguments: {'item': item},
-                          );
-                        },
-                        onEdit: () {
-                          Get.toNamed(
-                            Routes.EDIT_ITEM,
-                            arguments: {'item': item},
-                          );
-                        },
-                      );
-                    },
-                  ),
-          ],
+              const SizedBox(height: 8),
+              controller.unlistedItems.isEmpty
+                  ? const Text('No unlisted items.')
+                  : ListView.builder(
+                      itemCount: controller.unlistedItems.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final item = controller.unlistedItems[index];
+                        return sellItemCard(
+                          item: item,
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DETAILED_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                          onEdit: () {
+                            Get.toNamed(
+                              Routes.EDIT_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                        );
+                      },
+                    ),
+            ],
+          ),
         );
       }),
       floatingActionButton: FloatingActionButton(
@@ -277,14 +282,15 @@ class SellItemsView extends GetView<SellItemsController> {
                             ElevatedButton(
                               onPressed: () {
                                 controller.onStatusChanged(item['id'], 'sold');
-                                
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.success,
                                 foregroundColor: AppColors.neutral10,
                                 minimumSize: const Size(28, 24),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 6, vertical: 2),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -302,7 +308,9 @@ class SellItemsView extends GetView<SellItemsController> {
                                 foregroundColor: AppColors.neutral10,
                                 minimumSize: const Size(28, 24),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 6, vertical: 2),
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -313,7 +321,9 @@ class SellItemsView extends GetView<SellItemsController> {
                         )
                       : Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 6, vertical: 4),
+                            horizontal: 6,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: AppColors.neutral20,
                             borderRadius: BorderRadius.circular(8),

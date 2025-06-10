@@ -35,32 +35,44 @@ class TransactionsView extends GetView<TransactionsController> {
         backgroundColor: AppColors.primary,
         elevation: 0,
       ),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (controller.transactions.isEmpty) {
-          return const Center(child: Text('No Transactions'));
-        }
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: controller.transactions.length,
-          itemBuilder: (context, index) {
-            final item = controller.transactions[index];
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: transactionItem(
-                item: item,
-                title: item['name'],
-                price: "Rp${item['price']}",
-                imageUrl: item['image_url'],
-                status: item['status'],
-                onTap: () {},
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await controller.fetchTransactions();
+        },
+        child: Obx(
+          () {
+            if (controller.isLoading.value) {
+              return Center(child: CircularProgressIndicator());
+            }
+            if (controller.transactions.isEmpty) {
+              return Center(child: Text('No Transactions'));
+            }
+            return RefreshIndicator(
+              onRefresh: () async {
+                await controller.fetchTransactions();
+              },
+              child: ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: controller.transactions.length,
+                itemBuilder: (context, index) {
+                  final item = controller.transactions[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: transactionItem(
+                      item: item,
+                      title: item['name'],
+                      price: CurrencyFormatter.toRupiah(item['price']),
+                      imageUrl: item['image_url'],
+                      status: item['status'],
+                      onTap: () {},
+                    ),
+                  );
+                },
               ),
             );
           },
-        );
-      }),
+        ),
+      ),
     );
   }
 
