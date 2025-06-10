@@ -55,12 +55,7 @@ class TransactionsView extends GetView<TransactionsController> {
                 price: "Rp${item['price']}",
                 imageUrl: item['image_url'],
                 status: item['status'],
-                onTap: () {
-                  Get.toNamed(
-                    Routes.DETAILED_ITEM,
-                    arguments: {'item': item},
-                  );
-                },
+                onTap: () {},
               ),
             );
           },
@@ -121,7 +116,11 @@ class TransactionsView extends GetView<TransactionsController> {
                       status,
                       style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.pending,
+                        color: status.toLowerCase() == 'pending'
+                            ? AppColors.pending
+                            : status.toLowerCase() == 'sold'
+                                ? AppColors.success
+                                : AppColors.text, // fallback/default
                         fontWeight: FontWeight.w500,
                       ),
                     ),
