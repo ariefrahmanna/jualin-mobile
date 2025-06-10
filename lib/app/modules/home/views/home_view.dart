@@ -64,131 +64,137 @@ class HomeView extends GetView<HomeController> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 10,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Recently Viewed Section
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Recently Added',
-                    style: AppFonts.h2.bold,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Get.toNamed(Routes.RECENTLY_ADDED);
-                    },
-                    child: Text(
-                      'See More',
-                      style: AppFonts.h5.primary,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await controller.fetchRecentlyAddedPreview();
+        },
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 10,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Recently Viewed Section
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Recently Added',
+                      style: AppFonts.h2.bold,
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Obx(() {
-                if (controller.isLoading.value) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                return SizedBox(
-                  height: 220,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.recentlyAddedItems.length,
-                    itemBuilder: (context, index) {
-                      final item = controller.recentlyAddedItems[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 12),
-                        child: ItemCard(
-                          item: item,
-                          onTap: () {
-                            Get.toNamed(
-                              Routes.DETAILED_ITEM,
-                              arguments: {
-                                'item': item,
-                              },
-                            );
+                    TextButton(
+                      onPressed: () {
+                        Get.toNamed(Routes.RECENTLY_ADDED);
+                      },
+                      child: Text(
+                        'See More',
+                        style: AppFonts.h5.primary,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Obx(() {
+                  if (controller.isLoading.value) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  return SizedBox(
+                    height: 220,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.recentlyAddedItems.length,
+                      itemBuilder: (context, index) {
+                        final item = controller.recentlyAddedItems[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child: ItemCard(
+                            item: item,
+                            onTap: () {
+                              Get.toNamed(
+                                Routes.DETAILED_ITEM,
+                                arguments: {
+                                  'item': item,
+                                },
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }),
+
+                const SizedBox(height: 24),
+
+                // Find by Categories Section
+                Text(
+                  'Find by Categories',
+                  style: AppFonts.h2.bold,
+                ),
+                const SizedBox(height: 16),
+                GridView.count(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 3 / 2,
+                  children: [
+                    buildCategoryItem(
+                      icon: Icons.devices_other,
+                      label: 'Electronics',
+                      color: Color(0xFFE2F3EC),
+                      onTap: () {
+                        Get.toNamed(
+                          Routes.ITEM_BY_CATEGORY,
+                          arguments: {
+                            'category': 'Electronics',
                           },
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
-
-              const SizedBox(height: 24),
-
-              // Find by Categories Section
-              Text(
-                'Find by Categories',
-                style: AppFonts.h2.bold,
-              ),
-              const SizedBox(height: 16),
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 3 / 2,
-                children: [
-                  buildCategoryItem(
-                    icon: Icons.devices_other,
-                    label: 'Electronics',
-                    color: Color(0xFFE2F3EC),
-                    onTap: () {
-                      Get.toNamed(
-                        Routes.ITEM_BY_CATEGORY,
-                        arguments: {
-                          'category': 'Electronics',
-                        },
-                      );
-                    },
-                  ),
-                  buildCategoryItem(
-                    icon: Icons.kitchen,
-                    label: 'Appliances',
-                    color: Color(0xFFE3EAFE),
-                    onTap: () {
-                      Get.toNamed(
-                        Routes.ITEM_BY_CATEGORY,
-                        arguments: {
-                          'category': 'Appliances',
-                        },
-                      );
-                    },
-                  ),
-                  buildCategoryItem(
-                    icon: Icons.chair,
-                    label: 'Furniture',
-                    color: Color(0xFFFFF1CF),
-                    onTap: () {
-                      Get.toNamed(
-                        Routes.ITEM_BY_CATEGORY,
-                        arguments: {
-                          'category': 'Furniture',
-                        },
-                      );
-                    },
-                  ),
-                  buildCategoryItem(
-                    icon: Icons.more_horiz,
-                    label: 'See More',
-                    color: AppColors.neutral50,
-                    onTap: () {
-                      // Aksi untuk "See More"
-                    },
-                  ),
-                ],
-              ),
-            ],
+                        );
+                      },
+                    ),
+                    buildCategoryItem(
+                      icon: Icons.kitchen,
+                      label: 'Appliances',
+                      color: Color(0xFFE3EAFE),
+                      onTap: () {
+                        Get.toNamed(
+                          Routes.ITEM_BY_CATEGORY,
+                          arguments: {
+                            'category': 'Appliances',
+                          },
+                        );
+                      },
+                    ),
+                    buildCategoryItem(
+                      icon: Icons.chair,
+                      label: 'Furniture',
+                      color: Color(0xFFFFF1CF),
+                      onTap: () {
+                        Get.toNamed(
+                          Routes.ITEM_BY_CATEGORY,
+                          arguments: {
+                            'category': 'Furniture',
+                          },
+                        );
+                      },
+                    ),
+                    buildCategoryItem(
+                      icon: Icons.more_horiz,
+                      label: 'See More',
+                      color: AppColors.neutral50,
+                      onTap: () {
+                        // Aksi untuk "See More"
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
