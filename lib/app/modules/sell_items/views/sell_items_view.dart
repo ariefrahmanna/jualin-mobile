@@ -270,24 +270,46 @@ class SellItemsView extends GetView<SellItemsController> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  // Status Dropdown atau Badge
+                  // Status Dropdown
                   item['status']?.toString().toLowerCase() == 'pending'
-                      ? Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.neutral10,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: const Text(
-                            'Pending',
-                            style: TextStyle(
-                              color: AppColors.pending,
-                              fontWeight: FontWeight.bold,
+                      ? Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                controller.onStatusChanged(item['id'], 'sold');
+                                
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.success,
+                                foregroundColor: AppColors.neutral10,
+                                minimumSize: const Size(28, 24),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6, vertical: 2),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text('Accept'),
                             ),
-                          ),
+                            const SizedBox(width: 8),
+                            ElevatedButton(
+                              onPressed: () {
+                                controller.onStatusChanged(
+                                    item['id'], 'listed');
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.error,
+                                foregroundColor: AppColors.neutral10,
+                                minimumSize: const Size(28, 24),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6, vertical: 2),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text('Reject'),
+                            ),
+                          ],
                         )
                       : Container(
                           padding: const EdgeInsets.symmetric(
