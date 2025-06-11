@@ -133,21 +133,6 @@ class WishlistView extends GetView<WishlistController> {
                       controller.toggleWishlist(item);
                     },
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // TODO: Tambahkan logika beli
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      minimumSize: const Size(80, 36),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text('Buy',
-                        style: TextStyle(
-                            fontSize: 14, color: AppColors.neutral10)),
-                  ),
                 ],
               ),
             ],
