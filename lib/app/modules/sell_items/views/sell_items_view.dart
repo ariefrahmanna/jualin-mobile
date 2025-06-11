@@ -285,8 +285,7 @@ class SellItemsView extends GetView<SellItemsController> {
                                 Get.snackbar(
                                   'Success',
                                   'Item sold successfully',
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 108, 180, 111),
+                                  backgroundColor: AppColors.success,
                                   colorText: AppColors.neutral10,
                                   snackPosition: SnackPosition.BOTTOM,
                                   margin: const EdgeInsets.all(16),
