@@ -32,29 +32,31 @@ class AddItemController extends GetxController {
     isLoading.value = true;
     var secureStorage = const FlutterSecureStorage();
     String? token = await secureStorage.read(key: 'token');
+
     try {
       var url = Uri.parse(ApiEndpoints.items);
       var headers = {
         'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
         'Accept': 'application/json',
       };
-      var body = json.encode({
+      var body = {
         'name': nameController.text,
         'price': priceController.text,
         'category': categoryController.text,
         'image_url': imageUrlController.text,
         'description': descriptionController.text,
-      });
+      };
+
       var response = await http.post(url, headers: headers, body: body);
-      if (response.statusCode == 200) {
-        sellItemsController.fetchSellItems();
-        Get.back();
-        Get.snackbar('Success', 'Item added successfully');
-      } else {
-        var body = json.decode(response.body);
+      var json = jsonDecode(response.body);
+
+      if (json['status'] == false) {
         throw body['message'] ?? 'Failed to add item';
       }
+
+      sellItemsController.fetchSellItems();
+      Get.back();
+      Get.snackbar('Success', 'Item added successfully');
     } catch (e) {
       Get.snackbar(
         'Error',

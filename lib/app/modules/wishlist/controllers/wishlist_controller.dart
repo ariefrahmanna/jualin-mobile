@@ -28,7 +28,22 @@ class WishlistController extends GetxController {
 
       final json = jsonDecode(response.body);
       if (response.statusCode == 200 && json['status']) {
-        wishlists.assignAll(List<Map<String, dynamic>>.from(json['data']));
+        List<Map<String, dynamic>> data =
+            List<Map<String, dynamic>>.from(json['data']);
+
+        List<Map<String, dynamic>> soldItems = data
+            .where(
+                (item) => (item['status']?.toString().toLowerCase() == 'sold'))
+            .toList();
+
+        for (var item in soldItems) {
+          final itemId = item['id'];
+          await http.delete(
+            Uri.parse(ApiEndpoints.removeWishlistByItemId(itemId)),
+            headers: {'Authorization': 'Bearer $token'},
+          );
+        }
+        wishlists.assignAll(data);
       } else {
         throw json['message'] ?? 'Failed to load wishlist';
       }

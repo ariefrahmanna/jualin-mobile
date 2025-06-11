@@ -48,6 +48,9 @@ class DetailedItemView extends GetView<DetailedItemController> {
               child: Image.network(
                 controller.item['image_url'],
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(Icons.broken_image);
+                },
               ),
             ),
           ),
@@ -93,13 +96,9 @@ class DetailedItemView extends GetView<DetailedItemController> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
+                    Text(
                       "Meet the Seller",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.text,
-                      ),
+                      style: AppFonts.h4.bold,
                     ),
                     const SizedBox(height: 8),
                     GestureDetector(
@@ -178,21 +177,37 @@ class DetailedItemView extends GetView<DetailedItemController> {
                 ),
                 const Padding(padding: EdgeInsets.all(10)),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 12,
-                    ),
-                    decoration: ShapeDecoration(
-                      color: AppColors.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.defaultDialog(
+                        title: 'Confirm Purchase',
+                        middleText: 'Are you sure you want to buy this item?',
+                        textCancel: 'Cancel',
+                        textConfirm: 'Buy',
+                        confirmTextColor: Colors.white,
+                        buttonColor: AppColors.primary,
+                        onConfirm: () {
+                          Get.back();
+                          controller.buyyItem();
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 18,
+                        vertical: 12,
                       ),
-                    ),
-                    child: Text(
-                      'Buy',
-                      style: AppFonts.button.primary,
-                      textAlign: TextAlign.center,
+                      decoration: ShapeDecoration(
+                        color: AppColors.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        'Buy',
+                        style: AppFonts.button.primary,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ),

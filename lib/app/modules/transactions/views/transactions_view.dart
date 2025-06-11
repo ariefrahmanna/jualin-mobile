@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jualin/app/routes/app_pages.dart';
-import '../../../themes/colors.dart';
+import 'package:jualin/app/themes/colors.dart';
+import 'package:jualin/utils/currency_formatter.dart';
 import '../controllers/transactions_controller.dart';
 
 class TransactionsView extends GetView<TransactionsController> {
@@ -12,7 +13,6 @@ class TransactionsView extends GetView<TransactionsController> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
         title: const Text(
           'My Transactions',
           style: TextStyle(
@@ -32,83 +32,117 @@ class TransactionsView extends GetView<TransactionsController> {
           ),
         ],
         centerTitle: true,
+        backgroundColor: AppColors.primary,
+        elevation: 0,
       ),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return const Center(
-            child: CircularProgressIndicator(color: AppColors.primary),
-          );
-        }
-        if (controller.transactions.isEmpty) {
-          return Center(
-            child: Text(
-              'No transactions found',
-              style: TextStyle(
-                color: AppColors.neutral70,
-                fontSize: 16,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await controller.fetchTransactions();
+        },
+        child: Obx(
+          () {
+            if (controller.isLoading.value) {
+              return Center(child: CircularProgressIndicator());
+            }
+            if (controller.transactions.isEmpty) {
+              return Center(child: Text('No Transactions'));
+            }
+            return RefreshIndicator(
+              onRefresh: () async {
+                await controller.fetchTransactions();
+              },
+              child: ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: controller.transactions.length,
+                itemBuilder: (context, index) {
+                  final item = controller.transactions[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: transactionItem(
+                      item: item,
+                      title: item['name'],
+                      price: CurrencyFormatter.toRupiah(item['price']),
+                      imageUrl: item['image_url'],
+                      status: item['status'],
+                      onTap: () {},
+                    ),
+                  );
+                },
               ),
-            ),
-          );
-        }
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: controller.transactions.length,
-          itemBuilder: (context, index) {
-            final trx = controller.transactions[index];
-            return Card(
-              color: AppColors.neutral10,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget transactionItem({
+    required Map<String, dynamic> item,
+    required String title,
+    required String price,
+    required String imageUrl,
+    required String status,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 4,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  imageUrl,
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Icon(Icons.broken_image);
+                  },
+                ),
               ),
-              elevation: 2,
-              margin: const EdgeInsets.only(bottom: 16),
-              child: ListTile(
-                leading: Icon(
-                  Icons.receipt_long,
-                  color: AppColors.primary,
-                ),
-                title: Text(
-                  trx['item_name'] ?? '-',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.text,
-                  ),
-                ),
-                subtitle: Column(
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        )),
+                    const SizedBox(height: 8),
                     Text(
-                      'Tanggal: ${trx['date'] ?? '-'}',
+                      CurrencyFormatter.toRupiah(price),
                       style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.neutral70,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
+                    const SizedBox(height: 8),
                     Text(
-                      'Status: ${trx['status'] ?? '-'}',
+                      status,
                       style: TextStyle(
-                        fontSize: 13,
-                        color: trx['status'] == 'success'
-                            ? AppColors.primary
-                            : (trx['status'] == 'pending'
-                                ? Colors.orange
-                                : Colors.red),
+                        fontSize: 12,
+                        color: status.toLowerCase() == 'pending'
+                            ? AppColors.pending
+                            : status.toLowerCase() == 'sold'
+                                ? AppColors.success
+                                : AppColors.text, // fallback/default
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
                 ),
-                trailing: Text(
-                  'Rp ${trx['total'] ?? '0'}',
-                  style: const TextStyle(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
               ),
-            );
-          },
-        );
-      }),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

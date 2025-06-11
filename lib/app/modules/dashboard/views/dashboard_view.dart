@@ -21,8 +21,9 @@ class DashboardView extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<DashboardController>();
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.setIndexFromArguments(Get.arguments);
+    });
     return Obx(
       () {
         return Scaffold(

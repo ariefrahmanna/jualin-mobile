@@ -30,98 +30,131 @@ class SellItemsView extends GetView<SellItemsController> {
         centerTitle: true,
       ),
       body: Obx(() {
-        return ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                decoration: BoxDecoration(
-                  color: AppColors.success,
-                  borderRadius: BorderRadius.circular(8),
+        return RefreshIndicator(
+          onRefresh: () async {
+            await controller.fetchSellItems();
+          },
+          child: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(
+                  'Pending Items',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.pending,
+                  ),
                 ),
-                child: const Text(
+              ),
+              const SizedBox(height: 8),
+              controller.pendingItems.isEmpty
+                  ? const Text('No pending items.')
+                  : ListView.builder(
+                      itemCount: controller.pendingItems.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final item = controller.pendingItems[index];
+                        return sellItemCard(
+                          item: item,
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DETAILED_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                          onEdit: () {
+                            Get.toNamed(
+                              Routes.EDIT_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                        );
+                      },
+                    ),
+              const SizedBox(height: 24),
+              // Listed Items Section
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(
                   'Listed Items',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.background,
+                    color: AppColors.success,
                   ),
                 ),
               ),
-            ),
+              const SizedBox(height: 8),
+              controller.listedItems.isEmpty
+                  ? const Text('No listed items.')
+                  : ListView.builder(
+                      itemCount: controller.listedItems.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final item = controller.listedItems[index];
+                        return sellItemCard(
+                          item: item,
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DETAILED_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                          onEdit: () {
+                            Get.toNamed(
+                              Routes.EDIT_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                        );
+                      },
+                    ),
+              const SizedBox(height: 24),
 
-            const SizedBox(height: 8),
-            controller.listedItems.isEmpty
-                ? const Text('No listed items.')
-                : ListView.builder(
-                    itemCount: controller.listedItems.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final item = controller.listedItems[index];
-                      return sellItemCard(
-                        item: item,
-                        onTap: () {
-                          Get.toNamed(Routes.DETAILED_ITEM,
-                              arguments: {'item': item});
-                        },
-                        onEdit: () {
-                          Get.toNamed(Routes.EDIT_ITEM,
-                              arguments: {'item': item});
-                        },
-                      );
-                    },
-                  ),
-
-            const SizedBox(height: 24),
-
-            // Section: Unlisted Items
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                decoration: BoxDecoration(
-                  color: AppColors.error,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Text(
-                  'unlisted Items',
+              // Unlisted Items Section
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(
+                  'Unlisted Items',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.background,
+                    color: AppColors.error,
                   ),
                 ),
               ),
-            ),
-
-            const SizedBox(height: 8),
-            controller.unlistedItems.isEmpty
-                ? const Text('No unlisted items.')
-                : ListView.builder(
-                    itemCount: controller.unlistedItems.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final item = controller.unlistedItems[index];
-                      return sellItemCard(
-                        item: item,
-                        onTap: () {
-                          Get.toNamed(Routes.DETAILED_ITEM,
-                              arguments: {'item': item});
-                        },
-                        onEdit: () {
-                          Get.toNamed(Routes.EDIT_ITEM,
-                              arguments: {'item': item});
-                        },
-                      );
-                    },
-                  ),
-          ],
+              const SizedBox(height: 8),
+              controller.unlistedItems.isEmpty
+                  ? const Text('No unlisted items.')
+                  : ListView.builder(
+                      itemCount: controller.unlistedItems.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final item = controller.unlistedItems[index];
+                        return sellItemCard(
+                          item: item,
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DETAILED_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                          onEdit: () {
+                            Get.toNamed(
+                              Routes.EDIT_ITEM,
+                              arguments: {'item': item},
+                            );
+                          },
+                        );
+                      },
+                    ),
+            ],
+          ),
         );
       }),
       floatingActionButton: FloatingActionButton(
@@ -129,7 +162,7 @@ class SellItemsView extends GetView<SellItemsController> {
         onPressed: () {
           Get.toNamed(Routes.ADD_ITEM);
         },
-        child: const Icon(Icons.add, color: AppColors.neutral10),
+        child: Icon(Icons.add, color: AppColors.neutral10),
       ),
     );
   }
@@ -189,58 +222,146 @@ class SellItemsView extends GetView<SellItemsController> {
               // Tombol Aksi
               Column(
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.blue),
-                    onPressed: onEdit,
-                    tooltip: 'Edit Item',
-                  ),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: AppColors.neutral20,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.neutral40),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: item['status'],
-                        onChanged: (String? newValue) {
-                          if (newValue != null && newValue != item['status']) {
-                            controller.onStatusChanged(item['id'], newValue);
-                          }
-                        },
-                        items:
-                            <String>['listed', 'unlisted'].map((String value) {
-                          Icon icon = value == 'listed'
-                              ? const Icon(Icons.check_circle,
-                                  color: AppColors.secondary, size: 18)
-                              : const Icon(Icons.cancel,
-                                  color: AppColors.error, size: 18);
-
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Row(
-                              children: [
-                                icon,
-                                const SizedBox(width: 8),
-                                Text(
-                                  value,
-                                  style: TextStyle(
-                                    color: AppColors.neutral90,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                        icon: const Icon(Icons.arrow_drop_down,
-                            color: AppColors.neutral60),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit, color: Colors.blue),
+                        onPressed: onEdit,
+                        tooltip: 'Edit Item',
                       ),
-                    ),
-                  )
+                      IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        onPressed: () {
+                          Get.defaultDialog(
+                            title: 'Delete Item',
+                            middleText:
+                                'Are you sure you want to delete this item?',
+                            textCancel: 'Cancel',
+                            textConfirm: 'Delete',
+                            confirmTextColor: Colors.white,
+                            buttonColor: AppColors.error,
+                            onConfirm: () {
+                              Get.back();
+                              controller.deleteItem(item['id']);
+                            },
+                          );
+                        },
+                        tooltip: 'Delete Item',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  // Status Dropdown
+                  item['status']?.toString().toLowerCase() == 'pending'
+                      ? Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                controller.onStatusChanged(item['id'], 'sold');
+                                Get.snackbar(
+                                  'Success',
+                                  'Item sold successfully',
+                                  backgroundColor: AppColors.success,
+                                  colorText: AppColors.neutral10,
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  margin: const EdgeInsets.all(16),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.success,
+                                foregroundColor: AppColors.neutral10,
+                                minimumSize: const Size(28, 24),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text('Accept'),
+                            ),
+                            const SizedBox(width: 8),
+                            ElevatedButton(
+                              onPressed: () {
+                                controller.onStatusChanged(
+                                    item['id'], 'listed');
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.error,
+                                foregroundColor: AppColors.neutral10,
+                                minimumSize: const Size(28, 24),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text('Reject'),
+                            ),
+                          ],
+                        )
+                      : Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.neutral20,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: AppColors.neutral40),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: item['status'],
+                              onChanged: (String? newValue) {
+                                if (newValue != null &&
+                                    newValue != item['status']) {
+                                  controller.onStatusChanged(
+                                    item['id'],
+                                    newValue,
+                                  );
+                                }
+                              },
+                              items: <String>['listed', 'unlisted']
+                                  .map((String value) {
+                                Icon icon = value == 'listed'
+                                    ? Icon(
+                                        Icons.check_circle,
+                                        color: AppColors.secondary,
+                                        size: 18,
+                                      )
+                                    : const Icon(
+                                        Icons.cancel,
+                                        color: AppColors.error,
+                                        size: 18,
+                                      );
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Row(
+                                    children: [
+                                      icon,
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        value,
+                                        style: TextStyle(
+                                          color: AppColors.neutral90,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                              icon: const Icon(Icons.arrow_drop_down,
+                                  color: AppColors.neutral60),
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ],

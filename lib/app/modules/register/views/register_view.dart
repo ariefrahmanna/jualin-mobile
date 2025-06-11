@@ -186,56 +186,7 @@ class RegisterView extends GetView<RegisterController> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                Row(
-                  children: const [
-                    Expanded(child: Divider()),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text('OR'),
-                    ),
-                    Expanded(child: Divider()),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                OutlinedButton.icon(
-                  onPressed: () {
-                    // TODO: Google auth logic
-                  },
-                  icon: const Icon(Icons.g_mobiledata,
-                      color: Colors.red, size: 30),
-                  label: const Text(
-                    'Continue with Google',
-                    style: TextStyle(fontSize: 16, color: AppColors.primary),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    side: const BorderSide(color: Colors.teal),
-                    minimumSize: const Size(double.infinity, 50),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                OutlinedButton.icon(
-                  onPressed: () {
-                    // TODO: Facebook auth logic
-                  },
-                  icon:
-                      const Icon(Icons.facebook, color: Colors.blue, size: 30),
-                  label: const Text(
-                    'Continue with Facebook',
-                    style: TextStyle(fontSize: 16, color: AppColors.primary),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    side: const BorderSide(color: Colors.teal),
-                    minimumSize: const Size(double.infinity, 50),
-                  ),
-                ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 40),
               ],
             ),
           ),
