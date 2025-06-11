@@ -282,6 +282,15 @@ class SellItemsView extends GetView<SellItemsController> {
                             ElevatedButton(
                               onPressed: () {
                                 controller.onStatusChanged(item['id'], 'sold');
+                                Get.snackbar(
+                                  'Success',
+                                  'Item sold successfully',
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 108, 180, 111),
+                                  colorText: AppColors.neutral10,
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  margin: const EdgeInsets.all(16),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.success,
