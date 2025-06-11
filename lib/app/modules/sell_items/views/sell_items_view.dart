@@ -37,22 +37,14 @@ class SellItemsView extends GetView<SellItemsController> {
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                  decoration: BoxDecoration(
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(
+                  'Pending Items',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.pending,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Text(
-                    'Pending Items',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.background,
-                    ),
                   ),
                 ),
               ),
@@ -84,21 +76,14 @@ class SellItemsView extends GetView<SellItemsController> {
                     ),
               const SizedBox(height: 24),
               // Listed Items Section
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                  decoration: BoxDecoration(
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(
+                  'Listed Items',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.success,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Text(
-                    'Listed Items',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.background,
-                    ),
                   ),
                 ),
               ),
@@ -131,22 +116,14 @@ class SellItemsView extends GetView<SellItemsController> {
               const SizedBox(height: 24),
 
               // Unlisted Items Section
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                  decoration: BoxDecoration(
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(
+                  'Unlisted Items',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.error,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Text(
-                    'Unlisted Items',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.background,
-                    ),
                   ),
                 ),
               ),
