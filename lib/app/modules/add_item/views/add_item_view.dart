@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' show GetView, Obx;
 import 'package:jualin/app/themes/colors.dart';
 import '../controllers/add_item_controller.dart';
+import 'dart:io';
 
 class AddItemView extends GetView<AddItemController> {
   const AddItemView({super.key});
@@ -131,28 +132,61 @@ class AddItemView extends GetView<AddItemController> {
                       : null,
                 ),
                 const SizedBox(height: 16),
-                TextFormField(
-                  controller: imageUrlController,
-                  decoration: InputDecoration(
-                    labelText: 'Image URL',
-                    labelStyle: TextStyle(color: AppColors.primary),
-                    filled: true,
-                    fillColor: AppColors.neutral10,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.primary,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Image URL is required'
-                      : null,
-                ),
+                Obx(() => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Image',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: AppColors.text ,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        ElevatedButton.icon(
+                          onPressed: controller.isLoading.value
+                              ? null
+                              : () => controller.pickImage(),
+                          icon: const Icon(
+                            Icons.image,
+                            color: AppColors.primary,
+                          ),
+                          label: const Text('Choose an Image'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.background,
+                            foregroundColor: AppColors.text,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 16),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        controller.imageName.value.isNotEmpty
+                            ? Text(
+                                controller.imageName.value,
+                                style: const TextStyle(
+                                    fontSize: 14, color: AppColors.text),
+                              )
+                            : const Text(
+                                'No Image Selected',
+                                style: TextStyle(
+                                    fontSize: 14, color: AppColors.neutral60),
+                              ),
+                        const SizedBox(height: 8),
+                        controller.pickedImage != null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.file(
+                                  File(controller.pickedImage!.path),
+                                  height: 120,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : const SizedBox(),
+                      ],
+                    )),
                 const SizedBox(height: 24),
                 Obx(() => ElevatedButton(
                       style: ElevatedButton.styleFrom(

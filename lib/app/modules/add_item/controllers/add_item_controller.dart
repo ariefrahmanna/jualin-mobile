@@ -6,6 +6,7 @@ import 'package:jualin/utils/api_endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
+import 'package:image_picker/image_picker.dart';
 
 class AddItemController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -17,38 +18,43 @@ class AddItemController extends GetxController {
   SellItemsController sellItemsController = Get.put(SellItemsController());
   var isLoading = false.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  XFile? pickedImage;
+  var imageName = ''.obs;
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      imageName.value = pickedImage!.name;
+    }
   }
 
   Future<void> addItem() async {
     if (!formKey.currentState!.validate()) return;
     isLoading.value = true;
+
+    if (pickedImage == null) {
+      Get.snackbar('Error', 'Please select an image first',
+          backgroundColor: AppColors.error, colorText: AppColors.neutral10);
+      return;
+    }
+
     var secureStorage = const FlutterSecureStorage();
     String? token = await secureStorage.read(key: 'token');
 
     try {
       var url = Uri.parse(ApiEndpoints.items);
-      var headers = {
-        'Authorization': 'Bearer $token',
-        'Accept': 'application/json',
-      };
-      var body = {
-        'name': nameController.text,
-        'price': priceController.text,
-        'category': categoryController.text,
-        'image_url': imageUrlController.text,
-        'description': descriptionController.text,
-      };
+      var request = http.MultipartRequest('POST', url);
+      request.headers['Authorization'] = 'Bearer $token';
+      request.fields['name'] = nameController.text;
+      request.fields['price'] = priceController.text;
+      request.fields['category'] = categoryController.text;
+      request.fields['description'] = descriptionController.text;
+      request.files.add(await http.MultipartFile.fromPath('image', pickedImage!.path));
 
-      var response = await http.post(url, headers: headers, body: body);
-      var json = jsonDecode(response.body);
+      var response = await request.send();
+      var responseBody = await response.stream.bytesToString();
+      var json = jsonDecode(responseBody);
 
       if (json['status'] == false) {
         throw json['message'] ?? '';
@@ -73,6 +79,16 @@ class AddItemController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
   }
 
   @override
