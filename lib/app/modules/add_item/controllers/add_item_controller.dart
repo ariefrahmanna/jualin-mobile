@@ -51,12 +51,18 @@ class AddItemController extends GetxController {
       var json = jsonDecode(response.body);
 
       if (json['status'] == false) {
-        throw body['message'] ?? 'Failed to add item';
+        throw json['message'] ?? '';
+      } else if (response.statusCode != 201) {
+        throw json['message'] ?? '';
       }
-
       sellItemsController.fetchSellItems();
       Get.back();
-      Get.snackbar('Success', 'Item added successfully');
+      Get.snackbar(
+        'Success',
+        'Item added successfully',
+        backgroundColor: AppColors.success,
+        colorText: AppColors.neutral10,
+      );
     } catch (e) {
       Get.snackbar(
         'Error',
