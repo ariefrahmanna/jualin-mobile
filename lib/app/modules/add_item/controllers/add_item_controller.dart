@@ -33,16 +33,13 @@ class AddItemController extends GetxController {
     if (!formKey.currentState!.validate()) return;
     isLoading.value = true;
 
-    if (pickedImage == null) {
-      Get.snackbar('Error', 'Please select an image first',
-          backgroundColor: AppColors.error, colorText: AppColors.neutral10);
-      return;
-    }
-
     var secureStorage = const FlutterSecureStorage();
     String? token = await secureStorage.read(key: 'token');
 
     try {
+      if (pickedImage == null) {
+        throw ('Please select an image');
+      }
       var url = Uri.parse(ApiEndpoints.items);
       var request = http.MultipartRequest('POST', url);
       request.headers['Authorization'] = 'Bearer $token';
@@ -50,7 +47,8 @@ class AddItemController extends GetxController {
       request.fields['price'] = priceController.text;
       request.fields['category'] = categoryController.text;
       request.fields['description'] = descriptionController.text;
-      request.files.add(await http.MultipartFile.fromPath('image', pickedImage!.path));
+      request.files
+          .add(await http.MultipartFile.fromPath('image', pickedImage!.path));
 
       var response = await request.send();
       var responseBody = await response.stream.bytesToString();
