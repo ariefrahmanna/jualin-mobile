@@ -12,7 +12,6 @@ class AddItemView extends GetView<AddItemController> {
     var nameController = controller.nameController;
     var priceController = controller.priceController;
     var categoryController = controller.categoryController;
-    var imageUrlController = controller.imageUrlController;
     var descriptionController = controller.descriptionController;
 
     return Scaffold(
@@ -140,7 +139,7 @@ class AddItemView extends GetView<AddItemController> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
-                            color: AppColors.text ,
+                            color: AppColors.text,
                           ),
                         ),
                         const SizedBox(height: 8),
