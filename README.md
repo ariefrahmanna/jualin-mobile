@@ -46,7 +46,15 @@
    flutter pub get
    ```
 
-4. Run the app:
+4. Configure Laravel Backend:
+   - Clone Laravel backend repository
+   - Setup .env, database, and run migrations
+   - Serve the API using:
+   ```bash
+   php artisan serve
+   ```
+
+5. Run the app:
    ```bash
    flutter run
    ```
@@ -86,40 +94,30 @@ Thanks goes to these wonderful people who have contributed to this project:
         <img src="https://github.com/ariefrahmanna.png" width="100px;" alt="Developer Name"/><br />
         <sub><b>Arief Rahman</b></sub>
       </a>
-      <br />
-      <sub>Auth & User Management</sub>
     </td>
     <td align="center">
       <a href="https://github.com/bocahca">
         <img src="https://github.com/bocahca.png" width="100px;" alt="bocahca"/><br />
         <sub><b>Oliver Servatio Leon</b></sub>
       </a>
-      <br />
-      <sub>UI/UX & Item Management</sub>
     </td>
     <td align="center">
       <a href="https://github.com/alexandersrtn">
         <img src="https://github.com/alexandersrtn.png" width="100px;" alt="bocahca"/><br />
         <sub><b>Alexander Descayodi P. R. S.</b></sub>
       </a>
-      <br />
-      <sub>Wishlist & Transactions</sub>
     </td>
     <td align="center">
       <a href="https://github.com/monicam0n">
         <img src="https://github.com/monicam0n.png" width="100px;" alt="bocahca"/><br />
         <sub><b>Moncia Destianti</b></sub>
       </a>
-      <br />
-      <sub>Profile & Settings</sub>
     </td>
     <td align="center">
       <a href="https://github.com/karuqii9704">
         <img src="https://github.com/karuqii9704.png" width="100px;" alt="karuqii9704"/><br />
         <sub><b>Rifqi Sigwan Nugraha</b></sub>
       </a>
-      <br />
-      <sub>Search & Categories</sub>
     </td>
   </tr>
 </table>
