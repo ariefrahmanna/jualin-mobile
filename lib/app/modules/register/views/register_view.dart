@@ -28,11 +28,11 @@ class RegisterView extends GetView<RegisterController> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
+                Text(
                   'Fill in your details below to get started on a seamless shopping experience.',
                   style: TextStyle(
                     fontSize: 16,
-                    color: AppColors.neutral50,
+                    color: AppColors.text,
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -104,7 +104,10 @@ class RegisterView extends GetView<RegisterController> {
                   text: TextSpan(
                     text:
                         'By clicking Create Account, you acknowledge you have read and agreed to our ',
-                    style: TextStyle(fontSize: 12, color: AppColors.neutral50),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: AppColors.text,
+                    ),
                     children: [
                       TextSpan(
                         text: 'Terms of Use',
