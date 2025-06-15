@@ -184,11 +184,16 @@ class HomeView extends GetView<HomeController> {
                       },
                     ),
                     buildCategoryItem(
-                      icon: Icons.more_horiz,
-                      label: 'See More',
+                      icon: Icons.gamepad,
+                      label: 'Hobby',
                       color: AppColors.neutral50,
                       onTap: () {
-                        // Aksi untuk "See More"
+                        Get.toNamed(
+                          Routes.ITEM_BY_CATEGORY,
+                          arguments: {
+                            'category': 'Hobby',
+                          },
+                        );
                       },
                     ),
                   ],
