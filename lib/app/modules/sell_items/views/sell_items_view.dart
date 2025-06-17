@@ -59,12 +59,6 @@ class SellItemsView extends GetView<SellItemsController> {
                         final item = controller.pendingItems[index];
                         return sellItemCard(
                           item: item,
-                          onTap: () {
-                            Get.toNamed(
-                              Routes.DETAILED_ITEM,
-                              arguments: {'item': item},
-                            );
-                          },
                           onEdit: () {
                             Get.toNamed(
                               Routes.EDIT_ITEM,
@@ -98,12 +92,6 @@ class SellItemsView extends GetView<SellItemsController> {
                         final item = controller.listedItems[index];
                         return sellItemCard(
                           item: item,
-                          onTap: () {
-                            Get.toNamed(
-                              Routes.DETAILED_ITEM,
-                              arguments: {'item': item},
-                            );
-                          },
                           onEdit: () {
                             Get.toNamed(
                               Routes.EDIT_ITEM,
@@ -138,12 +126,6 @@ class SellItemsView extends GetView<SellItemsController> {
                         final item = controller.unlistedItems[index];
                         return sellItemCard(
                           item: item,
-                          onTap: () {
-                            Get.toNamed(
-                              Routes.DETAILED_ITEM,
-                              arguments: {'item': item},
-                            );
-                          },
                           onEdit: () {
                             Get.toNamed(
                               Routes.EDIT_ITEM,
@@ -169,14 +151,12 @@ class SellItemsView extends GetView<SellItemsController> {
 
   Widget sellItemCard({
     required Map<String, dynamic> item,
-    required VoidCallback onTap,
     required VoidCallback onEdit,
   }) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 4,
       child: InkWell(
-        onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(
