@@ -117,7 +117,7 @@ class TransactionsView extends GetView<TransactionsController> {
                         )),
                     const SizedBox(height: 8),
                     Text(
-                      CurrencyFormatter.toRupiah(price),
+                      price,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
