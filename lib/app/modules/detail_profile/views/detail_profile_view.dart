@@ -128,7 +128,7 @@ class DetailProfileView extends GetView<DetailProfileController> {
                       return ItemCard(
                         item: item,
                         onTap: () {
-                          Get.toNamed(Routes.DETAILED_ITEM, arguments: item);
+                          Get.toNamed(Routes.DETAILED_ITEM, arguments: {'item': item});
                         },
                       );
                     },

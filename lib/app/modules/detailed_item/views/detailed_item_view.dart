@@ -103,7 +103,7 @@ class DetailedItemView extends GetView<DetailedItemController> {
                     const SizedBox(height: 8),
                     GestureDetector(
                       onTap: () {
-                        Get.toNamed(
+                        Get.offNamed(
                           Routes.DETAIL_PROFILE,
                           arguments: {'user': controller.user},
                         );
