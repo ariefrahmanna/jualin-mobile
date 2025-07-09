@@ -5,7 +5,7 @@
 ## 📑 Table of Contents
 
 - [Features](#-features)
-- [ Tech Stack](#️-tech-stack)
+- [Tech Stack](#️-tech-stack)
 - [Installation](#-installation)
 - [Project Structure](#-project-structure)
 - [Building and Running](#-building-and-running)
@@ -33,12 +33,12 @@
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/if-tel-u/project-akhir-kelompok-3.git
+   git clone https://github.com/ariefrahmanna/jualin-mobile.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd project-akhir-kelompok-3
+   cd jualin-mobile
    ```
 
 3. Install dependencies:
@@ -47,7 +47,7 @@
    ```
 
 4. Configure Laravel Backend:
-   - Clone Laravel backend repository
+   - Clone Laravel backend [repository](https://github.com/ariefrahmanna/jualin-backend).
    - Setup .env, database, and run migrations
    - Serve the API using:
    ```bash
